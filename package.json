@@ -1,0 +1,19 @@
+{
+  "name": "freelancein-design-system",
+  "version": "1.0.0",
+  "description": "Design System & Landing Page for FreelanceIn",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y browser-sync start --server --files \"*.html, css/*.css, js/*.js\""
+  },
+  "keywords": [
+    "design-system",
+    "marketplace",
+    "freelance",
+    "indonesia",
+    "sme",
+    "student"
+  ],
+  "author": "FreelanceIn Team",
+  "license": "ISC"
+}

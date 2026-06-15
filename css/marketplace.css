@@ -1,0 +1,382 @@
+/*
+  FreelanceIn Marketplace Page Styles
+  Upwork-Inspired Search & Filter Interface
+*/
+
+.marketplace-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+/* Sidebar Filters (Upwork Style) */
+.filter-sidebar {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 92px; /* Header height (72px) + spacing */
+  max-height: calc(100vh - 112px);
+  overflow-y: auto;
+}
+
+.filter-section {
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-slate-100);
+}
+
+.filter-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.filter-title {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--color-slate-900);
+  margin-bottom: var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-clear-btn {
+  font-size: 11px;
+  color: var(--color-slate-400);
+  cursor: pointer;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.filter-clear-btn:hover {
+  color: var(--color-danger);
+}
+
+.filter-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Search and Header Results */
+.results-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.results-count {
+  font-size: var(--font-sm);
+  color: var(--color-slate-600);
+}
+
+.results-count strong {
+  color: var(--color-slate-900);
+}
+
+.results-sorting {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.results-sorting span {
+  font-size: var(--font-xs);
+  color: var(--color-slate-500);
+  white-space: nowrap;
+}
+
+.mobile-filter-trigger {
+  display: none;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* Horizontal Freelancer Card (Upwork Style) */
+.freelancer-card-horizontal {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.freelancer-card-horizontal:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-slate-300);
+}
+
+.freelancer-main-info {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.freelancer-avatar-wrapper {
+  position: relative;
+}
+
+.freelancer-online-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background-color: var(--color-success);
+  border: 2px solid var(--color-white);
+  border-radius: 50%;
+}
+
+.freelancer-role-title {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--color-slate-900);
+  margin-top: 4px;
+  margin-bottom: var(--space-xs);
+}
+
+.freelancer-meta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-sm);
+}
+
+.meta-item {
+  font-size: var(--font-xs);
+  color: var(--color-slate-500);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.meta-item strong {
+  color: var(--color-slate-800);
+}
+
+.meta-item svg {
+  color: var(--color-slate-400);
+}
+
+.meta-item.rating-item svg {
+  color: #fbbf24;
+  fill: #fbbf24;
+}
+
+.freelancer-description-text {
+  font-size: var(--font-sm);
+  color: var(--color-slate-600);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+  max-width: 780px;
+}
+
+.freelancer-action-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: flex-end;
+  text-align: right;
+}
+
+.hourly-rate-big {
+  font-size: var(--font-lg);
+  font-weight: 800;
+  color: var(--color-slate-900);
+}
+
+.hourly-rate-big span {
+  font-size: var(--font-xs);
+  color: var(--color-slate-500);
+  font-weight: 500;
+}
+
+/* Portfolio Previews Grid */
+.portfolio-previews-section {
+  border-top: 1px solid var(--color-slate-100);
+  padding-top: var(--space-md);
+}
+
+.portfolio-previews-title {
+  font-size: var(--font-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-slate-400);
+  margin-bottom: var(--space-sm);
+}
+
+.portfolio-previews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.portfolio-thumbnail-card {
+  background-color: var(--color-slate-50);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  aspect-ratio: 16 / 10;
+  transition: all var(--transition-normal);
+}
+
+.portfolio-thumbnail-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.portfolio-thumbnail-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.2) 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-sm) var(--space-md);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.portfolio-thumbnail-card:hover img {
+  transform: scale(1.05);
+}
+
+.portfolio-thumbnail-card:hover .portfolio-thumbnail-overlay {
+  opacity: 1;
+}
+
+.portfolio-project-title {
+  color: var(--color-white);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.portfolio-project-tag {
+  color: var(--color-accent);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+/* Mobile Filter Panel Backdrop */
+.filter-overlay-mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1100;
+  display: none;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.filter-overlay-mobile.show {
+  display: block;
+  opacity: 1;
+}
+
+.mobile-filter-drawer {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  height: 100%;
+  background-color: var(--color-white);
+  z-index: 1200;
+  padding: var(--space-lg);
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  transition: right var(--transition-slow);
+}
+
+.filter-overlay-mobile.show .mobile-filter-drawer {
+  right: 0;
+}
+
+.mobile-filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-slate-200);
+  padding-bottom: var(--space-sm);
+}
+
+/* Responsive Marketplace Breakpoints */
+@media (max-width: 1024px) {
+  .marketplace-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-sidebar {
+    display: none; /* Hide sidebar filter on desktop layout, load onto mobile drawer instead */
+  }
+  
+  .mobile-filter-trigger {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .freelancer-main-info {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+  
+  .freelancer-avatar-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .freelancer-info-col {
+    text-align: center;
+  }
+  
+  .freelancer-meta-row {
+    justify-content: center;
+  }
+  
+  .freelancer-description-text {
+    text-align: center;
+  }
+  
+  .freelancer-action-col {
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid var(--color-slate-100);
+    padding-top: var(--space-md);
+  }
+  
+  .portfolio-previews-grid {
+    grid-template-columns: 1fr; /* Stack portfolio thumbs on mobile */
+  }
+}

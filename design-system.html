@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreelanceIn - Dokumentasi Sistem Desain (FIDS)</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/showcase.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <a href="index.html" class="logo">
+          Freelance<span>In</span>
+          <div class="logo-dot"></div>
+        </a>
+        <span class="badge badge-primary" style="margin-left: -10px; font-size: 10px;">FIDS v1.0</span>
+      </div>
+      <div class="nav-right">
+        <a href="index.html" class="btn btn-outline btn-sm">
+          <i data-lucide="arrow-left" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> 
+          Kembali ke Landing Page
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Showcase Workspace Layout -->
+  <div class="showcase-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="showcase-sidebar">
+      <div class="sidebar-title">Dasar Desain</div>
+      <ul class="sidebar-menu">
+        <li><a href="#overview" class="sidebar-link active" data-sec="overview"><i data-lucide="info"></i>Pengenalan</a></li>
+        <li><a href="#colors" class="sidebar-link" data-sec="colors"><i data-lucide="aperture"></i>Warna (Colors)</a></li>
+        <li><a href="#typography" class="sidebar-link" data-sec="typography"><i data-lucide="type"></i>Tipografi</a></li>
+        <li><a href="#elevation" class="sidebar-link" data-sec="elevation"><i data-lucide="layers"></i>Bayangan & Radius</a></li>
+      </ul>
+
+      <div class="sidebar-title">Komponen Dasar</div>
+      <ul class="sidebar-menu">
+        <li><a href="#buttons" class="sidebar-link" data-sec="buttons"><i data-lucide="play-circle"></i>Tombol (Buttons)</a></li>
+        <li><a href="#forms" class="sidebar-link" data-sec="forms"><i data-lucide="check-square"></i>Form & Input</a></li>
+        <li><a href="#badges-alerts" class="sidebar-link" data-sec="badges-alerts"><i data-lucide="alert-circle"></i>Badge & Alert</a></li>
+      </ul>
+
+      <div class="sidebar-title">Komponen Pasar</div>
+      <ul class="sidebar-menu">
+        <li><a href="#market-cards" class="sidebar-link" data-sec="market-cards"><i data-lucide="credit-card"></i>Kartu Marketplace</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="showcase-content">
+      
+      <!-- SECTION: Pengenalan -->
+      <section id="sec-overview" class="showcase-section active">
+        <h1 class="showcase-section-title">Sistem Desain FreelanceIn (FIDS)</h1>
+        <p class="showcase-section-desc">Selamat datang di sistem desain resmi FreelanceIn. Pustaka ini dibangun dengan vanilla CSS untuk konsistensi, performa optimal, dan tampilan visual yang profesional bagi UMKM dan Mahasiswa IT di Indonesia.</p>
+        
+        <div class="card card-lg" style="background-color: var(--color-primary-light); border-color: var(--color-accent); margin-bottom: var(--space-xl);">
+          <h3 style="margin-bottom: var(--space-sm); color: var(--color-accent-dark);">Prinsip Antarmuka</h3>
+          <ul style="padding-left: var(--space-lg); color: var(--color-slate-700); font-size: var(--font-sm); display: flex; flex-direction: column; gap: var(--space-sm);">
+            <li><strong>Profesional & Tepercaya:</strong> Struktur navigasi yang matang, grid simetris, dan font sans-serif tegap (Inter) untuk memproyeksikan kesan bisnis SaaS kelas atas.</li>
+            <li><strong>Bebas Elemen Bubbly/Playful:</strong> Menghindari sudut bulat yang berlebihan, warna kontras pelangi, atau ilustrasi bergaya kartun kekanak-kanakan demi menjaga kredibilitas di mata pelaku UMKM.</li>
+            <li><strong>Mint Green Palette:</strong> Penggunaan palet warna mint sebagai aksen eksklusif pada latar belakang netral abu-abu terang (Cool Gray) dan gelap (Slate Dark).</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SECTION: Warna -->
+      <section id="sec-colors" class="showcase-section">
+        <h1 class="showcase-section-title">Palet Warna</h1>
+        <p class="showcase-section-desc">Klik pada salah satu kartu warna di bawah ini untuk menyalin kode hex secara otomatis.</p>
+        
+        <h3 class="demo-title">Warna Utama (Brand Colors)</h3>
+        <div class="color-grid mb-xl">
+          <div class="color-card" onclick="copyColor('#58D4C2')">
+            <div class="color-swatch" style="background-color: #58D4C2;"></div>
+            <div class="color-info">
+              <div class="color-name">Primary Mint</div>
+              <div class="color-hex">#58D4C2</div>
+            </div>
+          </div>
+          <div class="color-card" onclick="copyColor('#7CE7D8')">
+            <div class="color-swatch" style="background-color: #7CE7D8;"></div>
+            <div class="color-info">
+              <div class="color-name">Secondary Turquoise</div>
+              <div class="color-hex">#7CE7D8</div>
+            </div>
+          </div>
+          <div class="color-card" onclick="copyColor('#A7F3EA')">
+            <div class="color-swatch" style="background-color: #A7F3EA;"></div>
+            <div class="color-info">
+              <div class="color-name">Accent Light Mint</div>
+              <div class="color-hex">#A7F3EA</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="demo-title">Warna Netral (Text & Background)</h3>
+        <div class="color-grid mb-xl">
+          <div class="color-card" onclick="copyColor('#0F172A')">
+            <div class="color-swatch" style="background-color: #0F172A;"></div>
+            <div class="color-info">
+              <div class="color-name">Slate 900 (Text Title)</div>
+              <div class="color-hex">#0F172A</div>
+            </div>
+          </div>
+          <div class="color-card" onclick="copyColor('#334155')">
+            <div class="color-swatch" style="background-color: #334155;"></div>
+            <div class="color-info">
+              <div class="color-name">Slate 700 (Body Text)</div>
+              <div class="color-hex">#334155</div>
+            </div>
+          </div>
+          <div class="color-card" onclick="copyColor('#94A3B8')">
+            <div class="color-swatch" style="background-color: #94A3B8;"></div>
+            <div class="color-info">
+              <div class="color-name">Slate 400 (Muted)</div>
+              <div class="color-hex">#94A3B8</div>
+            </div>
+          </div>
+          <div class="color-card" onclick="copyColor('#F8FAFC')">
+            <div class="color-swatch" style="background-color: #F8FAFC;"></div>
+            <div class="color-info">
+              <div class="color-name">Slate 50 (Main BG)</div>
+              <div class="color-hex">#F8FAFC</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="demo-title">Warna Semantik (Status)</h3>
+        <div class="color-grid">
+          <div class="color-card" onclick="copyColor('#10B981')">
+            <div class="color-swatch" style="background-color: #10B981;"></div>
+            <div class="color-info">
+              <div class="color-name">Success (Verified)</div>
+              <div class="color-hex">#10B981</div>
+            </div>
+          </div>
+          <div class="color-card" onclick="copyColor('#F59E0B')">
+            <div class="color-swatch" style="background-color: #F59E0B;"></div>
+            <div class="color-info">
+              <div class="color-name">Warning</div>
+              <div class="color-hex">#F59E0B</div>
+            </div>
+          </div>
+          <div class="color-card" onclick="copyColor('#F43F5E')">
+            <div class="color-swatch" style="background-color: #F43F5E;"></div>
+            <div class="color-info">
+              <div class="color-name">Danger (Error)</div>
+              <div class="color-hex">#F43F5E</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: Tipografi -->
+      <section id="sec-typography" class="showcase-section">
+        <h1 class="showcase-section-title">Tipografi</h1>
+        <p class="showcase-section-desc">FIDS menggunakan font <strong>Inter</strong> sebagai font antarmuka utama demi menghadirkan keterbacaan tingkat tinggi khas aplikasi SaaS profesional.</p>
+        
+        <div class="card">
+          <div class="typo-row">
+            <div class="typo-label">h1 (.text-4xl)</div>
+            <div class="typo-preview"><h1 style="font-size: var(--font-4xl);">Bermitra dengan Talenta IT Berbakat</h1></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-label">h2 (.text-3xl)</div>
+            <div class="typo-preview"><h2 style="font-size: var(--font-3xl);">Kemudahan Rekrutmen Digital</h2></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-label">h3 (.text-2xl)</div>
+            <div class="typo-preview"><h3 style="font-size: var(--font-2xl);">Freelancer IT Terbaik Indonesia</h3></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-label">Body Base (.text-base)</div>
+            <div class="typo-preview"><p class="text-base">Membangun ekosistem teknologi yang menghubungkan talenta terbaik universitas dengan kebutuhan digital UMKM Indonesia secara aman, profesional, dan efisien.</p></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-label">Body Small (.text-sm)</div>
+            <div class="typo-preview"><p class="text-sm">Membangun ekosistem teknologi yang menghubungkan talenta terbaik universitas dengan kebutuhan digital UMKM Indonesia secara aman, profesional, dan efisien.</p></div>
+          </div>
+          <div class="typo-row" style="border-bottom: none;">
+            <div class="typo-label">Muted (.text-xs)</div>
+            <div class="typo-preview"><p class="text-xs text-slate-500">Terdaftar resmi sejak 2026. Di bawah pengawasan kementerian riset dan teknologi.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: Bayangan & Radius -->
+      <section id="sec-elevation" class="showcase-section">
+        <h1 class="showcase-section-title">Bayangan & Radius</h1>
+        <p class="showcase-section-desc">Efek visual bayangan lembut (*soft shadows*) dan sudut melengkung (*border-radius*) digunakan untuk memberi hierarki kedalaman pada antarmuka.</p>
+        
+        <h3 class="demo-title">Gaya Bayangan (Elevation Shadows)</h3>
+        <div class="d-grid gap-lg mb-xl" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="card" style="box-shadow: var(--shadow-sm); text-align: center; padding: var(--space-xl);">
+            <strong>Shadow Small</strong>
+            <p class="text-xs text-slate-500" style="margin-top: 4px;">var(--shadow-sm)</p>
+          </div>
+          <div class="card" style="box-shadow: var(--shadow-md); text-align: center; padding: var(--space-xl);">
+            <strong>Shadow Medium</strong>
+            <p class="text-xs text-slate-500" style="margin-top: 4px;">var(--shadow-md)</p>
+          </div>
+          <div class="card" style="box-shadow: var(--shadow-lg); text-align: center; padding: var(--space-xl);">
+            <strong>Shadow Large</strong>
+            <p class="text-xs text-slate-500" style="margin-top: 4px;">var(--shadow-lg)</p>
+          </div>
+        </div>
+
+        <h3 class="demo-title">Batas Melengkung (Border Radius)</h3>
+        <div class="d-grid gap-lg" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="card" style="border-radius: var(--radius-sm); border-color: var(--color-slate-300); text-align: center;">
+            <strong>Small Radius</strong>
+            <p class="text-xs text-slate-500" style="margin-top: 4px;">var(--radius-sm) - 8px</p>
+          </div>
+          <div class="card" style="border-radius: var(--radius-md); border-color: var(--color-slate-300); text-align: center;">
+            <strong>Medium Radius</strong>
+            <p class="text-xs text-slate-500" style="margin-top: 4px;">var(--radius-md) - 12px</p>
+          </div>
+          <div class="card" style="border-radius: var(--radius-lg); border-color: var(--color-slate-300); text-align: center;">
+            <strong>Large Radius</strong>
+            <p class="text-xs text-slate-500" style="margin-top: 4px;">var(--radius-lg) - 16px</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: Tombol -->
+      <section id="sec-buttons" class="showcase-section">
+        <h1 class="showcase-section-title">Tombol (Buttons)</h1>
+        <p class="showcase-section-desc">Gaya tombol yang fleksibel untuk berbagai macam interaksi pengguna.</p>
+        
+        <div class="mb-xl">
+          <h3 class="demo-title">Visualisasi Tombol</h3>
+          <div class="demo-box">
+            <button class="btn btn-primary">Primary Button</button>
+            <button class="btn btn-secondary">Secondary Button</button>
+            <button class="btn btn-outline">Outline Button</button>
+            <button class="btn btn-text">Text Button</button>
+            <button class="btn btn-primary btn-loading">Loading</button>
+            <button class="btn btn-primary" disabled>Disabled</button>
+          </div>
+          <div class="code-box">
+            <button class="btn-copy-code">Salin Kode</button>
+            <pre><code>&lt;!-- Tombol Primer --&gt;
+&lt;button class="btn btn-primary"&gt;Primary Button&lt;/button&gt;
+
+&lt;!-- Tombol Sekunder --&gt;
+&lt;button class="btn btn-secondary"&gt;Secondary Button&lt;/button&gt;
+
+&lt;!-- Tombol Outline --&gt;
+&lt;button class="btn btn-outline"&gt;Outline Button&lt;/button&gt;
+
+&lt;!-- Tombol Teks --&gt;
+&lt;button class="btn btn-text"&gt;Text Button&lt;/button&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: Formulir -->
+      <section id="sec-forms" class="showcase-section">
+        <h1 class="showcase-section-title">Form & Input</h1>
+        <p class="showcase-section-desc">Komponen formulir bersih dengan status interaksi yang jelas, termasuk area unggah berkas dropzone untuk verifikasi identitas mahasiswa.</p>
+        
+        <!-- Text Inputs and Select -->
+        <div class="mb-xl">
+          <h3 class="demo-title">Elemen Form Dasar</h3>
+          <div class="demo-box" style="display: block;">
+            <div class="d-grid gap-md" style="grid-template-columns: repeat(2, 1fr); margin-bottom: var(--space-md);">
+              <div class="form-group">
+                <label class="form-label">Input Nama</label>
+                <input type="text" class="form-input" placeholder="Masukkan nama lengkap...">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Dropdown Universitas</label>
+                <select class="form-select">
+                  <option selected disabled>Pilih universitas asal...</option>
+                  <option>Universitas Indonesia (UI)</option>
+                  <option>Institut Teknologi Bandung (ITB)</option>
+                  <option>Institut Teknologi Sepuluh Nopember (ITS)</option>
+                  <option>Universitas Gadjah Mada (UGM)</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="d-flex gap-lg align-center" style="margin-bottom: var(--space-lg);">
+              <label class="form-checkbox-label">
+                <input type="checkbox" class="form-checkbox">
+                <span>Ingat saya di perangkat ini</span>
+              </label>
+              
+              <label class="form-switch">
+                <input type="checkbox" class="form-switch-input">
+                <span class="form-label" style="margin-bottom: 0;">Terima notifikasi email</span>
+              </label>
+            </div>
+          </div>
+          <div class="code-box">
+            <button class="btn-copy-code">Salin Kode</button>
+            <pre><code>&lt;!-- Text Input --&gt;
+&lt;div class="form-group"&gt;
+  &lt;label class="form-label"&gt;Input Nama&lt;/label&gt;
+  &lt;input type="text" class="form-input" placeholder="Masukkan nama..."&gt;
+&lt;/div&gt;
+
+&lt;!-- Select Dropdown --&gt;
+&lt;div class="form-group"&gt;
+  &lt;label class="form-label"&gt;Pilihan&lt;/label&gt;
+  &lt;select class="form-select"&gt;
+    &lt;option&gt;Pilihan 1&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;!-- Checkbox --&gt;
+&lt;label class="form-checkbox-label"&gt;
+  &lt;input type="checkbox" class="form-checkbox"&gt;
+  &lt;span&gt;Pilihan Checkbox&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;!-- Switch --&gt;
+&lt;label class="form-switch"&gt;
+  &lt;input type="checkbox" class="form-switch-input"&gt;
+  &lt;span class="form-label"&gt;Switch Toggle&lt;/span&gt;
+&lt;/label&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Dropzone File Upload -->
+        <div class="mb-xl">
+          <h3 class="demo-title">Verifikasi KTM (Dropzone File Upload)</h3>
+          <div class="demo-box" style="display: block;">
+            <div class="dropzone">
+              <div class="dropzone-icon">
+                <i data-lucide="upload-cloud" style="width: 32px; height: 32px;"></i>
+              </div>
+              <h4 style="font-size: var(--font-sm); font-weight: 700; margin-bottom: 4px;">Tarik & Letakkan Berkas KTM Anda di Sini</h4>
+              <p style="font-size: var(--font-xs); color: var(--color-slate-500);">Mendukung berkas JPG, PNG, atau PDF hingga 5MB. Hanya untuk verifikasi identitas mahasiswa.</p>
+            </div>
+          </div>
+          <div class="code-box">
+            <button class="btn-copy-code">Salin Kode</button>
+            <pre><code>&lt;div class="dropzone"&gt;
+  &lt;div class="dropzone-icon"&gt;
+    &lt;i data-lucide="upload-cloud"&gt;&lt;/i&gt;
+  &lt;/div&gt;
+  &lt;h4&gt;Tarik & Letakkan Berkas KTM Anda di Sini&lt;/h4&gt;
+  &lt;p&gt;Mendukung berkas JPG, PNG, atau PDF hingga 5MB.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Form Validation Demo -->
+        <div>
+          <h3 class="demo-title">Validasi Formulir Interaktif</h3>
+          <div class="card" style="padding: var(--space-xl);">
+            <form id="demo-validation-form">
+              <div class="form-group">
+                <label class="form-label" for="demo-nama">Nama Lengkap <span style="color: var(--color-danger)">*</span></label>
+                <input type="text" id="demo-nama" class="form-input" placeholder="Masukkan nama lengkap Anda">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="demo-email">Email Kampus (.ac.id) <span style="color: var(--color-danger)">*</span></label>
+                <input type="email" id="demo-email" class="form-input" placeholder="contoh@mahasiswa.ui.ac.id">
+              </div>
+              <button type="submit" class="btn btn-primary" style="margin-top: var(--space-sm);">Kirim Formulir</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: Badge & Alert -->
+      <section id="sec-badges-alerts" class="showcase-section">
+        <h1 class="showcase-section-title">Badge & Alert</h1>
+        <p class="showcase-section-desc">Gaya notifikasi status banner dan badge keahlian IT untuk memperkaya visualisasi informasi.</p>
+        
+        <!-- Badges -->
+        <div class="mb-xl">
+          <h3 class="demo-title">Lencana Status & Keahlian</h3>
+          <div class="demo-box">
+            <span class="badge badge-success">Terverifikasi</span>
+            <span class="badge badge-warning">Menunggu Verifikasi</span>
+            <span class="badge badge-danger">Ditolak</span>
+            <span class="badge badge-info">Aktif</span>
+            <span class="badge badge-primary">UI / UX</span>
+            
+            <div style="width: 100%; border-bottom: 1px solid var(--color-slate-200); margin: var(--space-sm) 0;"></div>
+            
+            <span class="tag-skill">Next.js</span>
+            <span class="tag-skill">Flutter</span>
+            <span class="tag-skill">PostgreSQL</span>
+            <span class="tag-skill">Figma</span>
+          </div>
+          <div class="code-box">
+            <button class="btn-copy-code">Salin Kode</button>
+            <pre><code>&lt;!-- Lencana Status --&gt;
+&lt;span class="badge badge-success"&gt;Terverifikasi&lt;/span&gt;
+&lt;span class="badge badge-warning"&gt;Menunggu Verifikasi&lt;/span&gt;
+
+&lt;!-- Tag Keahlian IT --&gt;
+&lt;span class="tag-skill"&gt;Next.js&lt;/span&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Alert Banners -->
+        <div class="mb-xl">
+          <h3 class="demo-title">Banner Pemberitahuan (Alerts)</h3>
+          <div class="demo-box" style="display: block;">
+            <div class="alert alert-success">
+              <i data-lucide="check-circle" class="alert-icon"></i>
+              <div><strong>Verifikasi Sukses!</strong> Pendaftaran mahasiswa Anda telah disetujui. Sekarang Anda dapat melamar proyek.</div>
+            </div>
+            
+            <div class="alert alert-warning">
+              <i data-lucide="alert-triangle" class="alert-icon"></i>
+              <div><strong>Menunggu Verifikasi KTM.</strong> Berkas yang Anda unggah sedang ditinjau oleh tim kami. Proses ini memakan waktu maks. 24 jam.</div>
+            </div>
+
+            <div class="alert alert-info">
+              <i data-lucide="info" class="alert-icon"></i>
+              <div><strong>Tips Pencarian:</strong> Gunakan kata kunci teknologi spesifik seperti "Flutter" atau "Vue" untuk mendapatkan hasil lowongan yang tepat.</div>
+            </div>
+          </div>
+          <div class="code-box">
+            <button class="btn-copy-code">Salin Kode</button>
+            <pre><code>&lt;!-- Alert Sukses --&gt;
+&lt;div class="alert alert-success"&gt;
+  &lt;i data-lucide="check-circle" class="alert-icon"&gt;&lt;/i&gt;
+  &lt;div&gt;&lt;strong&gt;Verifikasi Sukses!&lt;/strong&gt; Pendaftaran disetujui.&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Toast Triggers -->
+        <div>
+          <h3 class="demo-title">Picu Toast Notification</h3>
+          <div class="demo-box">
+            <button class="btn btn-outline" onclick="showToast('Berhasil', 'Portofolio mahasiswa berhasil diperbarui.', 'success');">Picu Toast Sukses</button>
+            <button class="btn btn-outline" onclick="showToast('Peringatan', 'Sesi Anda akan segera berakhir dalam 5 menit.', 'warning');">Picu Toast Warning</button>
+            <button class="btn btn-outline" onclick="showToast('Gagal', 'Terjadi kesalahan sistem saat mengunggah berkas.', 'danger');">Picu Toast Gagal</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: Kartu Marketplace -->
+      <section id="sec-market-cards" class="showcase-section">
+        <h1 class="showcase-section-title">Kartu Marketplace</h1>
+        <p class="showcase-section-desc">Komponen kartu khusus yang dirancang untuk layout marketplace utama FreelanceIn.</p>
+        
+        <!-- Student Card -->
+        <div class="mb-xl">
+          <h3 class="demo-title">Kartu Profil Mahasiswa (Freelancer Card)</h3>
+          <div class="demo-box" style="justify-content: center; background-color: var(--color-slate-50);">
+            <div class="card card-hover freelancer-card" style="width: 100%; max-width: 340px;">
+              <div class="freelancer-header">
+                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop" alt="Budi Santoso" class="freelancer-avatar">
+                <div class="freelancer-info">
+                  <div class="freelancer-name">
+                    Budi Santoso
+                    <span class="badge badge-success" style="padding: 2px 6px; font-size: 9px;">
+                      <i data-lucide="shield" style="width: 8px; height: 8px; fill: currentColor;"></i> UI Verified
+                    </span>
+                  </div>
+                  <div class="freelancer-univ">S1 Teknik Informatika - UI</div>
+                  <div class="freelancer-rating">
+                    <i data-lucide="star" style="width: 12px; height: 12px; fill: #fbbf24; stroke: none;"></i>
+                    <span>4.9 <span style="color: var(--color-slate-400); font-weight: normal;">(18 ulasan)</span></span>
+                  </div>
+                </div>
+              </div>
+              <h4 class="freelancer-title">Web & API Developer Specialist</h4>
+              <p class="freelancer-bio">Menguasai React, Laravel, dan integrasi API payment gateway. Fokus pada optimalisasi query database dan keamanan sistem.</p>
+              <div class="freelancer-skills">
+                <span class="tag-skill">React</span>
+                <span class="tag-skill">Laravel</span>
+                <span class="tag-skill">Database</span>
+              </div>
+              <div class="freelancer-footer">
+                <div class="freelancer-rate">Tarif: <span>Rp 130.000 / jam</span></div>
+                <button class="btn btn-primary btn-sm" onclick="showToast('Hubungi', 'Pesan penawaran terkirim.');">Pekerjakan</button>
+              </div>
+            </div>
+          </div>
+          <div class="code-box">
+            <button class="btn-copy-code">Salin Kode</button>
+            <pre><code>&lt;!-- Kartu Profil Mahasiswa (Freelancer Card) --&gt;
+&lt;div class="card card-hover freelancer-card"&gt;
+  &lt;div class="freelancer-header"&gt;
+    &lt;img src="avatar.jpg" alt="Ahmad" class="freelancer-avatar"&gt;
+    &lt;div class="freelancer-info"&gt;
+      &lt;div class="freelancer-name"&gt;Ahmad Fauzi &lt;span class="badge badge-success"&gt;UI Verified&lt;/span&gt;&lt;/div&gt;
+      &lt;div class="freelancer-univ"&gt;Teknik Informatika - UI&lt;/div&gt;
+      &lt;div class="freelancer-rating"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;h4 class="freelancer-title"&gt;Web Specialist&lt;/h4&gt;
+  &lt;p class="freelancer-bio"&gt;Deskripsi portofolio singkat...&lt;/p&gt;
+  &lt;div class="freelancer-skills"&gt;
+    &lt;span class="tag-skill"&gt;React&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="freelancer-footer"&gt;
+    &lt;div class="freelancer-rate"&gt;Tarif: &lt;span&gt;Rp 150K / jam&lt;/span&gt;&lt;/div&gt;
+    &lt;button class="btn btn-primary btn-sm"&gt;Pekerjakan&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Job Card -->
+        <div>
+          <h3 class="demo-title">Kartu Lowongan Pekerjaan (Job Card)</h3>
+          <div class="demo-box" style="justify-content: center; background-color: var(--color-slate-50);">
+            <div class="card card-hover" style="width: 100%; max-width: 450px;">
+              <div class="d-flex justify-between align-center mb-sm">
+                <span class="badge badge-info">Web Development</span>
+                <span style="font-size: var(--font-xs); color: var(--color-slate-400);">Diposting 2 jam yang lalu</span>
+              </div>
+              <h4 style="font-size: var(--font-md); font-weight: 700; margin-bottom: var(--space-xs); color: var(--color-slate-900);">Pengembangan Website Katalog Produk UMKM Tenun</h4>
+              <p style="font-size: var(--font-sm); color: var(--color-slate-600); line-height: 1.5; margin-bottom: var(--space-md);">Dibutuhkan mahasiswa IT untuk membuat website katalog interaktif menampilkan produk kain tenun khas Bali. CMS sederhana, responsive, SEO-friendly.</p>
+              
+              <div class="d-flex flex-wrap gap-xs mb-md">
+                <span class="tag-skill">HTML & CSS</span>
+                <span class="tag-skill">Tailwind CSS</span>
+                <span class="tag-skill">PHP</span>
+                <span class="tag-skill">SEO</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--color-slate-100); padding-top: var(--space-md);">
+                <div>
+                  <span style="font-size: var(--font-xs); color: var(--color-slate-400); display: block;">Anggaran Proyek</span>
+                  <strong style="font-size: var(--font-base); color: var(--color-slate-900);">Rp 3.500.000</strong>
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="showToast('Kirim Proposal', 'Membuka formulir pengajuan proposal proyek untuk Mahasiswa...');">Kirim Proposal</button>
+              </div>
+            </div>
+          </div>
+          <div class="code-box">
+            <button class="btn-copy-code">Salin Kode</button>
+            <pre><code>&lt;!-- Kartu Lowongan Pekerjaan (Job Card) --&gt;
+&lt;div class="card card-hover"&gt;
+  &lt;div class="d-flex justify-between"&gt;
+    &lt;span class="badge badge-info"&gt;Kategori&lt;/span&gt;
+    &lt;span&gt;Waktu posting&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;h4&gt;Judul Lowongan Pekerjaan&lt;/h4&gt;
+  &lt;p&gt;Deskripsi pekerjaan digital yang ditawarkan...&lt;/p&gt;
+  &lt;div style="display:flex; justify-content:space-between;"&gt;
+    &lt;div&gt;
+      &lt;span&gt;Anggaran Proyek&lt;/span&gt;
+      &lt;strong&gt;Rp 3.500.000&lt;/strong&gt;
+    &lt;/div&gt;
+    &lt;button class="btn btn-secondary btn-sm"&gt;Kirim Proposal&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+    
+    // Sidebar Navigation logic
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    const sections = document.querySelectorAll('.showcase-section');
+    
+    sidebarLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Remove active class
+        sidebarLinks.forEach(l => l.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        
+        // Add active to current
+        link.classList.add('active');
+        const secId = 'sec-' + link.dataset.sec;
+        const targetSection = document.getElementById(secId);
+        if (targetSection) {
+          targetSection.classList.add('active');
+        }
+        
+        // Scroll to top of content wrapper smoothly
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Helper for color swatches clipboard copying
+    function copyColor(hex) {
+      navigator.clipboard.writeText(hex).then(() => {
+        showToast('Warna Disalin', `Kode warna ${hex} berhasil disalin ke papan klip.`, 'success');
+      });
+    }
+  </script>
+  
+  <!-- Custom main.js for toast support -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

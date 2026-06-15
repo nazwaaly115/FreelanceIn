@@ -1,0 +1,393 @@
+/*
+  FreelanceIn Freelancer Profile Page Styles
+  Upwork-Inspired Clean Profile Layout
+*/
+
+/* Profile Header Section */
+.profile-header-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+}
+
+.profile-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.profile-large-avatar-wrapper {
+  position: relative;
+}
+
+.profile-large-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+.profile-large-online {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  background-color: var(--color-success);
+  border: 3px solid var(--color-white);
+  border-radius: 50%;
+}
+
+.profile-header-info h2 {
+  font-size: var(--font-xl);
+  font-weight: 800;
+  color: var(--color-slate-900);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.profile-location {
+  font-size: var(--font-xs);
+  color: var(--color-slate-500);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: var(--space-xs);
+  font-weight: 500;
+}
+
+.profile-header-actions {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+/* Two-Column Profile Container */
+.profile-body-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  overflow: hidden;
+}
+
+/* Sidebar Styling (Left Column) */
+.profile-sidebar-col {
+  border-right: 1px solid var(--color-slate-200);
+  padding: var(--space-xl);
+  background-color: var(--color-white);
+}
+
+.sidebar-widget {
+  margin-bottom: var(--space-xl);
+}
+
+.sidebar-widget:last-of-type {
+  margin-bottom: 0;
+}
+
+.sidebar-widget-title {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--color-slate-900);
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-slate-100);
+  padding-bottom: var(--space-xs);
+}
+
+.sidebar-stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.sidebar-stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-stat-label {
+  font-size: var(--font-xs);
+  color: var(--color-slate-500);
+  font-weight: 500;
+}
+
+.sidebar-stat-value {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--color-slate-900);
+}
+
+.sidebar-edu-item {
+  margin-bottom: var(--space-sm);
+}
+
+.sidebar-edu-item:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-edu-degree {
+  font-size: var(--font-xs);
+  font-weight: 700;
+  color: var(--color-slate-800);
+}
+
+.sidebar-edu-univ {
+  font-size: var(--font-xs);
+  color: var(--color-slate-500);
+  font-weight: 500;
+}
+
+.sidebar-edu-date {
+  font-size: 10px;
+  color: var(--color-slate-400);
+  margin-top: 2px;
+}
+
+/* Main Content Area (Right Column) */
+.profile-main-col {
+  padding: var(--space-xl);
+}
+
+.profile-title-rate-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  border-bottom: 1px solid var(--color-slate-100);
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.profile-main-title {
+  font-size: var(--font-lg);
+  font-weight: 800;
+  color: var(--color-slate-900);
+}
+
+.profile-hourly-rate {
+  font-size: var(--font-lg);
+  font-weight: 800;
+  color: var(--color-slate-900);
+}
+
+.profile-hourly-rate span {
+  font-size: var(--font-xs);
+  color: var(--color-slate-500);
+  font-weight: 500;
+}
+
+.profile-bio-section {
+  font-size: var(--font-sm);
+  color: var(--color-slate-700);
+  line-height: 1.7;
+  margin-bottom: var(--space-2xl);
+}
+
+.profile-section-block {
+  margin-bottom: var(--space-2xl);
+  border-top: 1px solid var(--color-slate-100);
+  padding-top: var(--space-xl);
+}
+
+.profile-section-block:last-of-type {
+  margin-bottom: 0;
+}
+
+.profile-section-title {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--color-slate-900);
+  margin-bottom: var(--space-lg);
+}
+
+/* Detailed Portfolio Grid */
+.portfolio-detailed-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.portfolio-detailed-card {
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-detailed-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-slate-300);
+}
+
+.portfolio-detailed-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.portfolio-detailed-content {
+  padding: var(--space-md);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-detailed-title {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--color-slate-900);
+  margin-bottom: var(--space-xs);
+}
+
+.portfolio-detailed-desc {
+  font-size: var(--font-xs);
+  color: var(--color-slate-600);
+  line-height: 1.5;
+  margin-bottom: var(--space-md);
+  flex-grow: 1;
+}
+
+/* Detailed Reviews List */
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.review-item {
+  border-bottom: 1px solid var(--color-slate-100);
+  padding-bottom: var(--space-lg);
+}
+
+.review-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.review-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xs);
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.review-job-title {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--color-slate-900);
+}
+
+.review-stars-date {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.review-stars {
+  display: flex;
+  gap: 2px;
+  color: #fbbf24;
+}
+
+.review-stars svg {
+  width: 14px;
+  height: 14px;
+  fill: #fbbf24;
+  stroke: none;
+}
+
+.review-date {
+  font-size: 11px;
+  color: var(--color-slate-400);
+}
+
+.review-details-meta {
+  font-size: var(--font-xs);
+  color: var(--color-slate-500);
+  margin-bottom: var(--space-sm);
+}
+
+.review-details-meta strong {
+  color: var(--color-slate-800);
+}
+
+.review-feedback-text {
+  font-size: var(--font-xs);
+  color: var(--color-slate-600);
+  line-height: 1.5;
+  font-style: italic;
+  background-color: var(--color-slate-50);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-primary-dark);
+}
+
+/* Skills section styling */
+.skills-tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* Responsive Profile Breakpoints */
+@media (max-width: 992px) {
+  .profile-body-card {
+    grid-template-columns: 1fr;
+  }
+  
+  .profile-sidebar-col {
+    border-right: none;
+    border-bottom: 1px solid var(--color-slate-200);
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-header-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .profile-header-left {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  
+  .profile-header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .profile-header-actions .btn {
+    width: 100%;
+  }
+  
+  .portfolio-detailed-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budi Santoso - Web & API Developer Specialist - FreelanceIn</title>
+  <meta name="description" content="Detail profil mahasiswa IT Budi Santoso dari Universitas Indonesia. Spesialisasi Laravel, Node.js, dan database relasional. Pekerjakan sekarang untuk proyek digital Anda.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+
+  <!-- Navigation Header (Upwork Inspired) -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <a href="index.html" class="logo">
+          Freelance<span>In</span>
+          <div class="logo-dot"></div>
+        </a>
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item nav-item-dropdown">Cari Talenta</li>
+            <li class="nav-item nav-item-dropdown">Cari Proyek</li>
+            <li class="nav-item">Mengapa FreelanceIn</li>
+            <li class="nav-item"><a href="design-system.html" style="color: var(--color-slate-500); font-weight: 600;">Sistem Desain (FIDS)</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Header Search & Actions -->
+      <div class="nav-right">
+        <div class="header-search">
+          <input type="text" placeholder="Cari talenta IT atau proyek...">
+          <span class="header-search-icon">
+            <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+          </span>
+        </div>
+        <a href="#" class="btn-text" style="font-size: var(--font-sm); font-weight: 600;">Masuk</a>
+        <a href="#" class="btn btn-outline btn-sm">Daftar</a>
+        <a href="#" class="btn btn-primary btn-sm" onclick="showToast('Posting Proyek', 'Membuka form posting lowongan pekerjaan UMKM...');">Posting Pekerjaan</a>
+        <button class="mobile-nav-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Profile Container -->
+  <div class="container py-xl">
+    
+    <!-- Breadcrumbs -->
+    <div style="margin-bottom: var(--space-md); font-size: var(--font-xs); color: var(--color-slate-500);">
+      <a href="index.html">Beranda</a> &nbsp;/&nbsp; 
+      <a href="marketplace.html">Cari Talenta IT</a> &nbsp;/&nbsp; 
+      <span style="color: var(--color-slate-800); font-weight: 500;">Budi Santoso</span>
+    </div>
+
+    <!-- PROFILE HEADER CARD -->
+    <div class="profile-header-card">
+      <div class="profile-header-left">
+        <div class="profile-large-avatar-wrapper">
+          <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=160&auto=format&fit=crop" alt="Budi Santoso" class="profile-large-avatar">
+          <div class="profile-large-online"></div>
+        </div>
+        
+        <div class="profile-header-info">
+          <h2>
+            Budi Santoso
+            <span class="badge badge-success" style="padding: 4px 12px; font-size: var(--font-xs);">
+              <i data-lucide="shield-check" style="width: 12px; height: 12px; fill: currentColor;"></i> Verified Student
+            </span>
+          </h2>
+          <div class="profile-location">
+            <i data-lucide="map-pin" style="width: 12px; height: 12px;"></i>
+            <span>Depok, Jawa Barat, Indonesia</span>
+            <span style="color: var(--color-slate-300); margin: 0 4px;">|</span>
+            <i data-lucide="clock" style="width: 12px; height: 12px;"></i>
+            <span>Waktu lokal: 17:21 WIB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-header-actions">
+        <button class="btn btn-outline" onclick="showToast('Bookmark', 'Profil Budi Santoso disimpan ke bookmark.');">
+          <i data-lucide="bookmark" style="width: 16px; height: 16px;"></i>
+        </button>
+        <button class="btn btn-outline" onclick="showToast('Kirim Pesan', 'Membuka chat inbox dengan Budi...');">Kirim Pesan</button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#hire-modal">Pekerjakan Sekarang</button>
+      </div>
+    </div>
+
+    <!-- TWO-COLUMN PROFILE CARD BODY -->
+    <div class="profile-body-card">
+      
+      <!-- SIDEBAR INFO (LEFT COLUMN) -->
+      <aside class="profile-sidebar-col">
+        
+        <!-- Statistik Cepat -->
+        <div class="sidebar-widget">
+          <div class="sidebar-widget-title">Statistik Kerja</div>
+          <div class="sidebar-stats-list">
+            <div class="sidebar-stat-item">
+              <span class="sidebar-stat-label">Tarif</span>
+              <span class="sidebar-stat-value">Rp 130.000 / jam</span>
+            </div>
+            <div class="sidebar-stat-item">
+              <span class="sidebar-stat-label">Pekerjaan Selesai</span>
+              <span class="sidebar-stat-value">12 Proyek</span>
+            </div>
+            <div class="sidebar-stat-item">
+              <span class="sidebar-stat-label">Total Jam Kerja</span>
+              <span class="sidebar-stat-value">120 Jam</span>
+            </div>
+            <div class="sidebar-stat-item">
+              <span class="sidebar-stat-label">Success Rate</span>
+              <span class="sidebar-stat-value" style="color: var(--color-success);">100% Sukses</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Verifikasi Kampus -->
+        <div class="sidebar-widget">
+          <div class="sidebar-widget-title">Verifikasi Identitas</div>
+          <div class="sidebar-stats-list" style="gap: var(--space-sm);">
+            <div class="meta-item" style="color: var(--color-success); font-weight: 600;">
+              <i data-lucide="check-circle-2" style="color: var(--color-success)"></i> KTM Terverifikasi
+            </div>
+            <div class="meta-item" style="color: var(--color-success); font-weight: 600;">
+              <i data-lucide="check-circle-2" style="color: var(--color-success)"></i> Email Kampus Aktif
+            </div>
+            <div class="meta-item" style="color: var(--color-slate-500); font-size: 11px; padding-left: 24px; margin-top: -4px;">
+              budi.santoso@mahasiswa.ui.ac.id
+            </div>
+            <div class="meta-item" style="color: var(--color-success); font-weight: 600;">
+              <i data-lucide="check-circle-2" style="color: var(--color-success)"></i> Lulus Seleksi Akademis
+            </div>
+          </div>
+        </div>
+
+        <!-- Pendidikan -->
+        <div class="sidebar-widget">
+          <div class="sidebar-widget-title">Pendidikan</div>
+          <div class="sidebar-edu-item">
+            <div class="sidebar-edu-degree">S1 Teknik Informatika</div>
+            <div class="sidebar-edu-univ">Universitas Indonesia</div>
+            <div class="sidebar-edu-date">2023 - Sekarang (Semester 6)</div>
+          </div>
+        </div>
+
+        <!-- Kemampuan Bahasa -->
+        <div class="sidebar-widget">
+          <div class="sidebar-widget-title">Bahasa</div>
+          <div class="sidebar-stats-list">
+            <div class="sidebar-stat-item">
+              <span class="sidebar-stat-label">Indonesia</span>
+              <span class="sidebar-stat-value">Native / Utama</span>
+            </div>
+            <div class="sidebar-stat-item">
+              <span class="sidebar-stat-label">Inggris</span>
+              <span class="sidebar-stat-value">Profesional</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tautan Sosial -->
+        <div class="sidebar-widget" style="margin-bottom: 0;">
+          <div class="sidebar-widget-title">Tautan Portofolio</div>
+          <div class="sidebar-stats-list" style="gap: var(--space-sm);">
+            <a href="#" class="meta-item" style="color: var(--color-slate-700); font-weight: 500;" onclick="showToast('Eksternal Link', 'Membuka profil GitHub Budi...'); return false;">
+              <i data-lucide="github"></i> github.com/budisantoso
+            </a>
+            <a href="#" class="meta-item" style="color: var(--color-slate-700); font-weight: 500;" onclick="showToast('Eksternal Link', 'Membuka profil LinkedIn Budi...'); return false;">
+              <i data-lucide="linkedin"></i> linkedin.com/in/budisantoso
+            </a>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- MAIN CONTENT AREA (RIGHT COLUMN) -->
+      <main class="profile-main-col">
+        
+        <!-- Title & Hourly Rate Row -->
+        <div class="profile-title-rate-row">
+          <div class="profile-main-title">Web & API Developer Specialist</div>
+          <div class="profile-hourly-rate">Rp 130.000 <span>/ jam</span></div>
+        </div>
+
+        <!-- Bio / Overview -->
+        <div class="profile-bio-section">
+          <p style="margin-bottom: var(--space-md);">
+            Halo! Saya adalah mahasiswa aktif semester 6 jurusan Teknik Informatika di Universitas Indonesia. Berpengalaman selama lebih dari 2 tahun dalam membangun arsitektur backend aplikasi web yang andal, efisien, dan memiliki tingkat keamanan tinggi. Saya memiliki ketertarikan mendalam pada pembuatan sistem integrasi basis data dan RESTful API.
+          </p>
+          <p>
+            Dalam setiap kolaborasi dengan pelaku UMKM, saya selalu mengedepankan komunikasi yang transparan, penulisan kode yang bersih (clean code) sesuai standar industri, serta dokumentasi API yang lengkap agar sistem mudah dioperasikan. Saya berkomitmen penuh membantu UMKM di Indonesia bertransformasi ke digital dengan biaya yang sangat masuk akal bagi pertumbuhan bisnis Anda.
+          </p>
+        </div>
+
+        <!-- PORTFOLIO SECTION -->
+        <div class="profile-section-block">
+          <h3 class="profile-section-title">Galeri Portofolio</h3>
+          <div class="portfolio-detailed-grid">
+            
+            <!-- Portofolio 1 -->
+            <div class="portfolio-detailed-card" onclick="openPortfolioModal('POS System', 'Aplikasi Point of Sales (POS) berbasis web terintegrasi yang dirancang khusus untuk UMKM toko kelontong dan kuliner. Fitur utama mencakup manajemen stok barang otomatis, laporan laba-rugi bulanan, manajemen kasir multi-level, serta struk digital dinamis. Berjalan dengan performa query database yang telah dioptimasi.', 'Laravel, MySQL, Bootstrap', 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop')">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" alt="POS System" class="portfolio-detailed-img">
+              <div class="portfolio-detailed-content">
+                <h4 class="portfolio-detailed-title">E-Commerce POS System (Sistem Kasir)</h4>
+                <p class="portfolio-detailed-desc">Membangun web kasir sederhana responsive untuk inventory toko UMKM.</p>
+                <div class="freelancer-skills" style="gap: 4px;">
+                  <span class="tag-skill" style="padding: 2px 6px; font-size: 10px;">Laravel</span>
+                  <span class="tag-skill" style="padding: 2px 6px; font-size: 10px;">MySQL</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portofolio 2 -->
+            <div class="portfolio-detailed-card" onclick="openPortfolioModal('Admin Dashboard', 'Pengembangan dashboard administrasi canggih untuk pengelolaan pemesanan jasa online secara real-time. Dashboard ini mengintegrasikan visualisasi grafik transaksi keuangan (Chart.js), ekspor data laporan berformat CSV/Excel, serta sistem otentikasi JWT yang aman.', 'React.js, Node.js, Express, PostgreSQL', 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop')">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" alt="Admin Dashboard" class="portfolio-detailed-img">
+              <div class="portfolio-detailed-content">
+                <h4 class="portfolio-detailed-title">Booking App Admin Dashboard</h4>
+                <p class="portfolio-detailed-desc">Dasbor pengelola booking jasa digital lengkap dengan grafik analitik.</p>
+                <div class="freelancer-skills" style="gap: 4px;">
+                  <span class="tag-skill" style="padding: 2px 6px; font-size: 10px;">React</span>
+                  <span class="tag-skill" style="padding: 2px 6px; font-size: 10px;">Node.js</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portofolio 3 -->
+            <div class="portfolio-detailed-card" onclick="openPortfolioModal('Company Profile', 'Pembuatan website profil perusahaan modern bergaya minimalis untuk CV manufaktur lokal. Fokus utama adalah optimalisasi SEO on-page yang berhasil menaikkan posisi ranking website di Google search, kecepatan loading halaman yang optimal, dan struktur navigasi responsif yang ramah seluler.', 'HTML, CSS, Vanilla JS, SEO', 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=600&auto=format&fit=crop')">
+              <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=600&auto=format&fit=crop" alt="Company Profile" class="portfolio-detailed-img">
+              <div class="portfolio-detailed-content">
+                <h4 class="portfolio-detailed-title">Company Profile & SEO Optimization</h4>
+                <p class="portfolio-detailed-desc">Website profil interaktif responsive dengan peningkatan traffic search 40%.</p>
+                <div class="freelancer-skills" style="gap: 4px;">
+                  <span class="tag-skill" style="padding: 2px 6px; font-size: 10px;">Vanilla JS</span>
+                  <span class="tag-skill" style="padding: 2px 6px; font-size: 10px;">SEO</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- COMPLETED PROJECTS & REVIEWS -->
+        <div class="profile-section-block">
+          <h3 class="profile-section-title">Riwayat Pekerjaan & Ulasan UMKM</h3>
+          <div class="reviews-list">
+            
+            <!-- Review 1 -->
+            <div class="review-item">
+              <div class="review-header-row">
+                <h4 class="review-job-title">Pengembangan Sistem POS Kasir Warung Kopi</h4>
+                <div class="review-stars-date">
+                  <div class="review-stars">
+                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+                  </div>
+                  <span class="review-date">April 2026</span>
+                </div>
+              </div>
+              <div class="review-details-meta">
+                Anggaran: <strong>Rp 4.500.000 (Fixed Price)</strong> &nbsp;&bull;&nbsp; Kampus Terverifikasi: <strong>Teknik Informatika UI</strong>
+              </div>
+              <p class="review-feedback-text">
+                "Budi bekerja dengan sangat baik. Sistem POS kasir warung kopi kami selesai lebih cepat dari tenggat waktu semula. Dokumentasi coding dan cara penggunaan sistem diberikan secara detail. Komunikatif dan sangat profesional untuk sekelas mahasiswa!" &mdash; Hendra W., CV Maju Bersama.
+              </p>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="review-item">
+              <div class="review-header-row">
+                <h4 class="review-job-title">Custom Website Profil Toko Roti Lapis</h4>
+                <div class="review-stars-date">
+                  <div class="review-stars">
+                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+                  </div>
+                  <span class="review-date">Februari 2026</span>
+                </div>
+              </div>
+              <div class="review-details-meta">
+                Anggaran: <strong>Rp 3.000.000 (Fixed Price)</strong> &nbsp;&bull;&nbsp; Kampus Terverifikasi: <strong>Teknik Informatika UI</strong>
+              </div>
+              <p class="review-feedback-text">
+                "Sangat puas dengan hasilnya. Desain web-nya bersih dan cepat saat dibuka di handphone pelanggan. Budi juga sabar melayani beberapa revisi visual dari kami hingga sesuai keinginan. Terima kasih FreelanceIn!" &mdash; Santi S., Founder Roti Kita.
+              </p>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="review-item">
+              <div class="review-header-row">
+                <h4 class="review-job-title">Integrasi API Midtrans Payment Gateway</h4>
+                <div class="review-stars-date">
+                  <div class="review-stars">
+                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+                  </div>
+                  <span class="review-date">Desember 2025</span>
+                </div>
+              </div>
+              <div class="review-details-meta">
+                Anggaran: <strong>Rp 2.500.000 (Fixed Price)</strong> &nbsp;&bull;&nbsp; Kampus Terverifikasi: <strong>Teknik Informatika UI</strong>
+              </div>
+              <p class="review-feedback-text">
+                "API pembayaran Midtrans terintegrasi dengan baik di website toko online kami. Kodenya rapi dan terdokumentasi lengkap. Ada sedikit hambatan teknis dari sisi server kami, tapi Budi merespons dan memperbaikinya dengan cepat." &mdash; Aris S., Sinar Abadi Tech.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SKILLS LIST -->
+        <div class="profile-section-block">
+          <h3 class="profile-section-title">Keahlian & Keahlian IT</h3>
+          <div class="skills-tags-wrap">
+            <span class="tag-skill">Laravel</span>
+            <span class="tag-skill">React.js</span>
+            <span class="tag-skill">Node.js</span>
+            <span class="tag-skill">PHP</span>
+            <span class="tag-skill">Express.js</span>
+            <span class="tag-skill">PostgreSQL</span>
+            <span class="tag-skill">MySQL</span>
+            <span class="tag-skill">RESTful API</span>
+            <span class="tag-skill">Docker</span>
+            <span class="tag-skill">Git / Version Control</span>
+            <span class="tag-skill">HTML & CSS</span>
+            <span class="tag-skill">UI/UX Figma (Basic)</span>
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- HIRE MODAL (FORMULIR PENAWARAN KERJA) -->
+  <div id="hire-modal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Kirim Penawaran Proyek</h3>
+        <button class="modal-close">✕</button>
+      </div>
+      <form id="hire-project-form" onsubmit="submitHireOffer(event)">
+        <div class="modal-body">
+          <p style="font-size: var(--font-xs); color: var(--color-slate-500); margin-bottom: var(--space-md);">
+            Anda akan mengirimkan undangan rekrutmen proyek kepada mahasiswa: <strong>Budi Santoso (UI)</strong>.
+          </p>
+          
+          <div class="form-group">
+            <label class="form-label" for="project-title">Nama Proyek IT Anda</label>
+            <input type="text" id="project-title" class="form-input" placeholder="Contoh: Pembuatan Website Toko Online Sembako" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="project-budget">Perkiraan Anggaran Proyek</label>
+            <select id="project-budget" class="form-select" required>
+              <option selected disabled>Pilih rentang anggaran...</option>
+              <option>&lt; Rp 2.000.000</option>
+              <option>Rp 2.000.000 - Rp 5.000.000</option>
+              <option>Rp 5.000.000 - Rp 10.000.000</option>
+              <option>&gt; Rp 10.000.000</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="project-desc">Deskripsi & Kebutuhan Proyek</label>
+            <textarea id="project-desc" class="form-textarea" rows="4" placeholder="Tuliskan detail pekerjaan IT yang ingin Anda tugaskan..." required></textarea>
+          </div>
+
+          <label class="form-checkbox-label">
+            <input type="checkbox" class="form-checkbox" required checked>
+            <span style="font-size: 11px; color: var(--color-slate-600);">Saya setuju menggunakan Rekening Bersama FreelanceIn untuk transaksi aman.</span>
+          </label>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-sm" data-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm">Kirim Undangan Kerja</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO DETAIL MODAL -->
+  <div id="portfolio-modal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="port-modal-title">Detail Portofolio</h3>
+        <button class="modal-close">✕</button>
+      </div>
+      <div class="modal-body" style="padding-top: 0;">
+        <img id="port-modal-img" src="" alt="Portfolio Large View" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 0 0 var(--radius-sm) var(--radius-sm); margin-bottom: var(--space-md); border: 1px solid var(--color-slate-200);">
+        
+        <h4 style="font-size: var(--font-sm); font-weight: 700; color: var(--color-slate-900); margin-bottom: 4px;">Deskripsi Proyek</h4>
+        <p id="port-modal-desc" style="font-size: var(--font-sm); color: var(--color-slate-600); line-height: 1.6; margin-bottom: var(--space-md);"></p>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--color-slate-100); padding-top: var(--space-md);">
+          <div>
+            <span style="font-size: var(--font-xs); color: var(--color-slate-400); display: block;">Teknologi</span>
+            <strong id="port-modal-tech" style="font-size: var(--font-xs); color: var(--color-accent-dark);"></strong>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="showToast('Demo Proyek', 'Membuka tab baru menuju link live demo proyek...', 'success')">Lihat Live Demo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col-brand">
+          <a href="index.html" class="logo">
+            Freelance<span>In</span>
+            <div class="logo-dot"></div>
+          </a>
+          <p class="footer-brand-desc">FreelanceIn adalah platform terpercaya yang menghubungkan mahasiswa IT berprestasi dari universitas di Indonesia dengan UMKM untuk solusi digital terbaik.</p>
+        </div>
+        
+        <div class="footer-col-links">
+          <h4>Untuk UMKM</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">Cari Freelancer IT</a></li>
+            <li class="footer-link"><a href="#">Posting Lowongan Proyek</a></li>
+            <li class="footer-link"><a href="#">Rekening Bersama Aman</a></li>
+            <li class="footer-link"><a href="#">Katalog Proyek Digital</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-links">
+          <h4>Untuk Mahasiswa</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">Cari Lowongan IT</a></li>
+            <li class="footer-link"><a href="#">Verifikasi KTM Mahasiswa</a></li>
+            <li class="footer-link"><a href="#">Tips Menulis Proposal</a></li>
+            <li class="footer-link"><a href="#">Komunitas IT Student</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-links">
+          <h4>Perusahaan</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">Tentang Kami</a></li>
+            <li class="footer-link"><a href="#">Hubungi Support</a></li>
+            <li class="footer-link"><a href="#">Syarat & Ketentuan</a></li>
+            <li class="footer-link"><a href="#">Kebijakan Privasi</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 FreelanceIn. Seluruh hak cipta dilindungi undang-undang.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social-link"><i data-lucide="facebook"></i></a>
+          <a href="#" class="footer-social-link"><i data-lucide="twitter"></i></a>
+          <a href="#" class="footer-social-link"><i data-lucide="instagram"></i></a>
+          <a href="#" class="footer-social-link"><i data-lucide="linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Profile Specific Script -->
+  <script>
+    // Open Portfolio Detail Modal
+    function openPortfolioModal(title, details, tech, imgSrc) {
+      document.getElementById('port-modal-title').innerText = title;
+      document.getElementById('port-modal-desc').innerText = details;
+      document.getElementById('port-modal-tech').innerText = tech;
+      document.getElementById('port-modal-img').src = imgSrc;
+      
+      const modal = document.getElementById('portfolio-modal');
+      modal.classList.add('show');
+    }
+
+    // Submit Recruitment Proposal Offer
+    function submitHireOffer(event) {
+      event.preventDefault();
+      
+      const projectTitle = document.getElementById('project-title').value.trim();
+      
+      // Close modal
+      const modal = document.getElementById('hire-modal');
+      modal.classList.remove('show');
+      
+      // Reset form
+      document.getElementById('hire-project-form').reset();
+      
+      // Show Success Toast
+      showToast('Penawaran Terkirim!', `Undangan proyek "${projectTitle}" sukses dikirim ke Budi Santoso.`, 'success');
+    }
+  </script>
+
+  <!-- Custom main.js for toast support -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
