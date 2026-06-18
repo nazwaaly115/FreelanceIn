@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesan - FreelanceIn</title>
+  <meta name="description"
+    content="Kotak masuk percakapan antara mahasiswa IT terverifikasi dengan UMKM di FreelanceIn. Diskusikan detail proyek digital Anda.">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/messages.css">
+</head>
+
+<body>
+
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <a href="index.html" class="logo">
+          Freelance<span>In</span>
+          <div class="logo-dot"></div>
+        </a>
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="marketplace.html">Cari Talenta</a></li>
+            <li class="nav-item"><a href="student-dashboard.html">Dashboard</a></li>
+            <li class="nav-item text-primary"><a href="messages.html">Pesan</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav-right">
+        <!-- Replaced dynamically by main.js, placeholder for static reference -->
+        <button class="mobile-nav-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Chat Container -->
+  <div class="container py-xl">
+
+    <div class="messages-layout" id="chat-layout-wrapper">
+
+      <!-- LEFT COLUMN: Conversation List -->
+      <div class="chat-list-pane">
+
+        <!-- Search bar -->
+        <div class="chat-list-search">
+          <div class="header-search" style="width: 100%; padding-right: 0.5rem;">
+            <input type="text" placeholder="Cari kontak chat..." id="chat-contact-search"
+              oninput="searchChatContacts(this.value)">
+            <span class="header-search-icon">
+              <i data-lucide="search" style="width: 14px; height: 14px;"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Threads list -->
+        <div class="chat-threads-container" id="threads-list">
+
+          <!-- Thread 1: Budi Santoso (Student) -->
+          <div class="chat-thread-item active" id="thread-budi" onclick="activateChatThread('budi')">
+            <div class="thread-avatar-wrapper">
+              <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop"
+                alt="Budi" class="thread-avatar">
+              <div class="thread-online-badge"></div>
+            </div>
+            <div class="thread-details">
+              <div class="thread-header-row">
+                <span class="thread-name">Budi Santoso (Mhs)</span>
+                <span class="thread-time">19:57</span>
+              </div>
+              <div class="thread-header-row">
+                <span class="thread-last-msg" id="last-msg-budi">Saya akan kirim ZIP kodenya malam ini pak.</span>
+                <span class="thread-unread-badge" id="unread-budi" style="display: none;">1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thread 2: Siti Rahma (Student UI/UX) -->
+          <div class="chat-thread-item" id="thread-siti" onclick="activateChatThread('siti')">
+            <div class="thread-avatar-wrapper">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop"
+                alt="Siti" class="thread-avatar">
+              <div class="thread-online-badge"></div>
+            </div>
+            <div class="thread-details">
+              <div class="thread-header-row">
+                <span class="thread-name">Siti Rahma (Mhs UX)</span>
+                <span class="thread-time">Kemarin</span>
+              </div>
+              <div class="thread-header-row">
+                <span class="thread-last-msg" id="last-msg-siti">Halo, apakah wireframe pos kasir sudah sesuai?</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thread 3: Hendra Wijaya (SME Client) -->
+          <div class="chat-thread-item" id="thread-hendra" onclick="activateChatThread('hendra')"
+            style="display: none;">
+            <div class="thread-avatar-wrapper">
+              <div
+                style="width: 44px; height: 44px; border-radius: 50%; background-color: var(--color-primary); color: var(--color-slate-900); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--font-sm); box-shadow: var(--shadow-sm);">
+                HW
+              </div>
+            </div>
+            <div class="thread-details">
+              <div class="thread-header-row">
+                <span class="thread-name">Hendra Wijaya (CV Maju)</span>
+                <span class="thread-time">19:57</span>
+              </div>
+              <div class="thread-header-row">
+                <span class="thread-last-msg" id="last-msg-hendra">Saya tunggu ZIP kodenya malam ini, Budi.</span>
+                <span class="thread-unread-badge" id="unread-hendra" style="display: none;">1</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN: Chat Pane -->
+      <div class="chat-pane" id="chat-pane-wrapper">
+
+        <!-- Chat header bar -->
+        <div class="chat-header-bar">
+          <div class="chat-header-user">
+            <!-- Back button in mobile -->
+            <button class="btn btn-text btn-sm mobile-back-btn" onclick="toggleMobileChatList(true)"
+              style="display: none; padding: 4px;">
+              <i data-lucide="arrow-left" style="width: 20px; height: 20px;"></i>
+            </button>
+            <div class="thread-avatar-wrapper">
+              <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop"
+                alt="Active Chat Avatar" class="thread-avatar" id="active-chat-avatar">
+              <div class="thread-online-badge"></div>
+            </div>
+            <div>
+              <h3 style="font-size: var(--font-sm); font-weight: 700; color: var(--color-slate-900);"
+                id="active-chat-name">Budi Santoso</h3>
+              <span style="font-size: 11px; color: var(--color-slate-400);" id="active-chat-sub">Mahasiswa UI
+                Terverifikasi</span>
+            </div>
+          </div>
+          <div class="chat-header-actions">
+            <a href="project-tracking.html" class="btn btn-outline btn-sm" id="chat-header-action-btn">Lacak Proyek</a>
+          </div>
+        </div>
+
+        <!-- Chat messages area -->
+        <div class="chat-messages-viewport" id="chat-messages-box">
+
+          <!-- Sample messages dynamically loaded by script -->
+
+        </div>
+
+        <!-- Chat input bar control -->
+        <div class="chat-input-bar">
+
+          <!-- Attachment Button -->
+          <button class="chat-attachment-btn" title="Kirim File" onclick="triggerMockFileUpload()">
+            <i data-lucide="paperclip" style="width: 20px; height: 20px;"></i>
+          </button>
+
+          <!-- Hidden file input for simulation -->
+          <input type="file" id="chat-hidden-file" style="display: none;" onchange="handleMockFileSelected(this)">
+
+          <!-- Message textarea -->
+          <textarea class="chat-input-textarea" id="chat-message-input" placeholder="Tulis pesan Anda di sini..."
+            onkeydown="handleTextareaKeydown(event)"></textarea>
+
+          <!-- Kirim Button -->
+          <button class="btn btn-primary btn-sm" onclick="sendUserMessage()" style="padding: 10px 16px;">
+            <i data-lucide="send" style="width: 16px; height: 16px; margin: 0;"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 FreelanceIn. Seluruh hak cipta dilindungi undang-undang.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Interactive Chat Script -->
+  <script>
+    // Chat database
+    const chatsData = {
+      budi: {
+        avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop",
+        isAvatarImage: true,
+        name: "Budi Santoso",
+        subtitle: "S1 Teknik Informatika - Universitas Indonesia (Verified Student)",
+        link: "project-tracking.html",
+        linkText: "Lacak Proyek",
+        messages: [
+          { sender: "incoming", text: "Halo Pak Hendra. Saya sudah mengoptimasi query database untuk sistem POS kasir warung kopi Bapak.", time: "16 Juni 10:15" },
+          { sender: "outgoing", text: "Bagus Budi, terima kasih. Apakah struk transaksinya sudah responsive saat dicetak?", time: "16 Juni 10:30" },
+          { sender: "incoming", text: "Sudah pak, saya menggunakan media query print CSS khusus agar struk rapi di kertas thermal kasir 80mm.", time: "16 Juni 10:32" },
+          { sender: "incoming", text: "Saya juga sudah mengunggah berkas rancangan kodenya ke panel review.", time: "18 Juni 14:02" },
+          { sender: "outgoing", text: "Oke saya cek. Tolong kirimkan juga modul panduan instalasi lokalnya agar bisa dicoba.", time: "18 Juni 14:15" },
+          { sender: "incoming", text: "Tentu pak, panduan berbentuk PDF sudah saya taruh di folder zip. Saya akan kirim ZIP kodenya malam ini pak.", time: "19:57" }
+        ],
+        autoreply: "Terima kasih pak. Saya sudah terima masukan Anda. Segera saya perbarui filenya di folder deliverables proyek."
+      },
+      siti: {
+        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop",
+        isAvatarImage: true,
+        name: "Siti Rahma",
+        subtitle: "S1 Sistem Informasi - ITB (Verified Student)",
+        link: "profile.html",
+        linkText: "Lihat Profil",
+        messages: [
+          { sender: "outgoing", text: "Sore Siti, saya tertarik dengan portofolio UI kit rental mobil Anda. Berapa lama estimasi pengerjaan desain e-commerce hijab kami?", time: "Kemarin 14:00" },
+          { sender: "incoming", text: "Selamat sore! Untuk desain e-commerce hijab sekitar 5 halaman (Home, Catalog, Product Detail, Cart, Checkout) butuh waktu sekitar 7 hari kerja pak.", time: "Kemarin 14:15" },
+          { sender: "incoming", text: "Halo, apakah wireframe pos kasir sudah sesuai?", time: "Kemarin 16:30" }
+        ],
+        autoreply: "Baik pak, saya akan buatkan mockup UI kustom 2 halaman pertama besok agar Bapak bisa berikan feedback awal. Terima kasih!"
+      },
+      hendra: {
+        avatar: "HW",
+        isAvatarImage: false,
+        name: "Hendra Wijaya (CV Maju)",
+        subtitle: "Owner UMKM CV Maju Bersama (Klien Proyek)",
+        link: "project-tracking.html",
+        linkText: "Pantau Proyek",
+        messages: [
+          { sender: "outgoing", text: "Halo Pak Hendra. Saya sudah mengoptimasi query database untuk sistem POS kasir warung kopi Bapak.", time: "16 Juni 10:15" },
+          { sender: "incoming", text: "Bagus Budi, terima kasih. Apakah struk transaksinya sudah responsive saat dicetak?", time: "16 Juni 10:30" },
+          { sender: "outgoing", text: "Sudah pak, saya menggunakan media query print CSS khusus agar struk rapi di kertas thermal kasir 80mm.", time: "16 Juni 10:32" },
+          { sender: "outgoing", text: "Saya juga sudah mengunggah berkas rancangan kodenya ke panel review.", time: "18 Juni 14:02" },
+          { sender: "incoming", text: "Oke saya cek. Tolong kirimkan juga modul panduan instalasi lokalnya agar bisa dicoba.", time: "18 Juni 14:15" },
+          { sender: "outgoing", text: "Tentu pak, panduan berbentuk PDF sudah saya taruh di folder zip. Saya akan kirim ZIP kodenya malam ini pak.", time: "19:57" },
+          { sender: "incoming", text: "Saya tunggu ZIP kodenya malam ini, Budi.", time: "19:57" }
+        ],
+        autoreply: "Terima kasih infonya, Budi. Tinjauan akan segera saya selesaikan bersama tim kasir warung besok pagi."
+      }
+    };
+
+    window.activeThreadId = 'budi'; // Default active chat
+
+    // Toggle chat viewport on load depending on logged in role
+    window.addEventListener('load', () => {
+      const userJson = localStorage.getItem('freelancein_user');
+      if (userJson) {
+        const user = JSON.parse(userJson);
+        if (user.role === 'mahasiswa') {
+          // If logged in as student Budi Santoso, hide thread Budi (cannot chat with self) and show Hendra thread
+          document.getElementById('thread-budi').style.display = 'none';
+          document.getElementById('thread-hendra').style.display = 'flex';
+
+          window.activeThreadId = 'hendra';
+
+          // Set active thread style
+          document.getElementById('thread-hendra').classList.add('active');
+          document.getElementById('thread-siti').classList.remove('active');
+        }
+      }
+
+      // Load selected thread content
+      loadChatMessages(window.activeThreadId);
+    });
+
+    // Load Chat Thread
+    function loadChatMessages(threadId) {
+      window.activeThreadId = threadId;
+      const data = chatsData[threadId];
+
+      // Re-configure Header User info
+      const avatarEl = document.getElementById('active-chat-avatar');
+      const headerName = document.getElementById('active-chat-name');
+      const headerSub = document.getElementById('active-chat-sub');
+      const headerActionBtn = document.getElementById('chat-header-action-btn');
+
+      if (data.isAvatarImage) {
+        avatarEl.src = data.avatar;
+        avatarEl.style.display = 'block';
+        if (avatarEl.nextElementSibling) avatarEl.nextElementSibling.style.display = 'none';
+      } else {
+        avatarEl.style.display = 'none';
+
+        // Handle text initials avatar
+        let textAvatar = avatarEl.parentNode.querySelector('.text-avatar-mock');
+        if (!textAvatar) {
+          textAvatar = document.createElement('div');
+          textAvatar.className = 'text-avatar-mock';
+          textAvatar.style.cssText = "width: 44px; height: 44px; border-radius: 50%; background-color: var(--color-primary); color: var(--color-slate-900); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--font-sm); box-shadow: var(--shadow-sm);";
+          avatarEl.parentNode.appendChild(textAvatar);
+        }
+        textAvatar.innerText = data.avatar;
+        textAvatar.style.display = 'flex';
+      }
+
+      headerName.innerText = data.name;
+      headerSub.innerText = data.subtitle;
+      headerActionBtn.innerText = data.linkText;
+      headerActionBtn.href = data.link;
+
+      // Render Messages
+      const box = document.getElementById('chat-messages-box');
+      box.innerHTML = '';
+
+      data.messages.forEach(msg => {
+        const bubble = document.createElement('div');
+        bubble.className = `message-bubble ${msg.sender}`;
+
+        // Check if message is mock file or raw text
+        if (msg.isFile) {
+          bubble.innerHTML = `
+            <div class="chat-file-card" onclick="showToast('Unduh Berkas', 'Mengunduh file ${msg.fileName}...', 'success')">
+              <i data-lucide="file-archive" class="chat-file-icon"></i>
+              <div>
+                <strong>${msg.fileName}</strong><br>
+                <span style="font-size: 8px; color: var(--color-slate-400);">${msg.fileSize}</span>
+              </div>
+            </div>
+            <span>${msg.text}</span>
+            <span class="message-timestamp">${msg.time}</span>
+          `;
+        } else {
+          bubble.innerHTML = `
+            <span>${msg.text}</span>
+            <span class="message-timestamp">${msg.time}</span>
+          `;
+        }
+
+        box.appendChild(bubble);
+      });
+
+      // Scroll to bottom
+      scrollToBottom();
+
+      // Update thread active states visually
+      document.querySelectorAll('.chat-thread-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      const activeItem = document.getElementById(`thread-${threadId}`);
+      if (activeItem) {
+        activeItem.classList.add('active');
+      }
+
+      // Recreate icons
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    // Activate Thread Clicking
+    function activateChatThread(id) {
+      loadChatMessages(id);
+
+      // Handle mobile screen view transitions
+      if (window.innerWidth <= 768) {
+        toggleMobileChatList(false);
+      }
+    }
+
+    // Toggle mobile screen panels
+    function toggleMobileChatList(showList) {
+      const layout = document.getElementById('chat-layout-wrapper');
+      if (showList) {
+        layout.classList.remove('mobile-active');
+      } else {
+        layout.classList.add('mobile-active');
+      }
+    }
+
+    // Handle Textarea Enter Key
+    function handleTextareaKeydown(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendUserMessage();
+      }
+    }
+
+    // Send Message
+    function sendUserMessage() {
+      const input = document.getElementById('chat-message-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const date = new Date();
+      const timeStr = date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
+
+      // Add to database
+      chatsData[window.activeThreadId].messages.push({
+        sender: "outgoing",
+        text: text,
+        time: timeStr
+      });
+
+      // Render bubble immediately
+      const box = document.getElementById('chat-messages-box');
+      const bubble = document.createElement('div');
+      bubble.className = "message-bubble outgoing";
+      bubble.innerHTML = `
+        <span>${text}</span>
+        <span class="message-timestamp">${timeStr}</span>
+      `;
+      box.appendChild(bubble);
+
+      // Reset input
+      input.value = '';
+
+      // Update thread last message text
+      const threadMsg = document.getElementById(`last-msg-${window.activeThreadId}`);
+      if (threadMsg) {
+        threadMsg.innerText = text;
+      }
+
+      scrollToBottom();
+
+      // Trigger automatic typing mock reply
+      triggerMockAutoReply();
+    }
+
+    // Mock Typing Autoreply Simulator
+    function triggerMockAutoReply() {
+      const currentThread = window.activeThreadId;
+      const data = chatsData[currentThread];
+
+      setTimeout(() => {
+        // Double check they haven't switched threads
+        if (window.activeThreadId !== currentThread) return;
+
+        const date = new Date();
+        const timeStr = date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
+
+        // Append message
+        data.messages.push({
+          sender: "incoming",
+          text: data.autoreply,
+          time: timeStr
+        });
+
+        const box = document.getElementById('chat-messages-box');
+        const bubble = document.createElement('div');
+        bubble.className = "message-bubble incoming";
+        bubble.innerHTML = `
+          <span>${data.autoreply}</span>
+          <span class="message-timestamp">${timeStr}</span>
+        `;
+        box.appendChild(bubble);
+
+        // Update last message in thread list
+        const threadMsg = document.getElementById(`last-msg-${currentThread}`);
+        if (threadMsg) {
+          threadMsg.innerText = data.autoreply;
+        }
+
+        showToast('Pesan Baru', `Pesan masuk dari ${data.name}.`, 'info');
+        scrollToBottom();
+      }, 1800);
+    }
+
+    // Mock File Upload Integration
+    function triggerMockFileUpload() {
+      document.getElementById('chat-hidden-file').click();
+    }
+
+    function handleMockFileSelected(input) {
+      if (input.files.length === 0) return;
+
+      const file = input.files[0];
+      const date = new Date();
+      const timeStr = date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
+      const fileSizeFriendly = (file.size / (1024 * 1024)).toFixed(2) + " MB";
+
+      // Append file mock to database
+      chatsData[window.activeThreadId].messages.push({
+        sender: "outgoing",
+        text: "Mengirim berkas lampiran.",
+        time: timeStr,
+        isFile: true,
+        fileName: file.name,
+        fileSize: fileSizeFriendly
+      });
+
+      // Render file card bubble
+      const box = document.getElementById('chat-messages-box');
+      const bubble = document.createElement('div');
+      bubble.className = "message-bubble outgoing";
+      bubble.innerHTML = `
+        <div class="chat-file-card" onclick="showToast('Unduh Berkas', 'Mengunduh file ${file.name}...', 'success')">
+          <i data-lucide="file-archive" class="chat-file-icon"></i>
+          <div>
+            <strong>${file.name}</strong><br>
+            <span style="font-size: 8px; color: var(--color-slate-400);">${fileSizeFriendly}</span>
+          </div>
+        </div>
+        <span>Kirim Berkas Proyek</span>
+        <span class="message-timestamp">${timeStr}</span>
+      `;
+      box.appendChild(bubble);
+
+      // Update thread details
+      const threadMsg = document.getElementById(`last-msg-${window.activeThreadId}`);
+      if (threadMsg) {
+        threadMsg.innerHTML = `<i data-lucide="paperclip" style="width:10px; height:10px; display:inline-block; margin-right:2px;"></i> Berkas: ${file.name}`;
+      }
+
+      scrollToBottom();
+
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+
+      showToast('Berkas Terkirim', `File "${file.name}" berhasil diunggah.`, 'success');
+
+      // Auto reply simulation
+      triggerMockAutoReply();
+    }
+
+    // Contacts search filter
+    function searchChatContacts(query) {
+      const q = query.toLowerCase().trim();
+      const threads = document.querySelectorAll('.chat-thread-item');
+
+      threads.forEach(thread => {
+        const name = thread.querySelector('.thread-name').innerText.toLowerCase();
+        if (name.includes(q)) {
+          thread.style.display = 'flex';
+        } else {
+          thread.style.display = 'none';
+        }
+      });
+    }
+
+    function scrollToBottom() {
+      const box = document.getElementById('chat-messages-box');
+      box.scrollTop = box.scrollHeight;
+    }
+  </script>
+
+  <!-- Mobile screen styling overrides -->
+  <style>
+    @media (max-width: 768px) {
+      .mobile-back-btn {
+        display: inline-flex !important;
+      }
+
+      .mobile-nav-toggle {
+        order: 1;
+      }
+    }
+  </style>
+
+</body>
+
+</html>

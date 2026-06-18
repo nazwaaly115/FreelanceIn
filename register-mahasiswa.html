@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Mahasiswa - FreelanceIn</title>
+  <meta name="description"
+    content="Daftar sebagai freelancer mahasiswa IT terverifikasi di FreelanceIn untuk menghubungkan keahlian Anda dengan UMKM Indonesia.">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <a href="index.html" class="logo">
+          Freelance<span>In</span>
+          <div class="logo-dot"></div>
+        </a>
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="marketplace.html">Cari Talenta</a></li>
+            <li class="nav-item"><a href="design-system.html"
+                style="color: var(--color-slate-500); font-weight: 600;">Sistem Desain (FIDS)</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav-right">
+        <a href="login.html" class="btn-text" style="font-size: var(--font-sm); font-weight: 600;">Masuk</a>
+        <a href="login.html#register" class="btn btn-outline btn-sm">Daftar</a>
+        <button class="mobile-nav-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Registration Form Area -->
+  <div class="auth-container">
+    <div class="auth-card" style="max-width: 540px;">
+      <div class="auth-header">
+        <div class="auth-logo">
+          Freelance<span>In</span>
+          <div class="auth-logo-dot"></div>
+        </div>
+        <h2 class="auth-title">Daftar Akun Mahasiswa IT</h2>
+        <p class="auth-subtitle">Bangun portofolio profesional dan dapatkan proyek nyata</p>
+      </div>
+
+      <form id="register-student-form" onsubmit="handleRegisterStudent(event)">
+
+        <div class="form-group">
+          <label class="form-label" for="reg-nama">Nama Lengkap</label>
+          <input type="text" id="reg-nama" class="form-input" placeholder="Contoh: Budi Santoso" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-md);">
+          <div class="form-group">
+            <label class="form-label" for="reg-univ">Universitas / Kampus</label>
+            <select id="reg-univ" class="form-select" required>
+              <option value="" disabled selected>Pilih kampus...</option>
+              <option value="Universitas Indonesia">Universitas Indonesia (UI)</option>
+              <option value="Institut Teknologi Bandung">Institut Teknologi Bandung (ITB)</option>
+              <option value="Institut Teknologi Sepuluh Nopember">ITS Surabaya</option>
+              <option value="Universitas Gadjah Mada">Universitas Gadjah Mada (UGM)</option>
+              <option value="Binus University">Binus University</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-semester">Semester</label>
+            <select id="reg-semester" class="form-select" required>
+              <option value="" disabled selected>Pilih...</option>
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+              <option value="5">Semester 5</option>
+              <option value="6">Semester 6</option>
+              <option value="7">Semester 7</option>
+              <option value="8">Semester 8</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-skill">Keahlian Utama (IT / Desain)</label>
+          <input type="text" id="reg-skill" class="form-input"
+            placeholder="Contoh: React, Laravel, UI/UX Design, Python (pisahkan koma)" required>
+          <span
+            style="font-size: var(--font-xs); color: var(--color-slate-400); margin-top: 4px; display: block;">Pisahkan
+            beberapa keahlian dengan tanda koma.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-email">Email Kampus (.ac.id)</label>
+          <input type="email" id="reg-email" class="form-input" placeholder="nama@mahasiswa.univ.ac.id" required>
+          <span
+            style="font-size: var(--font-xs); color: var(--color-slate-400); margin-top: 4px; display: block;">Centang
+            hijau verifikasi membutuhkan email universitas aktif.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-pass">Kata Sandi</label>
+          <input type="password" id="reg-pass" class="form-input" placeholder="Min. 8 karakter" minlength="8" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--space-xl);">
+          <label class="form-checkbox-label">
+            <input type="checkbox" class="form-checkbox" required checked>
+            <span style="font-size: var(--font-xs); color: var(--color-slate-600); line-height: 1.4;">Saya bersedia
+              mematuhi <a href="#" style="color: var(--color-accent-dark); font-weight: 500;">Syarat & Ketentuan</a> dan
+              bersedia memverifikasi KTM saya.</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-full" id="reg-submit-btn">Daftar Sebagai Mahasiswa</button>
+      </form>
+
+      <div class="auth-footer">
+        Sudah memiliki akun? <a href="login.html">Masuk di sini</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p class="footer-copy">&copy; 2026 FreelanceIn. Seluruh hak cipta dilindungi undang-undang.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Registration Logic -->
+  <script>
+    function handleRegisterStudent(event) {
+      event.preventDefault();
+
+      const nama = document.getElementById('reg-nama').value.trim();
+      const univ = document.getElementById('reg-univ').value;
+      const semester = document.getElementById('reg-semester').value;
+      const skills = document.getElementById('reg-skill').value.split(',').map(s => s.trim());
+      const email = document.getElementById('reg-email').value.trim();
+      const pass = document.getElementById('reg-pass').value;
+      const btn = document.getElementById('reg-submit-btn');
+
+      // Email ac.id validation check (warn user but allow signup for prototyping flexibility)
+      if (!email.endsWith('.ac.id')) {
+        showToast('Peringatan Email', 'Email Anda bukan berakhiran .ac.id, badge verifikasi KTM akan berstatus tertunda.', 'warning');
+      }
+
+      btn.classList.add('btn-loading');
+
+      setTimeout(() => {
+        btn.classList.remove('btn-loading');
+
+        const studentUser = {
+          name: nama,
+          email: email,
+          role: 'mahasiswa',
+          univ: univ,
+          semester: semester,
+          skills: skills
+        };
+
+        // Save session
+        localStorage.setItem('freelancein_user', JSON.stringify(studentUser));
+
+        // Redirect to dashboard
+        window.location.href = 'student-dashboard.html?login=success';
+      }, 1200);
+    }
+  </script>
+
+</body>
+
+</html>

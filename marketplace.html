@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cari Talenta IT Mahasiswa Terverifikasi - FreelanceIn</title>
-  <meta name="description" content="Jelajahi direktori mahasiswa IT berbakat dari universitas terkemuka di Indonesia. Filter berdasarkan tarif, kampus, keahlian, dan rating untuk proyek Anda.">
-  
+  <meta name="description"
+    content="Jelajahi direktori mahasiswa IT berbakat dari universitas terkemuka di Indonesia. Filter berdasarkan tarif, kampus, keahlian, dan rating untuk proyek Anda.">
+
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/marketplace.css">
 </head>
+
 <body>
 
   <!-- Navigation Header (Upwork Inspired) -->
@@ -25,7 +28,8 @@
             <li class="nav-item nav-item-dropdown text-primary">Cari Talenta</li>
             <li class="nav-item nav-item-dropdown">Cari Proyek</li>
             <li class="nav-item">Mengapa FreelanceIn</li>
-            <li class="nav-item"><a href="design-system.html" style="color: var(--color-slate-500); font-weight: 600;">Sistem Desain (FIDS)</a></li>
+            <li class="nav-item"><a href="design-system.html"
+                style="color: var(--color-slate-500); font-weight: 600;">Sistem Desain (FIDS)</a></li>
           </ul>
         </nav>
       </div>
@@ -40,7 +44,9 @@
         </div>
         <a href="#" class="btn-text" style="font-size: var(--font-sm); font-weight: 600;">Masuk</a>
         <a href="#" class="btn btn-outline btn-sm">Daftar</a>
-        <a href="#" class="btn btn-primary btn-sm" onclick="showToast('Posting Proyek', 'Membuka form posting lowongan pekerjaan UMKM...');">Posting Pekerjaan</a>
+        <a href="#" class="btn btn-primary btn-sm"
+          onclick="showToast('Posting Proyek', 'Membuka form posting lowongan pekerjaan UMKM...');">Posting
+          Pekerjaan</a>
         <button class="mobile-nav-toggle">
           <i data-lucide="menu"></i>
         </button>
@@ -50,27 +56,32 @@
 
   <!-- Marketplace Layout Container -->
   <div class="container py-xl">
-    
+
     <!-- Breadcrumbs -->
     <div style="margin-bottom: var(--space-md); font-size: var(--font-xs); color: var(--color-slate-500);">
-      <a href="index.html" style="hover: color: var(--color-accent-dark);">Beranda</a> &nbsp;/&nbsp; <span style="color: var(--color-slate-800); font-weight: 500;">Cari Talenta IT</span>
+      <a href="index.html" style="hover: color: var(--color-accent-dark);">Beranda</a> &nbsp;/&nbsp; <span
+        style="color: var(--color-slate-800); font-weight: 500;">Cari Talenta IT</span>
     </div>
 
     <!-- Title and Subtitle -->
     <div style="margin-bottom: var(--space-xl);">
-      <h1 style="font-size: var(--font-2xl); font-weight: 800; color: var(--color-slate-900);">Hubungkan Bisnis Anda dengan Talenta IT Muda</h1>
-      <p style="color: var(--color-slate-600); font-size: var(--font-sm); margin-top: 4px;">Pilih mahasiswa berprestasi yang telah diverifikasi kartu identitas kampusnya (KTM) secara manual dan sistematis.</p>
+      <h1 style="font-size: var(--font-2xl); font-weight: 800; color: var(--color-slate-900);">Hubungkan Bisnis Anda
+        dengan Talenta IT Muda</h1>
+      <p style="color: var(--color-slate-600); font-size: var(--font-sm); margin-top: 4px;">Pilih mahasiswa berprestasi
+        yang telah diverifikasi kartu identitas kampusnya (KTM) secara manual dan sistematis.</p>
     </div>
 
     <!-- Main Content Area -->
     <div class="marketplace-layout">
-      
+
       <!-- DESKTOP SIDEBAR FILTER -->
       <aside class="filter-sidebar">
-        
+
         <!-- Header Filter -->
-        <div class="filter-section" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: var(--space-sm);">
-          <span style="font-weight: 700; font-size: var(--font-sm); color: var(--color-slate-900);">Filter Pencarian</span>
+        <div class="filter-section"
+          style="display: flex; justify-content: space-between; align-items: center; padding-bottom: var(--space-sm);">
+          <span style="font-weight: 700; font-size: var(--font-sm); color: var(--color-slate-900);">Filter
+            Pencarian</span>
           <span class="filter-clear-btn" onclick="resetFilters()">Hapus Semua</span>
         </div>
 
@@ -79,7 +90,8 @@
           <div class="filter-title">Status Verifikasi</div>
           <div class="filter-options-list">
             <label class="form-checkbox-label">
-              <input type="checkbox" class="form-checkbox filter-chk" data-type="verified" value="true" checked onchange="filterFreelancers()">
+              <input type="checkbox" class="form-checkbox filter-chk" data-type="verified" value="true" checked
+                onchange="filterFreelancers()">
               <span>Terverifikasi KTM</span>
             </label>
           </div>
@@ -90,19 +102,23 @@
           <div class="filter-title">Kategori Spesialisasi</div>
           <div class="filter-options-list">
             <label class="form-checkbox-label">
-              <input type="checkbox" class="form-checkbox filter-chk" data-type="category" value="web" checked onchange="filterFreelancers()">
+              <input type="checkbox" class="form-checkbox filter-chk" data-type="category" value="web" checked
+                onchange="filterFreelancers()">
               <span>Web Development</span>
             </label>
             <label class="form-checkbox-label">
-              <input type="checkbox" class="form-checkbox filter-chk" data-type="category" value="mobile" onchange="filterFreelancers()">
+              <input type="checkbox" class="form-checkbox filter-chk" data-type="category" value="mobile"
+                onchange="filterFreelancers()">
               <span>Mobile App Dev</span>
             </label>
             <label class="form-checkbox-label">
-              <input type="checkbox" class="form-checkbox filter-chk" data-type="category" value="uiux" onchange="filterFreelancers()">
+              <input type="checkbox" class="form-checkbox filter-chk" data-type="category" value="uiux"
+                onchange="filterFreelancers()">
               <span>UI/UX Design</span>
             </label>
             <label class="form-checkbox-label">
-              <input type="checkbox" class="form-checkbox filter-chk" data-type="category" value="data" onchange="filterFreelancers()">
+              <input type="checkbox" class="form-checkbox filter-chk" data-type="category" value="data"
+                onchange="filterFreelancers()">
               <span>Data & AI</span>
             </label>
           </div>
@@ -113,19 +129,23 @@
           <div class="filter-title">Asal Universitas</div>
           <div class="filter-options-list">
             <label class="form-checkbox-label">
-              <input type="checkbox" class="form-checkbox filter-chk" data-type="univ" value="UI" onchange="filterFreelancers()">
+              <input type="checkbox" class="form-checkbox filter-chk" data-type="univ" value="UI"
+                onchange="filterFreelancers()">
               <span>Universitas Indonesia (UI)</span>
             </label>
             <label class="form-checkbox-label">
-              <input type="checkbox" class="form-checkbox filter-chk" data-type="univ" value="ITB" onchange="filterFreelancers()">
+              <input type="checkbox" class="form-checkbox filter-chk" data-type="univ" value="ITB"
+                onchange="filterFreelancers()">
               <span>Institut Teknologi Bandung (ITB)</span>
             </label>
             <label class="form-checkbox-label">
-              <input type="checkbox" class="form-checkbox filter-chk" data-type="univ" value="ITS" onchange="filterFreelancers()">
+              <input type="checkbox" class="form-checkbox filter-chk" data-type="univ" value="ITS"
+                onchange="filterFreelancers()">
               <span>Institut Teknologi Sepuluh Nopember (ITS)</span>
             </label>
             <label class="form-checkbox-label">
-              <input type="checkbox" class="form-checkbox filter-chk" data-type="univ" value="UGM" onchange="filterFreelancers()">
+              <input type="checkbox" class="form-checkbox filter-chk" data-type="univ" value="UGM"
+                onchange="filterFreelancers()">
               <span>Universitas Gadjah Mada (UGM)</span>
             </label>
           </div>
@@ -136,19 +156,23 @@
           <div class="filter-title">Tarif Per Jam (Rp)</div>
           <div class="filter-options-list">
             <label class="form-checkbox-label">
-              <input type="radio" name="rate-group" class="form-radio filter-rate" value="all" checked onchange="filterFreelancers()">
+              <input type="radio" name="rate-group" class="form-radio filter-rate" value="all" checked
+                onchange="filterFreelancers()">
               <span>Semua Tarif</span>
             </label>
             <label class="form-checkbox-label">
-              <input type="radio" name="rate-group" class="form-radio filter-rate" value="under-130" onchange="filterFreelancers()">
+              <input type="radio" name="rate-group" class="form-radio filter-rate" value="under-130"
+                onchange="filterFreelancers()">
               <span>&lt; Rp 130.000 / jam</span>
             </label>
             <label class="form-checkbox-label">
-              <input type="radio" name="rate-group" class="form-radio filter-rate" value="130-145" onchange="filterFreelancers()">
+              <input type="radio" name="rate-group" class="form-radio filter-rate" value="130-145"
+                onchange="filterFreelancers()">
               <span>Rp 130.000 - Rp 145.000 / jam</span>
             </label>
             <label class="form-checkbox-label">
-              <input type="radio" name="rate-group" class="form-radio filter-rate" value="above-145" onchange="filterFreelancers()">
+              <input type="radio" name="rate-group" class="form-radio filter-rate" value="above-145"
+                onchange="filterFreelancers()">
               <span>&gt; Rp 145.000 / jam</span>
             </label>
           </div>
@@ -158,19 +182,21 @@
 
       <!-- RESULTS CONTENT AREA -->
       <main class="marketplace-results">
-        
+
         <!-- Results Header Bar -->
         <div class="results-header-bar">
           <div class="results-count">
             Menampilkan <strong id="matched-count">4</strong> dari <strong>4</strong> Mahasiswa IT Terpilih
           </div>
-          
+
           <div class="results-sorting">
             <button class="btn btn-outline btn-sm mobile-filter-trigger" onclick="toggleMobileFilter(true)">
               <i data-lucide="sliders-horizontal" style="width: 14px; height: 14px;"></i> Filter
             </button>
             <span>Urutkan:</span>
-            <select class="form-select" style="padding: 0.35rem 1.75rem 0.35rem 0.75rem; width: auto; font-size: var(--font-xs);" onchange="sortFreelancers(this.value)">
+            <select class="form-select"
+              style="padding: 0.35rem 1.75rem 0.35rem 0.75rem; width: auto; font-size: var(--font-xs);"
+              onchange="sortFreelancers(this.value)">
               <option value="popular">Terpopuler</option>
               <option value="rate-low">Tarif: Terendah</option>
               <option value="rate-high">Tarif: Tertinggi</option>
@@ -181,26 +207,31 @@
 
         <!-- Freelancers Cards List -->
         <div id="freelancers-list-container">
-          
+
           <!-- Card 1: Budi Santoso -->
-          <div class="freelancer-card-horizontal" data-name="Budi Santoso" data-verified="true" data-category="web" data-univ="UI" data-rate="130000" data-rating="4.9">
+          <div class="freelancer-card-horizontal" data-name="Budi Santoso" data-verified="true" data-category="web"
+            data-univ="UI" data-rate="130000" data-rating="4.9">
             <div class="freelancer-main-info">
               <div class="freelancer-avatar-wrapper">
-                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop" alt="Budi Santoso" class="freelancer-avatar">
+                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop"
+                  alt="Budi Santoso" class="freelancer-avatar">
                 <div class="freelancer-online-badge"></div>
               </div>
-              
+
               <div class="freelancer-info-col">
                 <div class="freelancer-name" style="font-size: var(--font-base);">
-                  <a href="profile.html" style="color: inherit; text-decoration: none; font-weight: 700;">Budi Santoso</a>
+                  <a href="profile.html" style="color: inherit; text-decoration: none; font-weight: 700;">Budi
+                    Santoso</a>
                   <span class="badge badge-success" style="padding: 2px 8px; font-size: 10px;">
-                    <i data-lucide="shield-check" style="width: 10px; height: 10px; fill: currentColor;"></i> UI Verified
+                    <i data-lucide="shield-check" style="width: 10px; height: 10px; fill: currentColor;"></i> UI
+                    Verified
                   </span>
                 </div>
-                <div class="freelancer-univ" style="font-size: var(--font-xs);">S1 Teknik Informatika - Universitas Indonesia</div>
-                
+                <div class="freelancer-univ" style="font-size: var(--font-xs);">S1 Teknik Informatika - Universitas
+                  Indonesia</div>
+
                 <div class="freelancer-role-title">Web & API Developer Specialist</div>
-                
+
                 <div class="freelancer-meta-row">
                   <div class="meta-item rating-item">
                     <i data-lucide="star" style="width: 14px; height: 14px;"></i>
@@ -219,13 +250,15 @@
 
               <div class="freelancer-action-col">
                 <div class="hourly-rate-big">Rp 130.000<span>/ jam</span></div>
-                <button class="btn btn-primary btn-sm w-full" onclick="showToast('Hubungi Budi', 'Membuka formulir penawaran proyek untuk Budi Santoso...');">Pekerjakan</button>
-                <button class="btn btn-outline btn-sm w-full" onclick="showToast('Kirim Pesan', 'Membuka chat inbox dengan Budi...');">Kirim Pesan</button>
+                <a href="profile.html#hire" class="btn btn-primary btn-sm w-full">Pekerjakan</a>
+                <a href="messages.html" class="btn btn-outline btn-sm w-full">Kirim Pesan</a>
               </div>
             </div>
 
             <p class="freelancer-description-text">
-              Halo! Saya mahasiswa tingkat akhir Teknik Informatika UI. Berfokus pada backend dan integrasi API menggunakan Laravel dan Node.js Express. Saya siap membantu UMKM membangun dashboard bisnis, sistem kasir online (POS), dan RESTful API yang aman serta terdokumentasi dengan baik.
+              Halo! Saya mahasiswa tingkat akhir Teknik Informatika UI. Berfokus pada backend dan integrasi API
+              menggunakan Laravel dan Node.js Express. Saya siap membantu UMKM membangun dashboard bisnis, sistem kasir
+              online (POS), dan RESTful API yang aman serta terdokumentasi dengan baik.
             </p>
 
             <div class="freelancer-skills" style="margin-bottom: var(--space-md);">
@@ -240,9 +273,12 @@
             <div class="portfolio-previews-section">
               <div class="portfolio-previews-title">Preview Portofolio</div>
               <div class="portfolio-previews-grid">
-                
-                <div class="portfolio-thumbnail-card" onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: E-Commerce POS System');">
-                  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=240&auto=format&fit=crop" alt="POS System">
+
+                <div class="portfolio-thumbnail-card"
+                  onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: E-Commerce POS System');">
+                  <img
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=240&auto=format&fit=crop"
+                    alt="POS System">
                   <div class="portfolio-thumbnail-overlay">
                     <div>
                       <h5 class="portfolio-project-title">E-Commerce POS System</h5>
@@ -251,8 +287,10 @@
                   </div>
                 </div>
 
-                <div class="portfolio-thumbnail-card" onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Booking App Admin');">
-                  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=240&auto=format&fit=crop" alt="Admin Dashboard">
+                <div class="portfolio-thumbnail-card"
+                  onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Booking App Admin');">
+                  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=240&auto=format&fit=crop"
+                    alt="Admin Dashboard">
                   <div class="portfolio-thumbnail-overlay">
                     <div>
                       <h5 class="portfolio-project-title">Booking App Admin</h5>
@@ -261,8 +299,11 @@
                   </div>
                 </div>
 
-                <div class="portfolio-thumbnail-card" onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Company Profile Custom');">
-                  <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=240&auto=format&fit=crop" alt="Company Profile">
+                <div class="portfolio-thumbnail-card"
+                  onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Company Profile Custom');">
+                  <img
+                    src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=240&auto=format&fit=crop"
+                    alt="Company Profile">
                   <div class="portfolio-thumbnail-overlay">
                     <div>
                       <h5 class="portfolio-project-title">Company Profile Custom</h5>
@@ -276,24 +317,28 @@
           </div>
 
           <!-- Card 2: Siti Rahma -->
-          <div class="freelancer-card-horizontal" data-name="Siti Rahma" data-verified="true" data-category="uiux" data-univ="ITB" data-rate="120000" data-rating="4.9">
+          <div class="freelancer-card-horizontal" data-name="Siti Rahma" data-verified="true" data-category="uiux"
+            data-univ="ITB" data-rate="120000" data-rating="4.9">
             <div class="freelancer-main-info">
               <div class="freelancer-avatar-wrapper">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop" alt="Siti Rahma" class="freelancer-avatar">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop"
+                  alt="Siti Rahma" class="freelancer-avatar">
                 <div class="freelancer-online-badge"></div>
               </div>
-              
+
               <div class="freelancer-info-col">
                 <div class="freelancer-name" style="font-size: var(--font-base);">
-                  Siti Rahma
+                  <a href="profile.html" style="color: inherit; text-decoration: none; font-weight: 700;">Siti Rahma</a>
                   <span class="badge badge-success" style="padding: 2px 8px; font-size: 10px;">
-                    <i data-lucide="shield-check" style="width: 10px; height: 10px; fill: currentColor;"></i> ITB Verified
+                    <i data-lucide="shield-check" style="width: 10px; height: 10px; fill: currentColor;"></i> ITB
+                    Verified
                   </span>
                 </div>
-                <div class="freelancer-univ" style="font-size: var(--font-xs);">S1 Sistem Informasi - Institut Teknologi Bandung</div>
-                
+                <div class="freelancer-univ" style="font-size: var(--font-xs);">S1 Sistem Informasi - Institut Teknologi
+                  Bandung</div>
+
                 <div class="freelancer-role-title">UI/UX Designer & Prototyper</div>
-                
+
                 <div class="freelancer-meta-row">
                   <div class="meta-item rating-item">
                     <i data-lucide="star" style="width: 14px; height: 14px;"></i>
@@ -312,13 +357,16 @@
 
               <div class="freelancer-action-col">
                 <div class="hourly-rate-big">Rp 120.000<span>/ jam</span></div>
-                <button class="btn btn-primary btn-sm w-full" onclick="showToast('Hubungi Siti', 'Membuka formulir penawaran proyek untuk Siti Rahma...');">Pekerjakan</button>
-                <button class="btn btn-outline btn-sm w-full" onclick="showToast('Kirim Pesan', 'Membuka chat inbox dengan Siti...');">Kirim Pesan</button>
+                <a href="profile.html#hire" class="btn btn-primary btn-sm w-full">Pekerjakan</a>
+                <a href="messages.html" class="btn btn-outline btn-sm w-full">Kirim Pesan</a>
               </div>
             </div>
 
             <p class="freelancer-description-text">
-              Spesialisasi saya adalah merancang UI/UX yang elegan dan mudah digunakan untuk aplikasi mobile dan web. Saya menggunakan Figma untuk wireframing, perancangan design system, serta interaktif prototyping berakurasi tinggi. Saya juga terbiasa melakukan riset kecil ke target pasar UMKM untuk menjamin desain tepat sasaran.
+              Spesialisasi saya adalah merancang UI/UX yang elegan dan mudah digunakan untuk aplikasi mobile dan web.
+              Saya menggunakan Figma untuk wireframing, perancangan design system, serta interaktif prototyping
+              berakurasi tinggi. Saya juga terbiasa melakukan riset kecil ke target pasar UMKM untuk menjamin desain
+              tepat sasaran.
             </p>
 
             <div class="freelancer-skills" style="margin-bottom: var(--space-md);">
@@ -333,9 +381,11 @@
             <div class="portfolio-previews-section">
               <div class="portfolio-previews-title">Preview Portofolio</div>
               <div class="portfolio-previews-grid">
-                
-                <div class="portfolio-thumbnail-card" onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Finance SaaS Dashboard Design');">
-                  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=240&auto=format&fit=crop" alt="Finance Dashboard">
+
+                <div class="portfolio-thumbnail-card"
+                  onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Finance SaaS Dashboard Design');">
+                  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=240&auto=format&fit=crop"
+                    alt="Finance Dashboard">
                   <div class="portfolio-thumbnail-overlay">
                     <div>
                       <h5 class="portfolio-project-title">Finance SaaS Dashboard</h5>
@@ -344,8 +394,11 @@
                   </div>
                 </div>
 
-                <div class="portfolio-thumbnail-card" onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Healthy Food Delivery UI');">
-                  <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=240&auto=format&fit=crop" alt="Food App UI">
+                <div class="portfolio-thumbnail-card"
+                  onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Healthy Food Delivery UI');">
+                  <img
+                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=240&auto=format&fit=crop"
+                    alt="Food App UI">
                   <div class="portfolio-thumbnail-overlay">
                     <div>
                       <h5 class="portfolio-project-title">Healthy Food Delivery</h5>
@@ -354,8 +407,10 @@
                   </div>
                 </div>
 
-                <div class="portfolio-thumbnail-card" onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Car Rental App UI Kit');">
-                  <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=240&auto=format&fit=crop" alt="Car App UI">
+                <div class="portfolio-thumbnail-card"
+                  onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Car Rental App UI Kit');">
+                  <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=240&auto=format&fit=crop"
+                    alt="Car App UI">
                   <div class="portfolio-thumbnail-overlay">
                     <div>
                       <h5 class="portfolio-project-title">Car Rental App UI Kit</h5>
@@ -369,24 +424,29 @@
           </div>
 
           <!-- Card 3: Rian Hidayat -->
-          <div class="freelancer-card-horizontal" data-name="Rian Hidayat" data-verified="true" data-category="mobile" data-univ="ITS" data-rate="130000" data-rating="4.8">
+          <div class="freelancer-card-horizontal" data-name="Rian Hidayat" data-verified="true" data-category="mobile"
+            data-univ="ITS" data-rate="130000" data-rating="4.8">
             <div class="freelancer-main-info">
               <div class="freelancer-avatar-wrapper">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop" alt="Rian Hidayat" class="freelancer-avatar">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop"
+                  alt="Rian Hidayat" class="freelancer-avatar">
                 <div class="freelancer-online-badge"></div>
               </div>
-              
+
               <div class="freelancer-info-col">
                 <div class="freelancer-name" style="font-size: var(--font-base);">
-                  Rian Hidayat
+                  <a href="profile.html" style="color: inherit; text-decoration: none; font-weight: 700;">Rian
+                    Hidayat</a>
                   <span class="badge badge-success" style="padding: 2px 8px; font-size: 10px;">
-                    <i data-lucide="shield-check" style="width: 10px; height: 10px; fill: currentColor;"></i> ITS Verified
+                    <i data-lucide="shield-check" style="width: 10px; height: 10px; fill: currentColor;"></i> ITS
+                    Verified
                   </span>
                 </div>
-                <div class="freelancer-univ" style="font-size: var(--font-xs);">S1 Teknik Komputer - Institut Teknologi Sepuluh Nopember</div>
-                
+                <div class="freelancer-univ" style="font-size: var(--font-xs);">S1 Teknik Komputer - Institut Teknologi
+                  Sepuluh Nopember</div>
+
                 <div class="freelancer-role-title">Mobile App Developer (Flutter)</div>
-                
+
                 <div class="freelancer-meta-row">
                   <div class="meta-item rating-item">
                     <i data-lucide="star" style="width: 14px; height: 14px;"></i>
@@ -405,13 +465,15 @@
 
               <div class="freelancer-action-col">
                 <div class="hourly-rate-big">Rp 130.000<span>/ jam</span></div>
-                <button class="btn btn-primary btn-sm w-full" onclick="showToast('Hubungi Rian', 'Membuka formulir penawaran proyek untuk Rian Hidayat...');">Pekerjakan</button>
-                <button class="btn btn-outline btn-sm w-full" onclick="showToast('Kirim Pesan', 'Membuka chat inbox dengan Rian...');">Kirim Pesan</button>
+                <a href="profile.html#hire" class="btn btn-primary btn-sm w-full">Pekerjakan</a>
+                <a href="messages.html" class="btn btn-outline btn-sm w-full">Kirim Pesan</a>
               </div>
             </div>
 
             <p class="freelancer-description-text">
-              Halo, saya Rian. Mengembangkan aplikasi mobile lintas platform (Android & iOS) menggunakan Flutter/Dart merupakan fokus saya selama 2 tahun terakhir di perkuliahan. Saya terbiasa menghubungkan aplikasi mobile dengan Firebase, mengintegrasikan Google Maps, serta membuat antarmuka transisi yang halus.
+              Halo, saya Rian. Mengembangkan aplikasi mobile lintas platform (Android & iOS) menggunakan Flutter/Dart
+              merupakan fokus saya selama 2 tahun terakhir di perkuliahan. Saya terbiasa menghubungkan aplikasi mobile
+              dengan Firebase, mengintegrasikan Google Maps, serta membuat antarmuka transisi yang halus.
             </p>
 
             <div class="freelancer-skills" style="margin-bottom: var(--space-md);">
@@ -426,9 +488,12 @@
             <div class="portfolio-previews-section">
               <div class="portfolio-previews-title">Preview Portofolio</div>
               <div class="portfolio-previews-grid">
-                
-                <div class="portfolio-thumbnail-card" onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Courier Delivery App');">
-                  <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=240&auto=format&fit=crop" alt="Courier App">
+
+                <div class="portfolio-thumbnail-card"
+                  onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Courier Delivery App');">
+                  <img
+                    src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=240&auto=format&fit=crop"
+                    alt="Courier App">
                   <div class="portfolio-thumbnail-overlay">
                     <div>
                       <h5 class="portfolio-project-title">Courier Delivery App</h5>
@@ -437,8 +502,10 @@
                   </div>
                 </div>
 
-                <div class="portfolio-thumbnail-card" onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: IoT Smart Home UI');">
-                  <img src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=240&auto=format&fit=crop" alt="Smart Home App">
+                <div class="portfolio-thumbnail-card"
+                  onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: IoT Smart Home UI');">
+                  <img src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=240&auto=format&fit=crop"
+                    alt="Smart Home App">
                   <div class="portfolio-thumbnail-overlay">
                     <div>
                       <h5 class="portfolio-project-title">IoT Smart Home App</h5>
@@ -447,8 +514,10 @@
                   </div>
                 </div>
 
-                <div class="portfolio-thumbnail-card" onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Live Chat Application');">
-                  <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=240&auto=format&fit=crop" alt="Chat App">
+                <div class="portfolio-thumbnail-card"
+                  onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Live Chat Application');">
+                  <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=240&auto=format&fit=crop"
+                    alt="Chat App">
                   <div class="portfolio-thumbnail-overlay">
                     <div>
                       <h5 class="portfolio-project-title">Live Chat Application</h5>
@@ -462,24 +531,29 @@
           </div>
 
           <!-- Card 4: Dewi Lestari -->
-          <div class="freelancer-card-horizontal" data-name="Dewi Lestari" data-verified="true" data-category="data" data-univ="UGM" data-rate="140000" data-rating="5.0">
+          <div class="freelancer-card-horizontal" data-name="Dewi Lestari" data-verified="true" data-category="data"
+            data-univ="UGM" data-rate="140000" data-rating="5.0">
             <div class="freelancer-main-info">
               <div class="freelancer-avatar-wrapper">
-                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=120&auto=format&fit=crop" alt="Dewi Lestari" class="freelancer-avatar">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=120&auto=format&fit=crop"
+                  alt="Dewi Lestari" class="freelancer-avatar">
                 <div class="freelancer-online-badge"></div>
               </div>
-              
+
               <div class="freelancer-info-col">
                 <div class="freelancer-name" style="font-size: var(--font-base);">
-                  Dewi Lestari
+                  <a href="profile.html" style="color: inherit; text-decoration: none; font-weight: 700;">Dewi
+                    Lestari</a>
                   <span class="badge badge-success" style="padding: 2px 8px; font-size: 10px;">
-                    <i data-lucide="shield-check" style="width: 10px; height: 10px; fill: currentColor;"></i> UGM Verified
+                    <i data-lucide="shield-check" style="width: 10px; height: 10px; fill: currentColor;"></i> UGM
+                    Verified
                   </span>
                 </div>
-                <div class="freelancer-univ" style="font-size: var(--font-xs);">S1 Ilmu Komputer - Universitas Gadjah Mada</div>
-                
+                <div class="freelancer-univ" style="font-size: var(--font-xs);">S1 Ilmu Komputer - Universitas Gadjah
+                  Mada</div>
+
                 <div class="freelancer-role-title">Data Analyst & Python Developer</div>
-                
+
                 <div class="freelancer-meta-row">
                   <div class="meta-item rating-item">
                     <i data-lucide="star" style="width: 14px; height: 14px;"></i>
@@ -498,13 +572,15 @@
 
               <div class="freelancer-action-col">
                 <div class="hourly-rate-big">Rp 140.000<span>/ jam</span></div>
-                <button class="btn btn-primary btn-sm w-full" onclick="showToast('Hubungi Dewi', 'Membuka formulir penawaran proyek untuk Dewi Lestari...');">Pekerjakan</button>
-                <button class="btn btn-outline btn-sm w-full" onclick="showToast('Kirim Pesan', 'Membuka chat inbox dengan Dewi...');">Kirim Pesan</button>
+                <a href="profile.html#hire" class="btn btn-primary btn-sm w-full">Pekerjakan</a>
+                <a href="messages.html" class="btn btn-outline btn-sm w-full">Kirim Pesan</a>
               </div>
             </div>
 
             <p class="freelancer-description-text">
-              Fokus saya adalah analisis data bisnis dan penyajian dashboard visualisasi data. Saya dapat membantu UMKM Anda menyusun riset data penjualan, segmentasi pelanggan, serta pemodelan prediksi tren pasar sederhana dengan Python Pandas dan Tableau. Saya sangat menghargai privasi dan akurasi data.
+              Fokus saya adalah analisis data bisnis dan penyajian dashboard visualisasi data. Saya dapat membantu UMKM
+              Anda menyusun riset data penjualan, segmentasi pelanggan, serta pemodelan prediksi tren pasar sederhana
+              dengan Python Pandas dan Tableau. Saya sangat menghargai privasi dan akurasi data.
             </p>
 
             <div class="freelancer-skills" style="margin-bottom: var(--space-md);">
@@ -519,9 +595,11 @@
             <div class="portfolio-previews-section">
               <div class="portfolio-previews-title">Preview Portofolio</div>
               <div class="portfolio-previews-grid">
-                
-                <div class="portfolio-thumbnail-card" onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Sales Prediction Dashboard');">
-                  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=240&auto=format&fit=crop" alt="Sales Prediction">
+
+                <div class="portfolio-thumbnail-card"
+                  onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Sales Prediction Dashboard');">
+                  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=240&auto=format&fit=crop"
+                    alt="Sales Prediction">
                   <div class="portfolio-thumbnail-overlay">
                     <div>
                       <h5 class="portfolio-project-title">Sales Prediction Python</h5>
@@ -530,8 +608,11 @@
                   </div>
                 </div>
 
-                <div class="portfolio-thumbnail-card" onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Customer Segment Tableau');">
-                  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=240&auto=format&fit=crop" alt="Segmentation Dashboard">
+                <div class="portfolio-thumbnail-card"
+                  onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Customer Segment Tableau');">
+                  <img
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=240&auto=format&fit=crop"
+                    alt="Segmentation Dashboard">
                   <div class="portfolio-thumbnail-overlay">
                     <div>
                       <h5 class="portfolio-project-title">Customer Segmentation</h5>
@@ -540,8 +621,11 @@
                   </div>
                 </div>
 
-                <div class="portfolio-thumbnail-card" onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Email Spam Classification REST API');">
-                  <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=240&auto=format&fit=crop" alt="Classification API">
+                <div class="portfolio-thumbnail-card"
+                  onclick="showToast('Lihat Portofolio', 'Membuka detail proyek: Email Spam Classification REST API');">
+                  <img
+                    src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=240&auto=format&fit=crop"
+                    alt="Classification API">
                   <div class="portfolio-thumbnail-overlay">
                     <div>
                       <h5 class="portfolio-project-title">Spam Classifier API</h5>
@@ -555,13 +639,17 @@
           </div>
 
           <!-- Empty State Container -->
-          <div id="empty-state" class="card text-center" style="display: none; padding: var(--space-2xl); border-color: var(--color-slate-200);">
+          <div id="empty-state" class="card text-center"
+            style="display: none; padding: var(--space-2xl); border-color: var(--color-slate-200);">
             <div style="font-size: var(--font-3xl); color: var(--color-slate-300); margin-bottom: var(--space-md);">
               <i data-lucide="users-round" style="width: 64px; height: 64px; margin: 0 auto;"></i>
             </div>
-            <h3 style="font-size: var(--font-lg); font-weight: 700; margin-bottom: var(--space-xs);">Talenta Tidak Ditemukan</h3>
-            <p style="color: var(--color-slate-500); font-size: var(--font-sm); max-width: 420px; margin: 0 auto var(--space-lg);">
-              Maaf, tidak ada mahasiswa IT yang cocok dengan kriteria filter Anda. Coba hapus beberapa pilihan filter Anda.
+            <h3 style="font-size: var(--font-lg); font-weight: 700; margin-bottom: var(--space-xs);">Talenta Tidak
+              Ditemukan</h3>
+            <p
+              style="color: var(--color-slate-500); font-size: var(--font-sm); max-width: 420px; margin: 0 auto var(--space-lg);">
+              Maaf, tidak ada mahasiswa IT yang cocok dengan kriteria filter Anda. Coba hapus beberapa pilihan filter
+              Anda.
             </p>
             <button class="btn btn-primary btn-sm" onclick="resetFilters()">Reset Filter</button>
           </div>
@@ -587,7 +675,8 @@
         <div class="filter-title">Status Verifikasi</div>
         <div class="filter-options-list">
           <label class="form-checkbox-label">
-            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="verified" value="true" checked onchange="syncAndFilter(this)">
+            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="verified" value="true" checked
+              onchange="syncAndFilter(this)">
             <span>Terverifikasi KTM</span>
           </label>
         </div>
@@ -597,19 +686,23 @@
         <div class="filter-title">Kategori Spesialisasi</div>
         <div class="filter-options-list">
           <label class="form-checkbox-label">
-            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="category" value="web" checked onchange="syncAndFilter(this)">
+            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="category" value="web" checked
+              onchange="syncAndFilter(this)">
             <span>Web Development</span>
           </label>
           <label class="form-checkbox-label">
-            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="category" value="mobile" onchange="syncAndFilter(this)">
+            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="category" value="mobile"
+              onchange="syncAndFilter(this)">
             <span>Mobile App Dev</span>
           </label>
           <label class="form-checkbox-label">
-            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="category" value="uiux" onchange="syncAndFilter(this)">
+            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="category" value="uiux"
+              onchange="syncAndFilter(this)">
             <span>UI/UX Design</span>
           </label>
           <label class="form-checkbox-label">
-            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="category" value="data" onchange="syncAndFilter(this)">
+            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="category" value="data"
+              onchange="syncAndFilter(this)">
             <span>Data & AI</span>
           </label>
         </div>
@@ -619,19 +712,23 @@
         <div class="filter-title">Asal Universitas</div>
         <div class="filter-options-list">
           <label class="form-checkbox-label">
-            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="univ" value="UI" onchange="syncAndFilter(this)">
+            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="univ" value="UI"
+              onchange="syncAndFilter(this)">
             <span>Universitas Indonesia (UI)</span>
           </label>
           <label class="form-checkbox-label">
-            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="univ" value="ITB" onchange="syncAndFilter(this)">
+            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="univ" value="ITB"
+              onchange="syncAndFilter(this)">
             <span>Institut Teknologi Bandung (ITB)</span>
           </label>
           <label class="form-checkbox-label">
-            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="univ" value="ITS" onchange="syncAndFilter(this)">
+            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="univ" value="ITS"
+              onchange="syncAndFilter(this)">
             <span>Institut Teknologi Sepuluh Nopember (ITS)</span>
           </label>
           <label class="form-checkbox-label">
-            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="univ" value="UGM" onchange="syncAndFilter(this)">
+            <input type="checkbox" class="form-checkbox mob-filter-chk" data-type="univ" value="UGM"
+              onchange="syncAndFilter(this)">
             <span>Universitas Gadjah Mada (UGM)</span>
           </label>
         </div>
@@ -654,9 +751,10 @@
             Freelance<span>In</span>
             <div class="logo-dot"></div>
           </a>
-          <p class="footer-brand-desc">FreelanceIn adalah platform terpercaya yang menghubungkan mahasiswa IT berprestasi dari universitas di Indonesia dengan UMKM untuk solusi digital terbaik.</p>
+          <p class="footer-brand-desc">FreelanceIn adalah platform terpercaya yang menghubungkan mahasiswa IT
+            berprestasi dari universitas di Indonesia dengan UMKM untuk solusi digital terbaik.</p>
         </div>
-        
+
         <div class="footer-col-links">
           <h4>Untuk UMKM</h4>
           <ul class="footer-links">
@@ -723,29 +821,29 @@
       const type = element.dataset.type;
       const val = element.value;
       const checked = element.checked;
-      
+
       // Find matching checkbox in the desktop list and sync it
       const desktopChks = document.querySelectorAll(`.filter-sidebar .filter-chk[data-type="${type}"][value="${val}"]`);
       desktopChks.forEach(chk => {
         chk.checked = checked;
       });
-      
+
       filterFreelancers();
     }
 
     // Main Filtering Logic
     function filterFreelancers() {
       const query = document.getElementById('global-search-input').value.toLowerCase().trim();
-      
+
       // Get selected filters (Desktop is primary source of truth, synced with Mobile)
       const verifiedOnly = document.querySelector('.filter-sidebar .filter-chk[data-type="verified"]').checked;
-      
+
       const categoryChks = document.querySelectorAll('.filter-sidebar .filter-chk[data-type="category"]:checked');
       const selectedCategories = Array.from(categoryChks).map(chk => chk.value);
-      
+
       const univChks = document.querySelectorAll('.filter-sidebar .filter-chk[data-type="univ"]:checked');
       const selectedUnivs = Array.from(univChks).map(chk => chk.value);
-      
+
       const selectedRateRadio = document.querySelector('.filter-sidebar .filter-rate:checked').value;
 
       const cards = document.querySelectorAll('.freelancer-card-horizontal');
@@ -756,7 +854,7 @@
         const role = card.querySelector('.freelancer-role-title').innerText.toLowerCase();
         const description = card.querySelector('.freelancer-description-text').innerText.toLowerCase();
         const skills = Array.from(card.querySelectorAll('.tag-skill')).map(t => t.innerText.toLowerCase());
-        
+
         const cardVerified = card.dataset.verified === 'true';
         const cardCategory = card.dataset.category;
         const cardUniv = card.dataset.univ;
@@ -856,7 +954,7 @@
       cards.forEach(card => container.appendChild(card));
       // Re-append empty state at the very end
       container.appendChild(document.getElementById('empty-state'));
-      
+
       showToast('Urutan Diubah', `Hasil pencarian diurutkan.`, 'success');
     }
 
@@ -870,4 +968,5 @@
   <script src="js/main.js"></script>
 
 </body>
+
 </html>

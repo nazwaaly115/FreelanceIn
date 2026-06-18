@@ -4,6 +4,172 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // --- MOCK STATE & SESSION MANAGEMENT ---
+  window.logoutUser = function(e) {
+    if (e) e.preventDefault();
+    localStorage.removeItem('freelancein_user');
+    window.location.href = 'index.html?logout=success';
+  };
+
+  // Re-check for logout/login status parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('logout') === 'success') {
+    window.history.replaceState({}, document.title, window.location.pathname);
+    setTimeout(() => {
+      showToast('Berhasil Keluar', 'Anda telah keluar dari akun FreelanceIn.', 'success');
+    }, 100);
+  }
+  if (urlParams.get('login') === 'success') {
+    window.history.replaceState({}, document.title, window.location.pathname);
+    setTimeout(() => {
+      showToast('Selamat Datang!', 'Proses masuk berhasil. Selamat bekerja!', 'success');
+    }, 100);
+  }
+
+  function initSessionAndHeaders() {
+    const userJson = localStorage.getItem('freelancein_user');
+    const navMenu = document.querySelector('.nav-menu');
+    const navRight = document.querySelector('.nav-right');
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+    if (!userJson) {
+      // VISITOR STATE - Setup Default Nav
+      if (navMenu) {
+        navMenu.innerHTML = `
+          <li class="nav-item ${currentPath === 'index.html' || currentPath === '' ? 'text-primary' : ''}"><a href="index.html">Home</a></li>
+          <li class="nav-item ${currentPath === 'marketplace.html' ? 'text-primary' : ''}"><a href="marketplace.html">Cari Talenta</a></li>
+          <li class="nav-item"><a href="design-system.html" style="color: var(--color-slate-500); font-weight: 600;">Sistem Desain (FIDS)</a></li>
+        `;
+      }
+      if (navRight) {
+        navRight.innerHTML = `
+          <div class="header-search">
+            <input type="text" placeholder="Cari talenta IT atau proyek...">
+            <span class="header-search-icon">
+              <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+            </span>
+          </div>
+          <a href="login.html" class="btn-text" style="font-size: var(--font-sm); font-weight: 600;">Masuk</a>
+          <a href="login.html#register" class="btn btn-outline btn-sm">Daftar</a>
+          <a href="login.html" class="btn btn-primary btn-sm">Posting Pekerjaan</a>
+          <button class="mobile-nav-toggle">
+            <i data-lucide="menu"></i>
+          </button>
+        `;
+      }
+      return;
+    }
+
+    // LOGGED IN USER
+    const user = JSON.parse(userJson);
+    const userInitials = user.name ? user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'US';
+
+    if (user.role === 'mahasiswa') {
+      if (navMenu) {
+        navMenu.innerHTML = `
+          <li class="nav-item ${currentPath === 'index.html' || currentPath === '' ? 'text-primary' : ''}"><a href="index.html">Home</a></li>
+          <li class="nav-item ${currentPath === 'marketplace.html' ? 'text-primary' : ''}"><a href="marketplace.html">Cari Talenta</a></li>
+          <li class="nav-item ${currentPath === 'student-dashboard.html' ? 'text-primary' : ''}"><a href="student-dashboard.html">Dashboard</a></li>
+          <li class="nav-item ${currentPath === 'messages.html' ? 'text-primary' : ''}"><a href="messages.html">Pesan</a></li>
+        `;
+      }
+      if (navRight) {
+        navRight.innerHTML = `
+          <div class="header-search">
+            <input type="text" placeholder="Cari lowongan proyek...">
+            <span class="header-search-icon">
+              <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+            </span>
+          </div>
+          <a href="messages.html" class="btn-text" style="padding: var(--space-xs) var(--space-sm); position: relative; display: flex; align-items: center;" title="Pesan">
+            <i data-lucide="message-square" style="width: 20px; height: 20px;"></i>
+            <span class="badge badge-danger" style="position: absolute; top: -5px; right: -5px; padding: 2px 5px; font-size: 8px;">2</span>
+          </a>
+          <div class="user-menu-wrapper" style="position: relative; cursor: pointer; display: flex; align-items: center;">
+            <div class="user-menu-trigger d-flex align-center gap-xs">
+              <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-accent);" alt="Avatar">
+              <span style="font-size: var(--font-xs); font-weight: 600; color: var(--color-slate-700); max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${user.name.split(' ')[0]} (Mhs)</span>
+              <i data-lucide="chevron-down" style="width: 12px; height: 12px; color: var(--color-slate-500);"></i>
+            </div>
+            <div class="user-dropdown" style="display: none; position: absolute; top: 120%; right: 0; background: var(--color-white); border: 1px solid var(--color-slate-200); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); width: 180px; z-index: 110; padding: var(--space-xs) 0;">
+              <a href="student-dashboard.html" style="display: block; padding: 8px 16px; font-size: var(--font-xs); color: var(--color-slate-700); font-weight: 500;">Dashboard Saya</a>
+              <a href="profile.html" style="display: block; padding: 8px 16px; font-size: var(--font-xs); color: var(--color-slate-700); font-weight: 500;">Profil Publik</a>
+              <a href="#" onclick="logoutUser(event)" style="display: block; padding: 8px 16px; font-size: var(--font-xs); color: var(--color-danger); border-top: 1px solid var(--color-slate-100); font-weight: 600;">Keluar</a>
+            </div>
+          </div>
+          <button class="mobile-nav-toggle">
+            <i data-lucide="menu"></i>
+          </button>
+        `;
+      }
+    } else if (user.role === 'umkm') {
+      if (navMenu) {
+        navMenu.innerHTML = `
+          <li class="nav-item ${currentPath === 'index.html' || currentPath === '' ? 'text-primary' : ''}"><a href="index.html">Home</a></li>
+          <li class="nav-item ${currentPath === 'marketplace.html' ? 'text-primary' : ''}"><a href="marketplace.html">Cari Talenta</a></li>
+          <li class="nav-item ${currentPath === 'umkm-dashboard.html' ? 'text-primary' : ''}"><a href="umkm-dashboard.html">Dashboard UMKM</a></li>
+          <li class="nav-item ${currentPath === 'messages.html' ? 'text-primary' : ''}"><a href="messages.html">Pesan</a></li>
+        `;
+      }
+      if (navRight) {
+        navRight.innerHTML = `
+          <div class="header-search">
+            <input type="text" placeholder="Cari talenta IT...">
+            <span class="header-search-icon">
+              <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+            </span>
+          </div>
+          <a href="messages.html" class="btn-text" style="padding: var(--space-xs) var(--space-sm); position: relative; display: flex; align-items: center;" title="Pesan">
+            <i data-lucide="message-square" style="width: 20px; height: 20px;"></i>
+            <span class="badge badge-danger" style="position: absolute; top: -5px; right: -5px; padding: 2px 5px; font-size: 8px;">1</span>
+          </a>
+          <div class="user-menu-wrapper" style="position: relative; cursor: pointer; display: flex; align-items: center;">
+            <div class="user-menu-trigger d-flex align-center gap-xs">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background-color: var(--color-primary); color: var(--color-slate-900); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--font-sm); border: 2px solid var(--color-accent);">
+                ${userInitials}
+              </div>
+              <span style="font-size: var(--font-xs); font-weight: 600; color: var(--color-slate-700); max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${user.name.split(' ')[0]} (UMKM)</span>
+              <i data-lucide="chevron-down" style="width: 12px; height: 12px; color: var(--color-slate-500);"></i>
+            </div>
+            <div class="user-dropdown" style="display: none; position: absolute; top: 120%; right: 0; background: var(--color-white); border: 1px solid var(--color-slate-200); border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); width: 180px; z-index: 110; padding: var(--space-xs) 0;">
+              <a href="umkm-dashboard.html" style="display: block; padding: 8px 16px; font-size: var(--font-xs); color: var(--color-slate-700); font-weight: 500;">Dashboard Saya</a>
+              <a href="#" onclick="logoutUser(event)" style="display: block; padding: 8px 16px; font-size: var(--font-xs); color: var(--color-danger); border-top: 1px solid var(--color-slate-100); font-weight: 600;">Keluar</a>
+            </div>
+          </div>
+          <a href="umkm-dashboard.html?post=true" class="btn btn-primary btn-sm">Posting Pekerjaan</a>
+          <button class="mobile-nav-toggle">
+            <i data-lucide="menu"></i>
+          </button>
+        `;
+      }
+    }
+
+    // Bind User Dropdown Toggle
+    document.querySelectorAll('.user-menu-wrapper').forEach(wrapper => {
+      wrapper.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dropdown = wrapper.querySelector('.user-dropdown');
+        if (dropdown) {
+          const isVisible = dropdown.style.display === 'block';
+          document.querySelectorAll('.user-dropdown').forEach(d => d.style.display = 'none');
+          dropdown.style.display = isVisible ? 'none' : 'block';
+        }
+      });
+    });
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.user-dropdown').forEach(d => d.style.display = 'none');
+    });
+  }
+
+  // Initialize session headers first
+  initSessionAndHeaders();
+
+  // Re-create icons if Lucide is available
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
+
   // 1. Mobile Navigation Menu Toggle
   const mobileToggle = document.querySelector('.mobile-nav-toggle');
   if (mobileToggle) {

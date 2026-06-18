@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard UMKM - FreelanceIn</title>
+  <meta name="description"
+    content="Dashboard portal pemilik usaha/UMKM FreelanceIn untuk mengelola proyek digital, merekrut freelancer mahasiswa, dan memantau status pekerjaan.">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <a href="index.html" class="logo">
+          Freelance<span>In</span>
+          <div class="logo-dot"></div>
+        </a>
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="marketplace.html">Cari Talenta</a></li>
+            <li class="nav-item text-primary"><a href="umkm-dashboard.html">Dashboard UMKM</a></li>
+            <li class="nav-item"><a href="messages.html">Pesan</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav-right">
+        <!-- Replaced dynamically by main.js, placeholder for static reference -->
+        <button class="mobile-nav-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container py-xl">
+
+    <!-- Title Area -->
+    <div
+      style="margin-bottom: var(--space-xl); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md);">
+      <div>
+        <h1 style="font-size: var(--font-2xl); font-weight: 800; color: var(--color-slate-900);">Dashboard UMKM</h1>
+        <p style="color: var(--color-slate-500); font-size: var(--font-sm);">Kelola proyek IT Anda, cari freelancer
+          mahasiswa, dan kelola pembayaran.</p>
+      </div>
+      <button class="btn btn-primary" onclick="openPostJobModal()">+ Posting Proyek Baru</button>
+    </div>
+
+    <!-- Dashboard Main Grid -->
+    <div class="dashboard-grid">
+
+      <!-- LEFT SIDEBAR -->
+      <aside class="dashboard-sidebar">
+
+        <!-- SME Info Card -->
+        <div class="card user-profile-widget" style="padding: var(--space-lg) var(--space-sm);">
+          <div
+            style="width: 64px; height: 64px; border-radius: 50%; background-color: var(--color-accent); color: var(--color-accent-dark); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: var(--font-xl); margin: 0 auto var(--space-sm);">
+            <i data-lucide="store" style="width: 28px; height: 28px;"></i>
+          </div>
+          <h3 class="dashboard-user-name" id="umkm-name">CV Maju Bersama</h3>
+          <p class="dashboard-user-subtitle" id="umkm-field">Bidang Kuliner & F&B</p>
+          <div style="margin-top: 8px; font-size: 11px; color: var(--color-slate-400);">Mitra Bisnis Terdaftar</div>
+        </div>
+
+        <!-- Project Budget Summary -->
+        <div class="card">
+          <h4
+            style="font-size: var(--font-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-sm); color: var(--color-slate-500);">
+            Anggaran Proyek Digital</h4>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; font-size: var(--font-xs);">
+              <span style="color: var(--color-slate-500);">Total Alokasi:</span>
+              <strong style="color: var(--color-slate-900);">Rp 10.000.000</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: var(--font-xs);">
+              <span style="color: var(--color-slate-500);">Terpakai:</span>
+              <strong style="color: var(--color-primary-dark);">Rp 4.500.000</strong>
+            </div>
+            <div
+              style="display: flex; justify-content: space-between; font-size: var(--font-xs); border-top: 1px solid var(--color-slate-100); padding-top: 6px;">
+              <span style="color: var(--color-slate-500);">Sisa Anggaran:</span>
+              <strong style="color: var(--color-slate-900);">Rp 5.500.000</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Status Progress -->
+        <div class="card">
+          <h4
+            style="font-size: var(--font-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-sm); color: var(--color-slate-500);">
+            Status Pekerjaan Terkini</h4>
+          <div style="position: relative; padding-left: var(--space-md);">
+            <div
+              style="border-left: 2px solid var(--color-primary); padding-left: var(--space-sm); font-size: var(--font-xs);">
+              <strong style="color: var(--color-accent-dark); display: block;">Sistem POS Warung Kopi</strong>
+              <span style="color: var(--color-slate-600); display: block; margin-top: 2px;">Tahap 3: Sedang
+                Dikerjakan</span>
+              <a href="project-tracking.html"
+                style="font-size: 10px; color: var(--color-primary-dark); font-weight: 600; text-decoration: underline; margin-top: 4px; display: inline-block;">Lacak
+                Progress</a>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- RIGHT MAIN CONTENT -->
+      <main>
+
+        <!-- Metrics Row -->
+        <div class="metrics-row">
+
+          <div class="metric-card">
+            <div class="metric-icon-bg primary">
+              <i data-lucide="folder" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Jumlah Proyek</span>
+              <span class="metric-value">2 Lowongan</span>
+              <span style="font-size: 9px; color: var(--color-slate-400); margin-top: 2px;">1 Aktif &bull; 1
+                Review</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon-bg warning">
+              <i data-lucide="bookmark" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Talenta Tersimpan</span>
+              <span class="metric-value" id="saved-freelancers-count">2 Orang</span>
+              <span style="font-size: 9px; color: var(--color-slate-400); margin-top: 2px;">Dari Universitas top</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon-bg success">
+              <i data-lucide="message-square" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Kotak Masuk Pesan</span>
+              <span class="metric-value">1 Pesan Baru</span>
+              <span style="font-size: 9px; color: var(--color-success); margin-top: 2px;">Dari Budi Santoso</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PROYEK SAYA SECTION -->
+        <section class="dashboard-section">
+          <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">
+              <i data-lucide="briefcase" style="color: var(--color-primary-dark); width: 18px; height: 18px;"></i>
+              Daftar Lowongan & Proyek Saya
+            </h3>
+            <span class="badge badge-success">Dana Escrow Aman</span>
+          </div>
+          <div class="dashboard-section-body" id="project-list-container">
+
+            <!-- Project 1 -->
+            <div class="project-list-item">
+              <div class="project-item-info">
+                <a href="project-tracking.html" style="text-decoration: none;">
+                  <h4 class="project-item-title"
+                    style="color: var(--color-accent-dark); hover: text-decoration: underline;">Sistem POS Warung Kopi
+                    Modern</h4>
+                </a>
+                <div class="project-item-meta">
+                  <span>Freelancer: <strong>Budi Santoso (UI)</strong></span>
+                  <span>&bull;</span>
+                  <span>Anggaran: <strong>Rp 4.500.000</strong></span>
+                  <span>&bull;</span>
+                  <span>Tenggat: <strong>30 Juni 2026</strong></span>
+                </div>
+              </div>
+              <div class="project-item-actions">
+                <span class="badge badge-primary" style="margin-right: 8px;">Dikerjakan</span>
+                <a href="project-tracking.html" class="btn btn-outline btn-sm">Lacak Detail</a>
+              </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-list-item">
+              <div class="project-item-info">
+                <h4 class="project-item-title">Pembuatan Landing Page Hijab Cantik</h4>
+                <div class="project-item-meta">
+                  <span>Pelamar: <strong>2 Mahasiswa IT</strong></span>
+                  <span>&bull;</span>
+                  <span>Anggaran: <strong>Rp 1.500.000</strong></span>
+                  <span>&bull;</span>
+                  <span>Tenggat: <strong>15 Juli 2026</strong></span>
+                </div>
+              </div>
+              <div class="project-item-actions">
+                <span class="badge badge-warning" style="margin-right: 8px;">2 Proposal Masuk</span>
+                <a href="marketplace.html" class="btn btn-secondary btn-sm">Pilih Pelamar</a>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- TALENTA IT REKOMENDASI SECTION -->
+        <section class="dashboard-section">
+          <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">
+              <i data-lucide="sparkles" style="color: var(--color-warning); width: 18px; height: 18px;"></i>
+              Mahasiswa IT Unggulan Rekomendasi
+            </h3>
+            <a href="marketplace.html"
+              style="font-size: var(--font-xs); color: var(--color-accent-dark); font-weight: 600; text-decoration: underline;">Lihat
+              Semua</a>
+          </div>
+          <div class="dashboard-section-body">
+            <div class="recommendation-grid">
+
+              <!-- Rec Card 1 -->
+              <div class="card" style="padding: var(--space-md);">
+                <div class="d-flex align-center gap-sm" style="margin-bottom: 8px;">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=80&auto=format&fit=crop"
+                    style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" alt="Avatar">
+                  <div>
+                    <h5 style="font-size: 13px; font-weight: 700; color: var(--color-slate-900);">Siti Rahma</h5>
+                    <span style="font-size: 10px; color: var(--color-slate-400);">S1 Sistem Informasi ITB</span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; color: var(--color-slate-600); margin-bottom: 12px; height: 32px; overflow: hidden; text-overflow: ellipsis;">
+                  Spesialis UI/UX Figma Design, Pembuatan mockup, Wireframe...</div>
+                <div
+                  style="border-top: 1px solid var(--color-slate-100); padding-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 10px; font-weight: 700; color: var(--color-slate-800);">Rp 120.000/jam</span>
+                  <a href="profile.html" class="btn btn-outline btn-sm" style="padding: 4px 8px; font-size: 10px;">Lihat
+                    Profil</a>
+                </div>
+              </div>
+
+              <!-- Rec Card 2 -->
+              <div class="card" style="padding: var(--space-md);">
+                <div class="d-flex align-center gap-sm" style="margin-bottom: 8px;">
+                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=80&auto=format&fit=crop"
+                    style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" alt="Avatar">
+                  <div>
+                    <h5 style="font-size: 13px; font-weight: 700; color: var(--color-slate-900);">Rian Hidayat</h5>
+                    <span style="font-size: 10px; color: var(--color-slate-400);">S1 Teknik Komputer ITS</span>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 11px; color: var(--color-slate-600); margin-bottom: 12px; height: 32px; overflow: hidden; text-overflow: ellipsis;">
+                  Spesialis Aplikasi Mobile Android/iOS dengan Flutter...</div>
+                <div
+                  style="border-top: 1px solid var(--color-slate-100); padding-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 10px; font-weight: 700; color: var(--color-slate-800);">Rp 130.000/jam</span>
+                  <a href="profile.html" class="btn btn-outline btn-sm" style="padding: 4px 8px; font-size: 10px;">Lihat
+                    Profil</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- TALENTA TERVERSIMPAN SECTION -->
+        <section class="dashboard-section">
+          <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">
+              <i data-lucide="bookmark" style="color: var(--color-primary-dark); width: 18px; height: 18px;"></i>
+              Freelancer IT yang Disimpan
+            </h3>
+          </div>
+          <div class="dashboard-section-body" id="saved-freelancers-list">
+
+            <div class="project-list-item" id="saved-f-1">
+              <div class="d-flex align-center gap-md">
+                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop"
+                  style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;" alt="Avatar">
+                <div>
+                  <h4 class="project-item-title">Budi Santoso</h4>
+                  <p style="font-size: 11px; color: var(--color-slate-500);">Universitas Indonesia &bull; Backend
+                    Developer Specialist</p>
+                </div>
+              </div>
+              <div class="project-item-actions">
+                <a href="profile.html" class="btn btn-outline btn-sm">Lihat Profil</a>
+                <button class="btn btn-text btn-sm" style="color: var(--color-danger);"
+                  onclick="removeSavedFreelancer('saved-f-1')"><i data-lucide="trash-2"
+                    style="width: 16px; height: 16px;"></i> Hapus</button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- POST JOB MODAL -->
+  <div id="post-job-modal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Posting Lowongan Proyek Baru</h3>
+        <button class="modal-close" onclick="closePostJobModal()">✕</button>
+      </div>
+      <form id="post-job-form" onsubmit="submitPostedJob(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="job-title">Nama Pekerjaan / Kebutuhan IT</label>
+            <input type="text" id="job-title" class="form-input"
+              placeholder="Contoh: Pembuatan Website Pemesanan Roti Lapis" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="job-budget">Anggaran Proyek (Maksimal)</label>
+            <input type="text" id="job-budget" class="form-input" placeholder="Contoh: Rp 3.000.000" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="job-desc">Detail Pekerjaan & Kebutuhan Fitur</label>
+            <textarea id="job-desc" class="form-textarea" rows="4"
+              placeholder="Tuliskan spesifikasi, halaman yang dibutuhkan, dan universitas yang Anda inginkan..."
+              required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closePostJobModal()">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="job-submit-btn">Posting Lowongan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 FreelanceIn. Seluruh hak cipta dilindungi undang-undang.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+
+  <!-- UMKM Dashboard Logic -->
+  <script>
+    // Load UMKM data from session
+    window.addEventListener('load', () => {
+      const userJson = localStorage.getItem('freelancein_user');
+      if (userJson) {
+        const user = JSON.parse(userJson);
+        if (user.role === 'umkm') {
+          document.getElementById('umkm-name').innerText = user.name;
+          document.getElementById('umkm-field').innerText = `Bidang Usaha: ${user.businessField}`;
+        }
+      }
+
+      // Check query parameter for automatic post job modal opening
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('post') === 'true') {
+        openPostJobModal();
+      }
+    });
+
+    // Modal Controls
+    function openPostJobModal() {
+      document.getElementById('post-job-modal').classList.add('show');
+    }
+
+    function closePostJobModal() {
+      document.getElementById('post-job-modal').classList.remove('show');
+      document.getElementById('post-job-form').reset();
+    }
+
+    // Submit Posted Job
+    let projectCounter = 2;
+    function submitPostedJob(event) {
+      event.preventDefault();
+
+      const title = document.getElementById('job-title').value.trim();
+      const budget = document.getElementById('job-budget').value.trim();
+      const btn = document.getElementById('job-submit-btn');
+
+      btn.classList.add('btn-loading');
+
+      setTimeout(() => {
+        btn.classList.remove('btn-loading');
+        closePostJobModal();
+
+        projectCounter++;
+
+        const container = document.getElementById('project-list-container');
+        const item = document.createElement('div');
+        item.className = 'project-list-item';
+        item.style.animation = "fadeIn 0.4s ease";
+        item.innerHTML = `
+          <div class="project-item-info">
+            <h4 class="project-item-title">${title}</h4>
+            <div class="project-item-meta">
+              <span>Pelamar: <strong>0 Mahasiswa</strong></span>
+              <span>&bull;</span>
+              <span>Anggaran: <strong>${budget}</strong></span>
+              <span>&bull;</span>
+              <span>Tenggat: <strong>14 Hari ke depan</strong></span>
+            </div>
+          </div>
+          <div class="project-item-actions">
+            <span class="badge badge-info" style="margin-right: 8px;">Baru Diposting</span>
+            <button class="btn btn-outline btn-sm" onclick="showToast('Review', 'Sedang menunggu mahasiswa kampus mengirim proposal...', 'info')">Lacak Proposal</button>
+          </div>
+        `;
+
+        // Prepend new listing
+        container.insertBefore(item, container.firstChild);
+        showToast('Lowongan Diposting', `Lowongan pekerjaan "${title}" berhasil disebarkan ke jaringan kampus.`, 'success');
+      }, 1000);
+    }
+
+    // Remove Saved Freelancer
+    function removeSavedFreelancer(id) {
+      const el = document.getElementById(id);
+      if (el && confirm("Apakah Anda yakin ingin menghapus mahasiswa ini dari daftar tersimpan?")) {
+        el.style.opacity = '0';
+        el.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+          el.remove();
+          // Update count
+          document.getElementById('saved-freelancers-count').innerText = "1 Orang";
+        }, 300);
+        showToast('Pemberitahuan', 'Mahasiswa dihapus dari bookmark.', 'success');
+      }
+    }
+  </script>
+
+</body>
+
+</html>

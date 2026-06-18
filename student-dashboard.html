@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Mahasiswa - FreelanceIn</title>
+  <meta name="description"
+    content="Dashboard portal mahasiswa IT terverifikasi FreelanceIn untuk mengelola proyek aktif, portfolio, sertifikat, dan mengajukan proposal.">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <a href="index.html" class="logo">
+          Freelance<span>In</span>
+          <div class="logo-dot"></div>
+        </a>
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="marketplace.html">Cari Talenta</a></li>
+            <li class="nav-item text-primary"><a href="student-dashboard.html">Dashboard</a></li>
+            <li class="nav-item"><a href="messages.html">Pesan</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav-right">
+        <!-- Replaced dynamically by main.js, placeholder for static reference -->
+        <button class="mobile-nav-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container py-xl">
+
+    <!-- Title Area -->
+    <div
+      style="margin-bottom: var(--space-xl); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md);">
+      <div>
+        <h1 style="font-size: var(--font-2xl); font-weight: 800; color: var(--color-slate-900);">Dashboard Mahasiswa
+        </h1>
+        <p style="color: var(--color-slate-500); font-size: var(--font-sm);">Kelola kontrak proyek digital Anda dan
+          ajukan proposal ke UMKM.</p>
+      </div>
+      <div class="badge badge-success" style="padding: 6px 16px; font-size: var(--font-xs); font-weight: 700;">
+        <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i> Identitas KTM Terverifikasi
+      </div>
+    </div>
+
+    <!-- Dashboard Main Grid -->
+    <div class="dashboard-grid">
+
+      <!-- LEFT SIDEBAR -->
+      <aside class="dashboard-sidebar">
+
+        <!-- User Profile Info -->
+        <div class="card user-profile-widget">
+          <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop"
+            alt="Profile" class="dashboard-large-avatar">
+          <h3 class="dashboard-user-name" id="student-name">Budi Santoso</h3>
+          <p class="dashboard-user-subtitle" id="student-univ">S1 Teknik Informatika - Universitas Indonesia</p>
+          <div style="margin-top: 12px; font-size: 11px; color: var(--color-slate-400);">Semester <span
+              id="student-sem">6</span> &bull; Web Developer</div>
+          <a href="profile.html" class="btn btn-outline btn-sm w-full" style="margin-top: var(--space-md);">Lihat Profil
+            Publik</a>
+        </div>
+
+        <!-- Skill Badges -->
+        <div class="card">
+          <h4
+            style="font-size: var(--font-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-sm); color: var(--color-slate-500);">
+            Skill Badges Terverifikasi</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="badge badge-primary" style="justify-content: flex-start; padding: 6px 12px; font-size: 11px;">
+              🛡️ Verified Laravel Specialist
+            </div>
+            <div class="badge badge-primary" style="justify-content: flex-start; padding: 6px 12px; font-size: 11px;">
+              🛡️ Next.js Web Developer UI
+            </div>
+            <div class="badge badge-primary" style="justify-content: flex-start; padding: 6px 12px; font-size: 11px;">
+              🛡️ RESTful API Integrator
+            </div>
+          </div>
+        </div>
+
+        <!-- Sertifikat -->
+        <div class="card">
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
+            <h4
+              style="font-size: var(--font-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-slate-500);">
+              Sertifikat Saya</h4>
+            <button class="btn btn-text btn-sm" style="padding: 2px 6px;" onclick="addMockCertificate()"><i
+                data-lucide="plus" style="width: 14px; height: 14px;"></i></button>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px;" id="certificates-list">
+            <div style="border-left: 2px solid var(--color-primary); padding-left: 10px;">
+              <strong style="font-size: 11px; display: block; color: var(--color-slate-800);">Google IT Automation
+                Certificate</strong>
+              <span style="font-size: 9px; color: var(--color-slate-400);">Google / Coursera &bull; 2025</span>
+            </div>
+            <div style="border-left: 2px solid var(--color-primary); padding-left: 10px;">
+              <strong style="font-size: 11px; display: block; color: var(--color-slate-800);">Menjadi Laravel Developer
+                Expert</strong>
+              <span style="font-size: 9px; color: var(--color-slate-400);">Dicoding Indonesia &bull; 2025</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- RIGHT MAIN CONTENT -->
+      <main>
+
+        <!-- Metrics Row -->
+        <div class="metrics-row">
+
+          <!-- Balance Widget -->
+          <div class="metric-card">
+            <div class="metric-icon-bg success">
+              <i data-lucide="wallet" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Penghasilan Anda</span>
+              <span class="metric-value">Rp 4.500.000</span>
+              <span style="font-size: 9px; color: var(--color-slate-400); margin-top: 2px;">Terbayar & Clear</span>
+            </div>
+          </div>
+
+          <!-- Active Projects Metric -->
+          <div class="metric-card">
+            <div class="metric-icon-bg primary">
+              <i data-lucide="briefcase" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Proyek Aktif</span>
+              <span class="metric-value" id="active-projects-count">1 Proyek</span>
+              <span style="font-size: 9px; color: var(--color-success); margin-top: 2px;">Sedang berjalan</span>
+            </div>
+          </div>
+
+          <!-- Proposals Count -->
+          <div class="metric-card">
+            <div class="metric-icon-bg info">
+              <i data-lucide="file-text" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Lamaran Terkirim</span>
+              <span class="metric-value">2 Proposal</span>
+              <span style="font-size: 9px; color: var(--color-slate-400); margin-top: 2px;">Menunggu review UMKM</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PROYEK AKTIF SECTION -->
+        <section class="dashboard-section">
+          <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">
+              <i data-lucide="clock" style="color: var(--color-primary-dark); width: 18px; height: 18px;"></i>
+              Proyek Aktif Saat Ini
+            </h3>
+            <span class="badge badge-success">Pekerjaan Sedang Berjalan</span>
+          </div>
+          <div class="dashboard-section-body" id="active-projects-list">
+
+            <div class="project-list-item">
+              <div class="project-item-info">
+                <a href="project-tracking.html" style="text-decoration: none;">
+                  <h4 class="project-item-title"
+                    style="color: var(--color-accent-dark); hover: text-decoration: underline;">Sistem POS Warung Kopi
+                    Modern</h4>
+                </a>
+                <div class="project-item-meta">
+                  <span>Klien: <strong>Hendra Wijaya (CV Maju Bersama)</strong></span>
+                  <span>&bull;</span>
+                  <span>Anggaran: <strong>Rp 4.500.000</strong></span>
+                  <span>&bull;</span>
+                  <span>Tenggat: <strong>30 Juni 2026</strong></span>
+                </div>
+              </div>
+              <div class="project-item-actions">
+                <a href="project-tracking.html" class="btn btn-outline btn-sm">Pantau Proyek</a>
+                <a href="messages.html" class="btn btn-text btn-sm" title="Chat Klien"><i data-lucide="message-square"
+                    style="width: 16px; height: 16px;"></i></a>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- LAMARAN SAYA SECTION -->
+        <section class="dashboard-section">
+          <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">
+              <i data-lucide="send" style="color: var(--color-info); width: 18px; height: 18px;"></i>
+              Proposal Lamaran Saya
+            </h3>
+          </div>
+          <div class="dashboard-section-body">
+
+            <!-- Proposal 1 -->
+            <div class="project-list-item">
+              <div class="project-item-info">
+                <h4 class="project-item-title">Pembuatan Landing Page Hijab Cantik</h4>
+                <div class="project-item-meta">
+                  <span>UMKM: <strong>Toko Hijab Syar'i</strong></span>
+                  <span>&bull;</span>
+                  <span>Penawaran Anda: <strong>Rp 1.800.000</strong></span>
+                  <span>&bull;</span>
+                  <span>Tanggal: <strong>14 Juni 2026</strong></span>
+                </div>
+              </div>
+              <div>
+                <span class="badge badge-warning">Dalam Review</span>
+              </div>
+            </div>
+
+            <!-- Proposal 2 -->
+            <div class="project-list-item">
+              <div class="project-item-info">
+                <h4 class="project-item-title">Sistem Penjualan Apotek Kasir</h4>
+                <div class="project-item-meta">
+                  <span>UMKM: <strong>Apotek Sehat Depok</strong></span>
+                  <span>&bull;</span>
+                  <span>Penawaran Anda: <strong>Rp 3.500.000</strong></span>
+                  <span>&bull;</span>
+                  <span>Tanggal: <strong>08 Juni 2026</strong></span>
+                </div>
+              </div>
+              <div>
+                <span class="badge badge-info">Negosiasi</span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- PORTOFOLIO SAYA SECTION -->
+        <section class="dashboard-section" id="portfolio">
+          <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">
+              <i data-lucide="folder-git" style="color: var(--color-primary-dark); width: 18px; height: 18px;"></i>
+              Portofolio Karya Saya
+            </h3>
+            <button class="btn btn-primary btn-sm" onclick="openAddPortfolioModal()">+ Tambah Karya</button>
+          </div>
+          <div class="dashboard-section-body">
+            <div class="portfolio-grid-editable" id="portfolio-list">
+
+              <!-- Project 1 -->
+              <div class="portfolio-card-editable" id="port-item-1">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=240&auto=format&fit=crop"
+                  alt="POS">
+                <div class="portfolio-card-body-edit">
+                  <strong style="font-size: var(--font-xs); display: block; color: var(--color-slate-900);">E-Commerce
+                    POS System</strong>
+                  <span style="font-size: 10px; color: var(--color-slate-500);">Laravel, MySQL</span>
+                  <div class="portfolio-card-actions">
+                    <button class="btn btn-text btn-sm" style="padding: 2px; color: var(--color-danger);"
+                      onclick="deletePortfolio('port-item-1')"><i data-lucide="trash-2"
+                        style="width: 14px; height: 14px;"></i> Hapus</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Project 2 -->
+              <div class="portfolio-card-editable" id="port-item-2">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=240&auto=format&fit=crop"
+                  alt="Dashboard">
+                <div class="portfolio-card-body-edit">
+                  <strong style="font-size: var(--font-xs); display: block; color: var(--color-slate-900);">Booking App
+                    Admin</strong>
+                  <span style="font-size: 10px; color: var(--color-slate-500);">React, Node.js</span>
+                  <div class="portfolio-card-actions">
+                    <button class="btn btn-text btn-sm" style="padding: 2px; color: var(--color-danger);"
+                      onclick="deletePortfolio('port-item-2')"><i data-lucide="trash-2"
+                        style="width: 14px; height: 14px;"></i> Hapus</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- PROYEK REKOMENDASI SECTION -->
+        <section class="dashboard-section" id="rekomendasi">
+          <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">
+              <i data-lucide="sparkles" style="color: var(--color-warning); width: 18px; height: 18px;"></i>
+              Rekomendasi Proyek IT UMKM (Cocok Untuk Anda)
+            </h3>
+          </div>
+          <div class="dashboard-section-body">
+            <div class="recommendation-grid">
+
+              <!-- Rec Card 1 -->
+              <div class="card" style="padding: var(--space-md);" id="rec-proj-1">
+                <span class="badge badge-primary" style="margin-bottom: 8px;">Web Dev</span>
+                <h4 style="font-size: var(--font-sm); font-weight: 700; margin-bottom: 4px;">Landing Page & Integrasi
+                  Chat WA</h4>
+                <p style="font-size: 11px; color: var(--color-slate-500); line-height: 1.4; margin-bottom: 12px;">
+                  Dibutuhkan landing page penjualan produk keripik singkong dengan Laravel. Harus terhubung ke chat
+                  WhatsApp...</p>
+                <div
+                  style="border-top: 1px solid var(--color-slate-100); padding-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <span style="font-size: 9px; color: var(--color-slate-400); display: block;">Anggaran</span>
+                    <strong style="font-size: var(--font-xs); color: var(--color-slate-800);">Rp 1.500.000</strong>
+                  </div>
+                  <button class="btn btn-primary btn-sm" style="padding: 4px 10px; font-size: 10px;"
+                    onclick="applyForProject('rec-proj-1', 'Landing Page & Integrasi Chat WA')">Ajukan Proposal</button>
+                </div>
+              </div>
+
+              <!-- Rec Card 2 -->
+              <div class="card" style="padding: var(--space-md);" id="rec-proj-2">
+                <span class="badge badge-info" style="margin-bottom: 8px;">API / Backend</span>
+                <h4 style="font-size: var(--font-sm); font-weight: 700; margin-bottom: 4px;">Integrasi Payment Gateway
+                  Toko</h4>
+                <p style="font-size: 11px; color: var(--color-slate-500); line-height: 1.4; margin-bottom: 12px;">Kami
+                  butuh mahasiswa IT yang bisa integrasikan Midtrans sandbox di website Laravel e-commerce kami yang
+                  sudah ada...</p>
+                <div
+                  style="border-top: 1px solid var(--color-slate-100); padding-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <span style="font-size: 9px; color: var(--color-slate-400); display: block;">Anggaran</span>
+                    <strong style="font-size: var(--font-xs); color: var(--color-slate-800);">Rp 2.000.000</strong>
+                  </div>
+                  <button class="btn btn-primary btn-sm" style="padding: 4px 10px; font-size: 10px;"
+                    onclick="applyForProject('rec-proj-2', 'Integrasi Payment Gateway Toko')">Ajukan Proposal</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- ADD PORTFOLIO MODAL -->
+  <div id="add-portfolio-modal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Tambah Portofolio Baru</h3>
+        <button class="modal-close" onclick="closeAddPortfolioModal()">✕</button>
+      </div>
+      <form id="portfolio-form" onsubmit="submitNewPortfolio(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="port-title">Judul Proyek</label>
+            <input type="text" id="port-title" class="form-input" placeholder="Contoh: Aplikasi Booking Jasa Salon"
+              required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="port-tech">Teknologi yang Digunakan</label>
+            <input type="text" id="port-tech" class="form-input" placeholder="Contoh: React.js, TailwindCSS, Firebase"
+              required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tangkapan Layar Proyek</label>
+            <div class="dropzone" style="padding: var(--space-md);">
+              <i data-lucide="upload-cloud"
+                style="width: 32px; height: 32px; color: var(--color-slate-400); margin: 0 auto 8px;"></i>
+              <p style="font-size: 11px; color: var(--color-slate-500);">Klik atau seret gambar thumbnail proyek di sini
+                (PNG, JPG max 5MB)</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeAddPortfolioModal()">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="port-submit-btn">Simpan Portofolio</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 FreelanceIn. Seluruh hak cipta dilindungi undang-undang.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Student Dashboard Logic -->
+  <script>
+    // Load student data from session
+    window.addEventListener('load', () => {
+      const userJson = localStorage.getItem('freelancein_user');
+      if (userJson) {
+        const user = JSON.parse(userJson);
+        if (user.role === 'mahasiswa') {
+          document.getElementById('student-name').innerText = user.name;
+          document.getElementById('student-univ').innerText = `S1 ${user.skills ? user.skills[0] || 'IT' : 'IT'} - ${user.univ}`;
+          document.getElementById('student-sem').innerText = user.semester;
+        }
+      }
+    });
+
+    // Add Mock Certificate
+    function addMockCertificate() {
+      const title = prompt("Masukkan nama sertifikat IT:");
+      if (!title) return;
+      const issuer = prompt("Penerbit sertifikat (misal: Dicoding, Coursera):");
+      if (!issuer) return;
+
+      const container = document.getElementById('certificates-list');
+      const certNode = document.createElement('div');
+      certNode.style.cssText = "border-left: 2px solid var(--color-primary); padding-left: 10px; animation: fadeIn 0.3s ease;";
+      certNode.innerHTML = `
+        <strong style="font-size: 11px; display: block; color: var(--color-slate-800);">${title}</strong>
+        <span style="font-size: 9px; color: var(--color-slate-400);">${issuer} &bull; 2026</span>
+      `;
+      container.appendChild(certNode);
+      showToast('Sertifikat Ditambahkan', `Sertifikat "${title}" berhasil disimpan.`, 'success');
+    }
+
+    // Modal Control
+    function openAddPortfolioModal() {
+      document.getElementById('add-portfolio-modal').classList.add('show');
+    }
+
+    function closeAddPortfolioModal() {
+      document.getElementById('add-portfolio-modal').classList.remove('show');
+      document.getElementById('portfolio-form').reset();
+    }
+
+    // Submit Portfolio
+    let portfolioCounter = 2;
+    function submitNewPortfolio(event) {
+      event.preventDefault();
+
+      const title = document.getElementById('port-title').value.trim();
+      const tech = document.getElementById('port-tech').value.trim();
+      const btn = document.getElementById('port-submit-btn');
+
+      btn.classList.add('btn-loading');
+
+      setTimeout(() => {
+        btn.classList.remove('btn-loading');
+        closeAddPortfolioModal();
+
+        portfolioCounter++;
+        const itemId = `port-item-${portfolioCounter}`;
+
+        const container = document.getElementById('portfolio-list');
+        const card = document.createElement('div');
+        card.className = 'portfolio-card-editable';
+        card.id = itemId;
+        card.style.animation = "fadeIn 0.4s ease";
+        card.innerHTML = `
+          <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=240&auto=format&fit=crop" alt="Project">
+          <div class="portfolio-card-body-edit">
+            <strong style="font-size: var(--font-xs); display: block; color: var(--color-slate-900);">${title}</strong>
+            <span style="font-size: 10px; color: var(--color-slate-500);">${tech}</span>
+            <div class="portfolio-card-actions">
+              <button class="btn btn-text btn-sm" style="padding: 2px; color: var(--color-danger);" onclick="deletePortfolio('${itemId}')">✕ Hapus</button>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+        showToast('Karya Ditambahkan', `Portofolio "${title}" berhasil diunggah.`, 'success');
+      }, 1000);
+    }
+
+    // Delete Portfolio
+    function deletePortfolio(id) {
+      const el = document.getElementById(id);
+      if (el && confirm("Apakah Anda yakin ingin menghapus portofolio ini?")) {
+        el.style.opacity = '0';
+        el.style.transform = 'scale(0.9)';
+        setTimeout(() => el.remove(), 300);
+        showToast('Portofolio Dihapus', 'Karya berhasil dihapus dari portofolio.', 'success');
+      }
+    }
+
+    // Apply for Project Recommendations
+    function applyForProject(cardId, projectName) {
+      const card = document.getElementById(cardId);
+      const applyBtn = card.querySelector('button');
+
+      applyBtn.disabled = true;
+      applyBtn.innerText = 'Mengirim...';
+
+      setTimeout(() => {
+        applyBtn.className = "btn btn-outline btn-sm";
+        applyBtn.innerText = 'Melamar Terkirim';
+        showToast('Proposal Terkirim', `Proposal untuk proyek "${projectName}" berhasil diajukan ke klien.`, 'success');
+      }, 1200);
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar UMKM - FreelanceIn</title>
+  <meta name="description"
+    content="Daftar sebagai UMKM/Bisnis di FreelanceIn untuk merekrut mahasiswa IT berprestasi dengan aman dan terjangkau.">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <a href="index.html" class="logo">
+          Freelance<span>In</span>
+          <div class="logo-dot"></div>
+        </a>
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="marketplace.html">Cari Talenta</a></li>
+            <li class="nav-item"><a href="design-system.html"
+                style="color: var(--color-slate-500); font-weight: 600;">Sistem Desain (FIDS)</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav-right">
+        <a href="login.html" class="btn-text" style="font-size: var(--font-sm); font-weight: 600;">Masuk</a>
+        <a href="login.html#register" class="btn btn-outline btn-sm">Daftar</a>
+        <button class="mobile-nav-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Registration Form Area -->
+  <div class="auth-container">
+    <div class="auth-card" style="max-width: 500px;">
+      <div class="auth-header">
+        <div class="auth-logo">
+          Freelance<span>In</span>
+          <div class="auth-logo-dot"></div>
+        </div>
+        <h2 class="auth-title">Daftar Akun UMKM / Bisnis</h2>
+        <p class="auth-subtitle">Temukan mahasiswa IT bertarif bersahabat untuk mendigitalkan bisnis Anda</p>
+      </div>
+
+      <form id="register-umkm-form" onsubmit="handleRegisterUMKM(event)">
+
+        <div class="form-group">
+          <label class="form-label" for="reg-nama-usaha">Nama Usaha / Perusahaan</label>
+          <input type="text" id="reg-nama-usaha" class="form-input" placeholder="Contoh: Kopi Kita, CV Sinar Abadi"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-bidang-usaha">Bidang Usaha</label>
+          <select id="reg-bidang-usaha" class="form-select" required>
+            <option value="" disabled selected>Pilih bidang usaha...</option>
+            <option value="Kuliner / F&B">Kuliner / Food & Beverages</option>
+            <option value="Manufaktur / Pabrik">Manufaktur / Pabrikasi</option>
+            <option value="Ritel / Toko Online">Ritel / Toko Online / Dagang</option>
+            <option value="Jasa / Konsultan">Jasa / Konsultan</option>
+            <option value="Kreatif / Kerajinan">Kreatif / Kerajinan Tangan</option>
+            <option value="Lainnya">Bidang Usaha Lainnya</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-email">Alamat Email Usaha</label>
+          <input type="email" id="reg-email" class="form-input" placeholder="kontak@tokosaya.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-pass">Kata Sandi</label>
+          <input type="password" id="reg-pass" class="form-input" placeholder="Min. 8 karakter" minlength="8" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--space-xl);">
+          <label class="form-checkbox-label">
+            <input type="checkbox" class="form-checkbox" required checked>
+            <span style="font-size: var(--font-xs); color: var(--color-slate-600); line-height: 1.4;">Saya setuju dengan
+              <a href="#" style="color: var(--color-accent-dark); font-weight: 500;">Syarat & Ketentuan</a> dan setuju
+              menggunakan Rekening Bersama FreelanceIn.</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-full" id="reg-submit-btn">Daftar Sebagai UMKM</button>
+      </form>
+
+      <div class="auth-footer">
+        Sudah memiliki akun? <a href="login.html">Masuk di sini</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p class="footer-copy">&copy; 2026 FreelanceIn. Seluruh hak cipta dilindungi undang-undang.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Registration Logic -->
+  <script>
+    function handleRegisterUMKM(event) {
+      event.preventDefault();
+
+      const namaUsaha = document.getElementById('reg-nama-usaha').value.trim();
+      const bidangUsaha = document.getElementById('reg-bidang-usaha').value;
+      const email = document.getElementById('reg-email').value.trim();
+      const pass = document.getElementById('reg-pass').value;
+      const btn = document.getElementById('reg-submit-btn');
+
+      btn.classList.add('btn-loading');
+
+      setTimeout(() => {
+        btn.classList.remove('btn-loading');
+
+        const umkmUser = {
+          name: namaUsaha,
+          email: email,
+          role: 'umkm',
+          businessName: namaUsaha,
+          businessField: bidangUsaha
+        };
+
+        // Save session
+        localStorage.setItem('freelancein_user', JSON.stringify(umkmUser));
+
+        // Redirect to dashboard
+        window.location.href = 'umkm-dashboard.html?login=success';
+      }, 1200);
+    }
+  </script>
+
+</body>
+
+</html>

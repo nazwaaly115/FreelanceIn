@@ -1,0 +1,203 @@
+/* 
+  FreelanceIn Auth Styles
+  Custom styling for login, register-mahasiswa, and register-umkm pages
+*/
+
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 144px); /* Account for header and footer */
+  padding: var(--space-2xl) var(--space-lg);
+  background-color: var(--color-slate-50);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-2xl);
+  transition: transform var(--transition-normal);
+}
+
+.auth-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.auth-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--font-xl);
+  font-weight: 800;
+  color: var(--color-slate-900);
+  margin-bottom: var(--space-sm);
+}
+
+.auth-logo span {
+  color: var(--color-accent-dark);
+}
+
+.auth-logo-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+.auth-title {
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--color-slate-900);
+  margin-bottom: var(--space-xs);
+}
+
+.auth-subtitle {
+  font-size: var(--font-xs);
+  color: var(--color-slate-500);
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--color-slate-400);
+  font-size: var(--font-xs);
+  margin: var(--space-lg) 0;
+}
+
+.auth-divider::before, .auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--color-slate-200);
+}
+
+.auth-divider:not(:empty)::before {
+  margin-right: .5em;
+}
+
+.auth-divider:not(:empty)::after {
+  margin-left: .5em;
+}
+
+/* Auth Role Toggle in Registration Selection */
+.auth-role-select {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.auth-role-card {
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.auth-role-card:hover {
+  border-color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+}
+
+.auth-role-card.active {
+  border-color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+  box-shadow: 0 0 0 2px var(--color-primary-dark);
+}
+
+.auth-role-icon {
+  font-size: var(--font-2xl);
+  margin-bottom: var(--space-sm);
+  color: var(--color-accent-dark);
+}
+
+.auth-role-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.auth-role-desc {
+  font-size: var(--font-xs);
+  color: var(--color-slate-500);
+  line-height: 1.4;
+}
+
+/* Demo Fast Login Info Box */
+.auth-demo-box {
+  background-color: var(--color-accent-light);
+  border: 1px dashed var(--color-primary-dark);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  font-size: var(--font-xs);
+}
+
+.auth-demo-title {
+  font-weight: 700;
+  color: var(--color-accent-dark);
+  margin-bottom: var(--space-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.auth-demo-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-xs) 0 0 0;
+}
+
+.auth-demo-item {
+  margin-bottom: 4px;
+  cursor: pointer;
+  color: var(--color-slate-600);
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+}
+
+.auth-demo-item:hover {
+  color: var(--color-accent-dark);
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: var(--space-xl);
+  font-size: var(--font-xs);
+  color: var(--color-slate-500);
+}
+
+.auth-footer a {
+  color: var(--color-accent-dark);
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive auth adjustments */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: var(--space-lg);
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
+  .auth-container {
+    background: var(--color-white);
+    padding: var(--space-md);
+  }
+}

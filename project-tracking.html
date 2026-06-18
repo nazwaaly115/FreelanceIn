@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pelacakan Proyek - FreelanceIn</title>
+  <meta name="description" content="Portal pelacakan proyek kolaborasi mahasiswa IT dengan UMKM di FreelanceIn. Monitor progress, review berkas, dan lakukan pembayaran bersama.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <a href="index.html" class="logo">
+          Freelance<span>In</span>
+          <div class="logo-dot"></div>
+        </a>
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="marketplace.html">Cari Talenta</a></li>
+            <li class="nav-item"><a href="student-dashboard.html">Dashboard</a></li>
+            <li class="nav-item"><a href="messages.html">Pesan</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav-right">
+        <!-- Replaced dynamically by main.js, placeholder for static reference -->
+        <button class="mobile-nav-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container py-xl">
+
+    <!-- DEMO CONTROLLER TOOLBAR -->
+    <div class="demo-control-bar">
+      <div class="demo-control-title">
+        <i data-lucide="sliders" style="width: 16px; height: 16px;"></i>
+        <span>Pengontrol Alur Prototip Kontrak (Simulasi Langkah Kerja)</span>
+      </div>
+      <div class="demo-control-btns">
+        <button class="btn btn-primary btn-sm" onclick="setProjectStep(1)" style="padding: 4px 8px; font-size: 10px; background-color: var(--color-slate-700); border-color: var(--color-slate-600); color: var(--color-white);">1. Proposal</button>
+        <button class="btn btn-primary btn-sm" onclick="setProjectStep(2)" style="padding: 4px 8px; font-size: 10px; background-color: var(--color-slate-700); border-color: var(--color-slate-600); color: var(--color-white);">2. Disetujui</button>
+        <button class="btn btn-primary btn-sm" onclick="setProjectStep(3)" style="padding: 4px 8px; font-size: 10px; background-color: var(--color-slate-700); border-color: var(--color-slate-600); color: var(--color-white);">3. Dikerjakan</button>
+        <button class="btn btn-primary btn-sm" onclick="setProjectStep(4)" style="padding: 4px 8px; font-size: 10px; background-color: var(--color-slate-700); border-color: var(--color-slate-600); color: var(--color-white);">4. Review</button>
+        <button class="btn btn-primary btn-sm" onclick="setProjectStep(5)" style="padding: 4px 8px; font-size: 10px; background-color: var(--color-slate-700); border-color: var(--color-slate-600); color: var(--color-white);">5. Selesai</button>
+      </div>
+    </div>
+
+    <!-- Tracking Stepper / Progress Bar Section -->
+    <div class="tracking-header">
+      <h2 style="font-size: var(--font-md); font-weight: 800; color: var(--color-slate-900); text-align: center;">Pelacakan Kemajuan Kontrak Kerja</h2>
+      
+      <!-- Horizontal Stepper -->
+      <div class="stepper-container">
+        <div class="stepper-line">
+          <div class="stepper-line-progress" id="stepper-bar"></div>
+        </div>
+        
+        <!-- Step 1: Proposal -->
+        <div class="step-node" id="step-node-1" onclick="setProjectStep(1)">
+          <div class="step-circle">1</div>
+          <span class="step-label">Proposal</span>
+        </div>
+        
+        <!-- Step 2: Disetujui -->
+        <div class="step-node" id="step-node-2" onclick="setProjectStep(2)">
+          <div class="step-circle">2</div>
+          <span class="step-label">Disetujui</span>
+        </div>
+        
+        <!-- Step 3: Sedang Dikerjakan -->
+        <div class="step-node" id="step-node-3" onclick="setProjectStep(3)">
+          <div class="step-circle">3</div>
+          <span class="step-label">Dikerjakan</span>
+        </div>
+        
+        <!-- Step 4: Review -->
+        <div class="step-node" id="step-node-4" onclick="setProjectStep(4)">
+          <div class="step-circle">4</div>
+          <span class="step-label">Review</span>
+        </div>
+        
+        <!-- Step 5: Selesai -->
+        <div class="step-node" id="step-node-5" onclick="setProjectStep(5)">
+          <div class="step-circle">5</div>
+          <span class="step-label">Selesai</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-Column Layout -->
+    <div class="dashboard-grid">
+      
+      <!-- LEFT SIDEBAR: Status Cards -->
+      <aside class="dashboard-sidebar">
+        
+        <!-- Detail Kontrak Card -->
+        <div class="card">
+          <h4 style="font-size: var(--font-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-md); color: var(--color-slate-500); border-bottom: 1px solid var(--color-slate-100); padding-bottom: 6px;">Detail Proyek IT</h4>
+          <div style="display: flex; flex-direction: column; gap: 12px; font-size: var(--font-xs);">
+            <div>
+              <span style="color: var(--color-slate-400); display: block;">Judul Pekerjaan</span>
+              <strong style="color: var(--color-slate-800); font-size: var(--font-xs);">Sistem POS Warung Kopi Modern</strong>
+            </div>
+            <div>
+              <span style="color: var(--color-slate-400); display: block;">Nilai Kontrak</span>
+              <strong style="color: var(--color-slate-900); font-size: var(--font-xs);" id="escrow-budget">Rp 4.500.000</strong>
+              <span class="badge badge-success" style="font-size: 8px; padding: 2px 5px; margin-top: 2px;" id="escrow-status">Amankan di Rekening Bersama</span>
+            </div>
+            <div>
+              <span style="color: var(--color-slate-400); display: block;">Pemilik Usaha (UMKM)</span>
+              <strong style="color: var(--color-slate-800);">Hendra Wijaya (CV Maju Bersama)</strong>
+            </div>
+            <div>
+              <span style="color: var(--color-slate-400); display: block;">Pelaksana (Mahasiswa IT)</span>
+              <strong style="color: var(--color-slate-800);">Budi Santoso (Universitas Indonesia)</strong>
+            </div>
+            <div>
+              <span style="color: var(--color-slate-400); display: block;">Estimasi Tenggat</span>
+              <strong style="color: var(--color-slate-800);">30 Juni 2026 (12 Hari Lagi)</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Berkas Deliverables Card -->
+        <div class="card" id="deliverables-card">
+          <h4 style="font-size: var(--font-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-md); color: var(--color-slate-500); border-bottom: 1px solid var(--color-slate-100); padding-bottom: 6px;">Berkas Deliverable</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;" id="files-container">
+            
+            <div style="font-size: var(--font-xs); color: var(--color-slate-400); text-align: center; padding: 12px;" id="no-files-text">
+              Belum ada berkas hasil kerja yang diunggah.
+            </div>
+
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- RIGHT PANEL: Live Timeline & Actions -->
+      <main>
+        
+        <!-- Live Action Status Card -->
+        <section class="card" style="margin-bottom: var(--space-xl); border-left: 4px solid var(--color-primary-dark);">
+          <h3 style="font-size: var(--font-sm); font-weight: 700; margin-bottom: 4px;" id="status-card-title">Tahap: Sedang Dikerjakan</h3>
+          <p style="font-size: var(--font-xs); color: var(--color-slate-600); line-height: 1.5;" id="status-card-desc">
+            Budi Santoso sedang mengerjakan arsitektur database, routing API, dan integrasi view dashboard admin. Pembayaran Anda Rp 4.500.000 disimpan dengan aman di Rekening Bersama FreelanceIn.
+          </p>
+          
+          <div style="margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-slate-100); display: flex; gap: var(--space-md);" id="action-btns-container">
+            <!-- Appended dynamically -->
+          </div>
+        </section>
+
+        <!-- Chronological Project Timeline -->
+        <section class="dashboard-section">
+          <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">
+              <i data-lucide="history" style="color: var(--color-slate-500); width: 18px; height: 18px;"></i>
+              Linimasa & Riwayat Aktivitas
+            </h3>
+          </div>
+          <div class="dashboard-section-body">
+            <div class="timeline-list" id="timeline-list-container">
+              
+              <!-- Appended dynamically by script to keep state synchronized -->
+
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- REVIEW MODAL -->
+  <div id="review-modal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Berikan Ulasan & Review Kinerja</h3>
+        <button class="modal-close" onclick="closeReviewModal()">✕</button>
+      </div>
+      <form id="review-form" onsubmit="submitReview(event)">
+        <div class="modal-body">
+          <p style="font-size: var(--font-xs); color: var(--color-slate-500); margin-bottom: var(--space-md);">
+            Berikan nilai rating dan ulasan Anda untuk mahasiswa <strong>Budi Santoso (UI)</strong> atas kerja kerasnya mendigitalkan usaha Anda.
+          </p>
+          
+          <div class="form-group">
+            <label class="form-label">Rating Bintang</label>
+            <div style="display: flex; gap: 8px; font-size: var(--font-2xl); cursor: pointer; color: #fbbf24;" id="star-rating-selector">
+              <span onclick="setRatingStars(1)">★</span>
+              <span onclick="setRatingStars(2)">★</span>
+              <span onclick="setRatingStars(3)">★</span>
+              <span onclick="setRatingStars(4)">★</span>
+              <span onclick="setRatingStars(5)">★</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="review-text">Tulis Ulasan Anda</label>
+            <textarea id="review-text" class="form-textarea" rows="4" placeholder="Ketik ulasan Anda mengenai komunikasi, ketepatan waktu, dan kualitas kodenya..." required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeReviewModal()">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="review-submit-btn">Kirim Ulasan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 FreelanceIn. Seluruh hak cipta dilindungi undang-undang.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+  
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Stepper Simulation Script -->
+  <script>
+    // Project state definition
+    const projectStepsData = {
+      1: {
+        title: "Tahap: Proposal Diajukan",
+        desc: "Mahasiswa IT Budi Santoso mengajukan proposal penawaran senilai Rp 4.500.000 untuk mengembangkan POS kasir warung kopi Anda. Silakan setujui kontrak untuk mendepositkan dana ke rekening bersama.",
+        progress: 0,
+        timeline: [
+          { title: "Proposal Dikirim", desc: "Budi Santoso mengirimkan proposal penawaran.", date: "15 Juni 2026 10:14", type: "completed" }
+        ],
+        actions: `
+          <button class="btn btn-primary btn-sm" onclick="setProjectStep(2); showToast('Kontrak Disetujui', 'Telah mendepositkan dana Rp 4.500.000 ke rekening bersama.', 'success');">Setujui Kontrak & Deposit Dana</button>
+          <a href="messages.html" class="btn btn-outline btn-sm">Diskusi di Pesan</a>
+        `,
+        escrowText: "Belum Didepositkan",
+        escrowBadge: "badge-danger",
+        files: []
+      },
+      2: {
+        title: "Tahap: Kontrak Disetujui & Escrow Aktif",
+        desc: "Dana proyek Rp 4.500.000 didepositkan ke Rekening Bersama FreelanceIn. Mahasiswa IT terverifikasi (Budi) siap memulai pengerjaan sesuai spesifikasi kontrak.",
+        progress: 25,
+        timeline: [
+          { title: "Pembayaran Escrow Diterima", desc: "CV Maju Bersama menyetor Rp 4.500.000 ke rekening bersama.", date: "16 Juni 2026 09:20", type: "completed" },
+          { title: "Proposal Disetujui", desc: "Klien menyetujui proposal penawaran kontrak.", date: "16 Juni 2026 09:18", type: "completed" },
+          { title: "Proposal Dikirim", desc: "Budi Santoso mengirimkan proposal penawaran.", date: "15 Juni 2026 10:14", type: "completed" }
+        ],
+        actions: `
+          <button class="btn btn-primary btn-sm" onclick="setProjectStep(3); showToast('Pengerjaan Dimulai', 'Freelancer Mahasiswa mulai melakukan coding.', 'success');">Mulai Pengerjaan Proyek</button>
+          <a href="messages.html" class="btn btn-outline btn-sm">Kirim Pesan</a>
+        `,
+        escrowText: "Rp 4.500.000 Teraman Escrow",
+        escrowBadge: "badge-success",
+        files: []
+      },
+      3: {
+        title: "Tahap: Proyek Sedang Dikerjakan",
+        desc: "Budi Santoso sedang mengerjakan arsitektur backend Laravel, routing RESTful API, dan layout kasir responsive. Monitor perkembangan via chat room.",
+        progress: 50,
+        timeline: [
+          { title: "Pengerjaan Dimulai", desc: "Budi Santoso mulai melakukan penulisan kode di repository.", date: "16 Juni 2026 11:00", type: "completed" },
+          { title: "Pembayaran Escrow Diterima", desc: "CV Maju Bersama menyetor Rp 4.500.000 ke rekening bersama.", date: "16 Juni 2026 09:20", type: "completed" },
+          { title: "Proposal Disetujui", desc: "Klien menyetujui proposal penawaran kontrak.", date: "16 Juni 2026 09:18", type: "completed" }
+        ],
+        actions: `
+          <button class="btn btn-primary btn-sm" onclick="setProjectStep(4); showToast('Demo Diunggah', 'File mockup & prototype web diunggah oleh freelancer.', 'success');">Unggah & Kirim File Pekerjaan</button>
+          <a href="messages.html" class="btn btn-outline btn-sm">Chat Freelancer</a>
+        `,
+        escrowText: "Rp 4.500.000 Teraman Escrow",
+        escrowBadge: "badge-success",
+        files: []
+      },
+      4: {
+        title: "Tahap: Sedang Direview Klien",
+        desc: "Budi Santoso mengunggah kode demo ZIP dan link live demo kasir. Harap tinjau hasilnya dan klik 'Setujui & Lepaskan Dana' jika semua fitur sudah sesuai kesepakatan.",
+        progress: 75,
+        timeline: [
+          { title: "Berkas Demo Diunggah", desc: "Budi Santoso mengirim berkas arsitektur pos-web.zip untuk direview.", date: "18 Juni 2026 14:02", type: "active" },
+          { title: "Pengerjaan Dimulai", desc: "Budi Santoso mulai melakukan penulisan kode di repository.", date: "16 Juni 2026 11:00", type: "completed" },
+          { title: "Pembayaran Escrow Diterima", desc: "CV Maju Bersama menyetor Rp 4.500.000 ke rekening bersama.", date: "16 Juni 2026 09:20", type: "completed" }
+        ],
+        actions: `
+          <button class="btn btn-primary btn-sm" onclick="setProjectStep(5); showToast('Pekerjaan Selesai', 'Dana dilepaskan ke Budi Santoso.', 'success');">Setujui Pekerjaan & Lepaskan Dana</button>
+          <button class="btn btn-outline btn-sm" style="color: var(--color-danger); border-color: var(--color-danger);" onclick="showToast('Revisi Diajukan', 'Meminta freelancer melakukan perbaikan fitur.', 'warning');">Minta Revisi Berkas</button>
+        `,
+        escrowText: "Rp 4.500.000 Teraman Escrow",
+        escrowBadge: "badge-success",
+        files: [
+          { name: "pos-web-v1.zip", size: "14.2 MB", link: "#" },
+          { name: "dokumentasi-api.pdf", size: "1.8 MB", link: "#" }
+        ]
+      },
+      5: {
+        title: "Tahap: Proyek Selesai",
+        desc: "Pekerjaan disetujui sepenuhnya oleh klien dan dana Rp 4.500.000 telah dilepaskan ke dompet Budi Santoso. Kolaborasi sukses ditutup!",
+        progress: 100,
+        timeline: [
+          { title: "Dana Dilepaskan", desc: "Dana escrow sebesar Rp 4.500.000 berhasil dilepaskan ke Budi Santoso.", date: "18 Juni 2026 19:57", type: "completed" },
+          { title: "Pekerjaan Disetujui", desc: "CV Maju Bersama menyetujui seluruh deliverables.", date: "18 Juni 2026 19:56", type: "completed" },
+          { title: "Berkas Demo Diunggah", desc: "Budi Santoso mengirim berkas arsitektur pos-web.zip.", date: "18 Juni 2026 14:02", type: "completed" }
+        ],
+        actions: `
+          <button class="btn btn-primary btn-sm" onclick="openReviewModal()">Berikan Ulasan & Rating</button>
+          <a href="index.html" class="btn btn-outline btn-sm">Kembali ke Beranda</a>
+        `,
+        escrowText: "Rp 4.500.000 Telah Dilepas",
+        escrowBadge: "badge-primary",
+        files: [
+          { name: "pos-web-v1.zip", size: "14.2 MB", link: "#" },
+          { name: "dokumentasi-api.pdf", size: "1.8 MB", link: "#" }
+        ]
+      }
+    };
+
+    // Global step switcher
+    window.currentProjectStep = 3; // Default is working phase
+
+    function setProjectStep(step) {
+      window.currentProjectStep = step;
+      const data = projectStepsData[step];
+      
+      // 1. Update horizontal progress bar line & node highlights
+      const bar = document.getElementById('stepper-bar');
+      bar.style.width = data.progress + '%';
+
+      for (let i = 1; i <= 5; i++) {
+        const node = document.getElementById(`step-node-${i}`);
+        node.classList.remove('completed', 'active');
+        if (i < step) {
+          node.classList.add('completed');
+        } else if (i === step) {
+          node.classList.add('active');
+        }
+      }
+
+      // 2. Update status card contents
+      document.getElementById('status-card-title').innerText = data.title;
+      document.getElementById('status-card-desc').innerText = data.desc;
+      document.getElementById('action-btns-container').innerHTML = data.actions;
+
+      // 3. Update escrow labels
+      const escrowLabel = document.getElementById('escrow-budget');
+      const escrowBadge = document.getElementById('escrow-status');
+      
+      escrowLabel.innerText = step === 5 ? "Rp 0 (Sudah Dilepas)" : "Rp 4.500.000";
+      escrowBadge.innerText = data.escrowText;
+      escrowBadge.className = `badge ${data.escrowBadge}`;
+
+      // 4. Update timeline list
+      const timelineContainer = document.getElementById('timeline-list-container');
+      timelineContainer.innerHTML = '';
+      data.timeline.forEach(t => {
+        const markerClass = t.type === 'completed' ? 'completed' : 'active';
+        timelineContainer.innerHTML += `
+          <div class="timeline-event ${markerClass}">
+            <div class="timeline-marker"></div>
+            <div class="timeline-event-card">
+              <div class="timeline-event-header">
+                <span class="timeline-event-title">${t.title}</span>
+                <span class="timeline-event-date">${t.date}</span>
+              </div>
+              <p class="timeline-event-desc">${t.desc}</p>
+            </div>
+          </div>
+        `;
+      });
+
+      // 5. Update deliverables card files list
+      const filesContainer = document.getElementById('files-container');
+      const noFilesText = document.getElementById('no-files-text');
+      
+      filesContainer.innerHTML = '';
+      if (data.files.length === 0) {
+        filesContainer.appendChild(noFilesText);
+      } else {
+        data.files.forEach(f => {
+          filesContainer.innerHTML += `
+            <div class="d-flex align-center justify-between" style="border: 1px solid var(--color-slate-100); padding: 8px; border-radius: var(--radius-xs); background: var(--color-slate-50);">
+              <div>
+                <span style="font-size: 11px; font-weight: 600; display: block; color: var(--color-slate-800);">${f.name}</span>
+                <span style="font-size: 9px; color: var(--color-slate-400);">${f.size}</span>
+              </div>
+              <button class="btn btn-text btn-sm" style="padding: 4px;" onclick="showToast('Unduh Berkas', 'Mengunduh file ${f.name}...', 'success')">
+                <i data-lucide="download" style="width: 14px; height: 14px; color: var(--color-accent-dark);"></i>
+              </button>
+            </div>
+          `;
+        });
+      }
+
+      // Recreate lucide icons in dynamic markup
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    // Modal control reviews
+    function openReviewModal() {
+      document.getElementById('review-modal').classList.add('show');
+    }
+
+    function closeReviewModal() {
+      document.getElementById('review-modal').classList.remove('show');
+      document.getElementById('review-form').reset();
+      setRatingStars(0);
+    }
+
+    // Star rating selection
+    window.selectedStars = 5;
+    function setRatingStars(stars) {
+      window.selectedStars = stars;
+      const spans = document.querySelectorAll('#star-rating-selector span');
+      spans.forEach((span, idx) => {
+        if (idx < stars) {
+          span.style.color = '#fbbf24'; // filled
+        } else {
+          span.style.color = '#cbd5e1'; // outline slate-300
+        }
+      });
+    }
+
+    // Submit rating
+    function submitReview(event) {
+      event.preventDefault();
+      
+      const txt = document.getElementById('review-text').value.trim();
+      const btn = document.getElementById('review-submit-btn');
+
+      btn.classList.add('btn-loading');
+
+      setTimeout(() => {
+        btn.classList.remove('btn-loading');
+        closeReviewModal();
+        showToast('Review Terkirim', `Ulasan Anda (${window.selectedStars} Bintang) berhasil diposting ke profil Budi Santoso. Terima kasih!`, 'success');
+        
+        // Disable action button on card
+        const actionContainer = document.getElementById('action-btns-container');
+        actionContainer.innerHTML = `<button class="btn btn-outline btn-sm" disabled>Review Telah Diberikan</button>`;
+      }, 1000);
+    }
+
+    // Initialize with default step 3
+    window.addEventListener('load', () => {
+      setProjectStep(3);
+    });
+  </script>
+
+</body>
+</html>
