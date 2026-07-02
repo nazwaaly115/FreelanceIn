@@ -364,19 +364,51 @@
 
   <!-- UMKM Dashboard Logic -->
   <script>
-    // Load UMKM data from session
+    // ---- Role Guard & Session Management ----
     window.addEventListener('load', () => {
-      const userJson = localStorage.getItem('freelancein_user');
-      if (userJson) {
-        const user = JSON.parse(userJson);
-        if (user.role === 'umkm') {
-          document.getElementById('umkm-name').innerText = user.name;
-          document.getElementById('umkm-field').innerText = `Bidang Usaha: ${user.businessField}`;
-        }
+      let userJson = localStorage.getItem('freelancein_user');
+
+      // Auto-seed demo session if accessed directly without login
+      if (!userJson) {
+        const mockUmkm = {
+          email: 'hendra@majubersama.com',
+          name: 'Hendra Wijaya',
+          role: 'umkm',
+          businessName: 'CV Maju Bersama',
+          businessField: 'Kuliner & F&B'
+        };
+        localStorage.setItem('freelancein_user', JSON.stringify(mockUmkm));
+        userJson = JSON.stringify(mockUmkm);
+      }
+
+      const user = JSON.parse(userJson);
+
+      // Role guard: Mahasiswa users must not access this page
+      if (user.role === 'mahasiswa') {
+        showToast('Akses Ditolak', 'Halaman ini khusus untuk UMKM. Mengalihkan ke Dashboard Mahasiswa...', 'warning');
+        setTimeout(() => {
+          window.location.href = 'student-dashboard.html';
+        }, 1500);
+        return;
+      }
+
+      // Populate dashboard with UMKM data
+      if (user.role === 'umkm') {
+        document.getElementById('umkm-name').innerText = user.businessName || user.name;
+        document.getElementById('umkm-field').innerText = `Bidang Usaha: ${user.businessField || 'Jasa & Usaha'}`;
+      }
+
+      // Show toast on fresh login
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('login') === 'success') {
+        window.history.replaceState({}, document.title, window.location.pathname);
+        const firstName = user.name.split(' ')[0];
+        setTimeout(() => {
+          showToast('Selamat Datang! 🎉', `Halo ${firstName}, dashboard UMKM siap digunakan.`, 'success');
+        }, 200);
       }
 
       // Check query parameter for automatic post job modal opening
-      const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('post') === 'true') {
         openPostJobModal();
       }

@@ -269,19 +269,34 @@
     // Toggle chat viewport on load depending on logged in role
     window.addEventListener('load', () => {
       const userJson = localStorage.getItem('freelancein_user');
+      let isStudent = false;
+      
       if (userJson) {
         const user = JSON.parse(userJson);
         if (user.role === 'mahasiswa') {
+          isStudent = true;
           // If logged in as student Budi Santoso, hide thread Budi (cannot chat with self) and show Hendra thread
           document.getElementById('thread-budi').style.display = 'none';
           document.getElementById('thread-hendra').style.display = 'flex';
 
           window.activeThreadId = 'hendra';
-
-          // Set active thread style
-          document.getElementById('thread-hendra').classList.add('active');
-          document.getElementById('thread-siti').classList.remove('active');
         }
+      }
+
+      // Read chat parameter from query URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const chatParam = urlParams.get('chat');
+      if (chatParam && chatsData[chatParam]) {
+        if (!(isStudent && chatParam === 'budi')) {
+          window.activeThreadId = chatParam;
+        }
+      }
+
+      // Set active thread style
+      document.querySelectorAll('.chat-thread-item').forEach(t => t.classList.remove('active'));
+      const activeEl = document.getElementById(`thread-${window.activeThreadId}`);
+      if (activeEl) {
+        activeEl.classList.add('active');
       }
 
       // Load selected thread content

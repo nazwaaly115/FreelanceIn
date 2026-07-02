@@ -415,16 +415,57 @@
 
   <!-- Student Dashboard Logic -->
   <script>
-    // Load student data from session
+    // ---- Role Guard & Session Management ----
     window.addEventListener('load', () => {
-      const userJson = localStorage.getItem('freelancein_user');
-      if (userJson) {
-        const user = JSON.parse(userJson);
-        if (user.role === 'mahasiswa') {
-          document.getElementById('student-name').innerText = user.name;
-          document.getElementById('student-univ').innerText = `S1 ${user.skills ? user.skills[0] || 'IT' : 'IT'} - ${user.univ}`;
-          document.getElementById('student-sem').innerText = user.semester;
-        }
+      let userJson = localStorage.getItem('freelancein_user');
+
+      // Auto-seed demo session if accessed directly without login
+      if (!userJson) {
+        const mockStudent = {
+          email: 'budi@mahasiswa.ui.ac.id',
+          name: 'Budi Santoso',
+          role: 'mahasiswa',
+          univ: 'Universitas Indonesia',
+          semester: '6',
+          skills: ['Laravel', 'React', 'Node.js']
+        };
+        localStorage.setItem('freelancein_user', JSON.stringify(mockStudent));
+        userJson = JSON.stringify(mockStudent);
+      }
+
+      const user = JSON.parse(userJson);
+
+      // Role guard: UMKM users must not access this page
+      if (user.role === 'umkm') {
+        showToast('Akses Ditolak', 'Halaman ini khusus untuk Mahasiswa. Mengalihkan ke Dashboard UMKM...', 'warning');
+        setTimeout(() => {
+          window.location.href = 'umkm-dashboard.html';
+        }, 1500);
+        return;
+      }
+
+      // Populate dashboard with user data
+      if (user.role === 'mahasiswa') {
+        document.getElementById('student-name').innerText = user.name;
+
+        // Build subtitle from role + university
+        const skill = user.skills && user.skills.length > 0 ? user.skills[0] : 'IT';
+        document.getElementById('student-univ').innerText = `${skill} Developer — ${user.univ || 'Universitas'}`;
+        document.getElementById('student-sem').innerText = user.semester || '5';
+
+        // Update profile link to correct dynamic profile
+        const profileLinks = document.querySelectorAll('a[href="profile.html"]');
+        profileLinks.forEach(l => { l.href = 'profile.html?user=me'; });
+      }
+
+      // Show toast on fresh login
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('login') === 'success') {
+        window.history.replaceState({}, document.title, window.location.pathname);
+        const firstName = user.name.split(' ')[0];
+        setTimeout(() => {
+          showToast('Selamat Datang! 🎉', `Halo ${firstName}, dashboard mahasiswa siap digunakan.`, 'success');
+        }, 200);
       }
     });
 
@@ -516,11 +557,13 @@
 
       setTimeout(() => {
         applyBtn.className = "btn btn-outline btn-sm";
-        applyBtn.innerText = 'Melamar Terkirim';
+        applyBtn.innerText = '✓ Melamar Terkirim';
         showToast('Proposal Terkirim', `Proposal untuk proyek "${projectName}" berhasil diajukan ke klien.`, 'success');
       }, 1200);
     }
   </script>
+
+
 
 </body>
 

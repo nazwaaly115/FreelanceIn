@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   // --- MOCK STATE & SESSION MANAGEMENT ---
-  window.logoutUser = function(e) {
+  window.logoutUser = function (e) {
     if (e) e.preventDefault();
     localStorage.removeItem('freelancein_user');
     window.location.href = 'index.html?logout=success';
@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navMenu.innerHTML = `
           <li class="nav-item ${currentPath === 'index.html' || currentPath === '' ? 'text-primary' : ''}"><a href="index.html">Home</a></li>
           <li class="nav-item ${currentPath === 'marketplace.html' ? 'text-primary' : ''}"><a href="marketplace.html">Cari Talenta</a></li>
+          <li class="nav-item"><a href="index.html#alur-kolaborasi">Cara Kerja</a></li>
           <li class="nav-item"><a href="design-system.html" style="color: var(--color-slate-500); font-weight: 600;">Sistem Desain (FIDS)</a></li>
         `;
       }
@@ -195,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
           pointer-events: none;
           transition: opacity 0.3s ease;
         `;
-        
+
         // Copy links from desktop menu
         const desktopMenu = document.querySelector('.nav-menu');
         if (desktopMenu) {
@@ -221,24 +222,24 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         closeBtn.addEventListener('click', () => {
           mobileOverlay.style.opacity = '0';
-          mobileOverlay.style.pointer-events = 'none';
+          mobileOverlay.style.pointerEvents = 'none';
         });
         mobileOverlay.appendChild(closeBtn);
-        
+
         // Add action buttons
         const actionWrapper = document.createElement('div');
         actionWrapper.style.cssText = 'display:flex; flex-direction:column; gap:12px; margin-top:20px;';
         actionWrapper.innerHTML = `
-          <a href="#" class="btn btn-outline" style="text-align:center;">Masuk</a>
-          <a href="#" class="btn btn-primary" style="text-align:center;">Daftar</a>
+          <a href="login.html" class="btn btn-outline" style="text-align:center;">Masuk</a>
+          <a href="login.html#register" class="btn btn-primary" style="text-align:center;">Daftar</a>
         `;
         mobileOverlay.appendChild(actionWrapper);
-        
+
         document.body.appendChild(mobileOverlay);
       }
-      
+
       mobileOverlay.style.opacity = '1';
-      mobileOverlay.style.pointer-events = 'auto';
+      mobileOverlay.style.pointerEvents = 'auto';
     });
   }
 
@@ -250,12 +251,12 @@ document.addEventListener('DOMContentLoaded', () => {
     tabButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const target = btn.dataset.tab;
-        
+
         // Remove active state from all buttons
         tabButtons.forEach(b => b.classList.remove('active'));
         // Hide all content panels
         contentPanels.forEach(p => p.classList.remove('active'));
-        
+
         // Add active state to clicked button
         btn.classList.add('active');
         // Show target content panel
@@ -270,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Search Bar Interaction (Hero & Header)
   const headerSearchInput = document.querySelector('.header-search input');
   const headerSearchIcon = document.querySelector('.header-search-icon');
-  
+
   const heroSearchInput = document.querySelector('.hero-search-box input');
   const heroSearchButton = document.querySelector('.hero-search-box button');
 
@@ -369,7 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 5. Toast Notification System
-  window.showToast = function(title, message, type = 'info') {
+  window.showToast = function (title, message, type = 'info') {
     let toastContainer = document.querySelector('.toast-container');
     if (!toastContainer) {
       toastContainer = document.createElement('div');
@@ -379,10 +380,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const toast = document.createElement('div');
     toast.className = 'toast';
-    
+
     // Choose icon based on type
     let iconSvg = `<svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`; // default info
-    
+
     if (title === 'Berhasil' || type === 'success') {
       toast.style.borderLeftColor = 'var(--color-success)';
       iconSvg = `<svg class="alert-icon" style="color: var(--color-success)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;

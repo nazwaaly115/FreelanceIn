@@ -25,9 +25,9 @@
         </a>
         <nav>
           <ul class="nav-menu">
-            <li class="nav-item nav-item-dropdown text-primary">Cari Talenta</li>
-            <li class="nav-item nav-item-dropdown">Cari Proyek</li>
-            <li class="nav-item">Mengapa FreelanceIn</li>
+            <li class="nav-item"><a href="marketplace.html">Cari Talenta</a></li>
+            <li class="nav-item"><a href="marketplace.html">Cari Proyek</a></li>
+            <li class="nav-item"><a href="index.html#alur-kolaborasi">Cara Kerja</a></li>
             <li class="nav-item"><a href="design-system.html"
                 style="color: var(--color-slate-500); font-weight: 600;">Sistem Desain (FIDS)</a></li>
           </ul>
@@ -42,8 +42,8 @@
             <i data-lucide="search" style="width: 16px; height: 16px;"></i>
           </span>
         </div>
-        <a href="#" class="btn-text" style="font-size: var(--font-sm); font-weight: 600;">Masuk</a>
-        <a href="#" class="btn btn-outline btn-sm">Daftar</a>
+        <a href="login.html" class="btn-text" style="font-size: var(--font-sm); font-weight: 600;">Masuk</a>
+        <a href="login.html#register" class="btn btn-outline btn-sm">Daftar</a>
         <a href="#" class="btn btn-primary btn-sm"
           onclick="showToast('Posting Proyek', 'Membuka form posting lowongan pekerjaan UMKM...');">Posting
           Pekerjaan</a>
@@ -250,8 +250,8 @@
 
               <div class="freelancer-action-col">
                 <div class="hourly-rate-big">Rp 130.000<span>/ jam</span></div>
-                <a href="profile.html#hire" class="btn btn-primary btn-sm w-full">Pekerjakan</a>
-                <a href="messages.html" class="btn btn-outline btn-sm w-full">Kirim Pesan</a>
+                <a href="profile.html?user=budi#hire" class="btn btn-primary btn-sm w-full">Pekerjakan</a>
+                <a href="messages.html?chat=budi" class="btn btn-outline btn-sm w-full">Kirim Pesan</a>
               </div>
             </div>
 
@@ -357,8 +357,8 @@
 
               <div class="freelancer-action-col">
                 <div class="hourly-rate-big">Rp 120.000<span>/ jam</span></div>
-                <a href="profile.html#hire" class="btn btn-primary btn-sm w-full">Pekerjakan</a>
-                <a href="messages.html" class="btn btn-outline btn-sm w-full">Kirim Pesan</a>
+                <a href="profile.html?user=siti#hire" class="btn btn-primary btn-sm w-full">Pekerjakan</a>
+                <a href="messages.html?chat=siti" class="btn btn-outline btn-sm w-full">Kirim Pesan</a>
               </div>
             </div>
 
@@ -465,8 +465,8 @@
 
               <div class="freelancer-action-col">
                 <div class="hourly-rate-big">Rp 130.000<span>/ jam</span></div>
-                <a href="profile.html#hire" class="btn btn-primary btn-sm w-full">Pekerjakan</a>
-                <a href="messages.html" class="btn btn-outline btn-sm w-full">Kirim Pesan</a>
+                <a href="profile.html?user=rian#hire" class="btn btn-primary btn-sm w-full">Pekerjakan</a>
+                <a href="messages.html?chat=rian" class="btn btn-outline btn-sm w-full">Kirim Pesan</a>
               </div>
             </div>
 
@@ -572,8 +572,8 @@
 
               <div class="freelancer-action-col">
                 <div class="hourly-rate-big">Rp 140.000<span>/ jam</span></div>
-                <a href="profile.html#hire" class="btn btn-primary btn-sm w-full">Pekerjakan</a>
-                <a href="messages.html" class="btn btn-outline btn-sm w-full">Kirim Pesan</a>
+                <a href="profile.html?user=dewi#hire" class="btn btn-primary btn-sm w-full">Pekerjakan</a>
+                <a href="messages.html?chat=dewi" class="btn btn-outline btn-sm w-full">Kirim Pesan</a>
               </div>
             </div>
 
@@ -960,6 +960,30 @@
 
     // Initial load filtering
     window.addEventListener('load', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchParam = urlParams.get('search');
+      if (searchParam !== null) {
+        document.getElementById('global-search-input').value = searchParam;
+      }
+
+      const catParam = urlParams.get('category');
+      if (catParam) {
+        document.querySelectorAll('.filter-sidebar .filter-chk[data-type="category"]').forEach(chk => {
+          chk.checked = false;
+        });
+        const chk = document.querySelector(`.filter-sidebar .filter-chk[data-type="category"][value="${catParam}"]`);
+        if (chk) chk.checked = true;
+      }
+
+      const univParam = urlParams.get('univ');
+      if (univParam) {
+        document.querySelectorAll('.filter-sidebar .filter-chk[data-type="univ"]').forEach(chk => {
+          chk.checked = false;
+        });
+        const chk = document.querySelector(`.filter-sidebar .filter-chk[data-type="univ"][value="${univParam.toUpperCase()}"]`);
+        if (chk) chk.checked = true;
+      }
+
       filterFreelancers();
     });
   </script>

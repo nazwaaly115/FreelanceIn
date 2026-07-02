@@ -160,9 +160,27 @@
       const univ = document.getElementById('reg-univ').value;
       const semester = document.getElementById('reg-semester').value;
       const skills = document.getElementById('reg-skill').value.split(',').map(s => s.trim());
-      const email = document.getElementById('reg-email').value.trim();
+      const email = document.getElementById('reg-email').value.trim().toLowerCase();
       const pass = document.getElementById('reg-pass').value;
       const btn = document.getElementById('reg-submit-btn');
+
+      // Basic validation
+      if (!nama || !univ || !semester || !email || !pass) {
+        showToast('Peringatan', 'Mohon lengkapi semua field yang wajib diisi.', 'warning');
+        return;
+      }
+      if (pass.length < 6) {
+        showToast('Kata Sandi Terlalu Pendek', 'Kata sandi minimal 6 karakter.', 'danger');
+        return;
+      }
+
+      // Check for duplicate email
+      const registeredUsers = JSON.parse(localStorage.getItem('freelancein_registered_users') || '[]');
+      const existingUser = registeredUsers.find(u => u.email.toLowerCase() === email);
+      if (existingUser) {
+        showToast('Email Sudah Terdaftar', 'Email ini sudah digunakan. Silakan masuk atau gunakan email lain.', 'danger');
+        return;
+      }
 
       // Email ac.id validation check (warn user but allow signup for prototyping flexibility)
       if (!email.endsWith('.ac.id')) {
@@ -170,24 +188,37 @@
       }
 
       btn.classList.add('btn-loading');
+      btn.disabled = true;
 
       setTimeout(() => {
         btn.classList.remove('btn-loading');
+        btn.disabled = false;
 
         const studentUser = {
           name: nama,
           email: email,
+          password: pass,
           role: 'mahasiswa',
           univ: univ,
           semester: semester,
           skills: skills
         };
 
-        // Save session
+        // Save to mock database
+        const allUsers = JSON.parse(localStorage.getItem('freelancein_registered_users') || '[]');
+        const filtered = allUsers.filter(u => u.email.toLowerCase() !== email);
+        filtered.push(studentUser);
+        localStorage.setItem('freelancein_registered_users', JSON.stringify(filtered));
+
+        // Save active session
         localStorage.setItem('freelancein_user', JSON.stringify(studentUser));
 
+        showToast('Pendaftaran Berhasil! 🎉', `Selamat datang ${nama.split(' ')[0]}! Mengalihkan ke dashboard...`, 'success');
+
         // Redirect to dashboard
-        window.location.href = 'student-dashboard.html?login=success';
+        setTimeout(() => {
+          window.location.href = 'student-dashboard.html?login=success';
+        }, 1000);
       }, 1200);
     }
   </script>

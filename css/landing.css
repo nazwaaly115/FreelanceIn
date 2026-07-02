@@ -65,8 +65,24 @@
   padding: var(--space-xs) 0;
 }
 
-.nav-item:hover {
+.nav-item a {
+  color: var(--color-slate-700);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  padding: var(--space-xs) 0;
+  display: block;
+}
+
+.nav-item a:hover,
+.nav-item:hover > a {
   color: var(--color-accent-dark);
+}
+
+.nav-item.text-primary > a,
+.nav-item.text-primary {
+  color: var(--color-accent-dark) !important;
+  font-weight: 600;
 }
 
 .nav-item-dropdown::after {

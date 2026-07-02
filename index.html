@@ -25,9 +25,9 @@
         </a>
         <nav>
           <ul class="nav-menu">
-            <li class="nav-item nav-item-dropdown">Cari Talenta</li>
-            <li class="nav-item nav-item-dropdown">Cari Proyek</li>
-            <li class="nav-item">Mengapa FreelanceIn</li>
+            <li class="nav-item"><a href="marketplace.html">Cari Talenta</a></li>
+            <li class="nav-item"><a href="marketplace.html">Cari Proyek</a></li>
+            <li class="nav-item"><a href="#alur-kolaborasi">Cara Kerja</a></li>
             <li class="nav-item"><a href="design-system.html"
                 style="color: var(--color-slate-500); font-weight: 600;">Sistem Desain (FIDS)</a></li>
           </ul>
@@ -42,8 +42,8 @@
             <i data-lucide="search" style="width: 16px; height: 16px;"></i>
           </span>
         </div>
-        <a href="#" class="btn-text" style="font-size: var(--font-sm); font-weight: 600;">Masuk</a>
-        <a href="#" class="btn btn-outline btn-sm">Daftar</a>
+        <a href="login.html" class="btn-text" style="font-size: var(--font-sm); font-weight: 600;">Masuk</a>
+        <a href="login.html#register" class="btn btn-outline btn-sm">Daftar</a>
         <a href="#" class="btn btn-primary btn-sm"
           onclick="showToast('Posting Proyek', 'Membuka form posting lowongan pekerjaan UMKM...');">Posting
           Pekerjaan</a>
@@ -191,7 +191,7 @@
 
       <div class="categories-grid">
         <!-- Web Development -->
-        <div class="card card-hover category-card">
+        <div class="card card-hover category-card" style="cursor: pointer;" onclick="window.location.href='marketplace.html?category=web';">
           <div class="category-icon-wrapper">
             <i data-lucide="code-2"></i>
           </div>
@@ -201,7 +201,7 @@
         </div>
 
         <!-- Mobile App Development -->
-        <div class="card card-hover category-card">
+        <div class="card card-hover category-card" style="cursor: pointer;" onclick="window.location.href='marketplace.html?category=mobile';">
           <div class="category-icon-wrapper">
             <i data-lucide="smartphone"></i>
           </div>
@@ -211,7 +211,7 @@
         </div>
 
         <!-- UI/UX Design -->
-        <div class="card card-hover category-card">
+        <div class="card card-hover category-card" style="cursor: pointer;" onclick="window.location.href='marketplace.html?category=uiux';">
           <div class="category-icon-wrapper">
             <i data-lucide="palette"></i>
           </div>
@@ -221,7 +221,7 @@
         </div>
 
         <!-- Database & Cloud -->
-        <div class="card card-hover category-card">
+        <div class="card card-hover category-card" style="cursor: pointer;" onclick="window.location.href='marketplace.html?category=data';">
           <div class="category-icon-wrapper">
             <i data-lucide="database"></i>
           </div>
@@ -231,7 +231,7 @@
         </div>
 
         <!-- AI & Data Science -->
-        <div class="card card-hover category-card">
+        <div class="card card-hover category-card" style="cursor: pointer;" onclick="window.location.href='marketplace.html?category=data';">
           <div class="category-icon-wrapper">
             <i data-lucide="brain-circuit"></i>
           </div>
@@ -241,7 +241,7 @@
         </div>
 
         <!-- Software Testing & QA -->
-        <div class="card card-hover category-card">
+        <div class="card card-hover category-card" style="cursor: pointer;" onclick="window.location.href='marketplace.html?category=web';">
           <div class="category-icon-wrapper">
             <i data-lucide="shield-alert"></i>
           </div>
@@ -254,7 +254,7 @@
   </section>
 
   <!-- Cara Kerja Section (Upwork-like Tabs) -->
-  <section class="py-3xl" style="background-color: var(--color-white);">
+  <section id="alur-kolaborasi" class="py-3xl" style="background-color: var(--color-white);">
     <div class="container">
       <div class="section-header" style="margin-left: auto; margin-right: auto; text-align: center;">
         <span class="section-subtitle">Alur Kolaborasi</span>
@@ -330,11 +330,11 @@
         <!-- Freelancer 1 -->
         <div class="card card-hover freelancer-card">
           <div class="freelancer-header">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=120&auto=format&fit=crop"
-              alt="Ahmad Fauzi" class="freelancer-avatar">
+            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop"
+              alt="Budi Santoso" class="freelancer-avatar">
             <div class="freelancer-info">
               <div class="freelancer-name">
-                Ahmad Fauzi
+                Budi Santoso
                 <span class="badge badge-success" style="padding: 2px 6px; font-size: 9px;">
                   <i data-lucide="shield" style="width: 8px; height: 8px; fill: currentColor;"></i> UI Verified
                 </span>
@@ -342,7 +342,7 @@
               <div class="freelancer-univ">S1 Teknik Informatika - UI</div>
               <div class="freelancer-rating">
                 <i data-lucide="star" style="width: 12px; height: 12px; fill: #fbbf24; stroke: none;"></i>
-                <span>5.0 <span style="color: var(--color-slate-400); font-weight: normal;">(42 ulasan)</span></span>
+                <span>4.9 <span style="color: var(--color-slate-400); font-weight: normal;">(18 ulasan)</span></span>
               </div>
             </div>
           </div>
@@ -351,13 +351,13 @@
             RESTful API, dan database MySQL/Postgres.</p>
           <div class="freelancer-skills">
             <span class="tag-skill">Laravel</span>
-            <span class="tag-skill">Vue.js</span>
+            <span class="tag-skill">Next.js</span>
             <span class="tag-skill">MySQL</span>
             <span class="tag-skill">REST API</span>
           </div>
           <div class="freelancer-footer">
-            <div class="freelancer-rate">Tarif: <span>Rp 150.000 / jam</span></div>
-            <a href="profile.html" class="btn btn-primary btn-sm">Lihat Profil</a>
+            <div class="freelancer-rate">Tarif: <span>Rp 130.000 / jam</span></div>
+            <a href="profile.html?user=budi" class="btn btn-primary btn-sm">Lihat Profil</a>
           </div>
         </div>
 
@@ -391,7 +391,7 @@
           </div>
           <div class="freelancer-footer">
             <div class="freelancer-rate">Tarif: <span>Rp 120.000 / jam</span></div>
-            <a href="profile.html" class="btn btn-primary btn-sm">Lihat Profil</a>
+            <a href="profile.html?user=siti" class="btn btn-primary btn-sm">Lihat Profil</a>
           </div>
         </div>
 
@@ -425,7 +425,7 @@
           </div>
           <div class="freelancer-footer">
             <div class="freelancer-rate">Tarif: <span>Rp 130.000 / jam</span></div>
-            <a href="profile.html" class="btn btn-primary btn-sm">Lihat Profil</a>
+            <a href="profile.html?user=rian" class="btn btn-primary btn-sm">Lihat Profil</a>
           </div>
         </div>
 
@@ -459,7 +459,7 @@
           </div>
           <div class="freelancer-footer">
             <div class="freelancer-rate">Tarif: <span>Rp 140.000 / jam</span></div>
-            <a href="profile.html" class="btn btn-primary btn-sm">Lihat Profil</a>
+            <a href="profile.html?user=dewi" class="btn btn-primary btn-sm">Lihat Profil</a>
           </div>
         </div>
       </div>

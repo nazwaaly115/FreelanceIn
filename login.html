@@ -12,6 +12,108 @@
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/landing.css">
   <link rel="stylesheet" href="css/auth.css">
+
+  <style>
+    /* Role Tab Switcher */
+    .role-tab-bar {
+      display: flex;
+      border-radius: var(--radius-md);
+      background: var(--color-slate-100);
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: var(--space-lg);
+    }
+
+    .role-tab-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: var(--font-xs);
+      font-weight: 600;
+      color: var(--color-slate-500);
+      transition: all 0.2s ease;
+    }
+
+    .role-tab-btn.active {
+      background: var(--color-white);
+      color: var(--color-slate-900);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    }
+
+    .role-tab-btn .tab-emoji {
+      font-size: 16px;
+    }
+
+    /* Demo box */
+    .auth-demo-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #bae6fd;
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin-bottom: var(--space-lg);
+      font-size: var(--font-xs);
+    }
+
+    .auth-demo-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      color: #0369a1;
+      margin-bottom: 8px;
+    }
+
+    .auth-demo-item {
+      padding: 8px 12px;
+      background: var(--color-white);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: 1px solid #e0f2fe;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--color-slate-600);
+      transition: all 0.15s ease;
+    }
+
+    .auth-demo-item:hover {
+      background: #e0f2fe;
+      border-color: #7dd3fc;
+      color: #0369a1;
+    }
+
+    .role-badge-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: var(--space-md);
+    }
+
+    .role-badge-indicator.mhs {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .role-badge-indicator.umkm {
+      background: #fef9c3;
+      color: #a16207;
+    }
+
+    /* Auth card style fix */
+    .auth-card {
+      max-width: 440px;
+    }
+  </style>
 </head>
 
 <body>
@@ -29,7 +131,7 @@
             <li class="nav-item"><a href="index.html">Home</a></li>
             <li class="nav-item"><a href="marketplace.html">Cari Talenta</a></li>
             <li class="nav-item"><a href="design-system.html"
-                style="color: var(--color-slate-505); font-weight: 600;">Sistem Desain (FIDS)</a></li>
+                style="color: var(--color-slate-500); font-weight: 600;">Sistem Desain (FIDS)</a></li>
           </ul>
         </nav>
       </div>
@@ -55,28 +157,56 @@
           <div class="auth-logo-dot"></div>
         </div>
         <h2 class="auth-title">Masuk ke Akun Anda</h2>
-        <p class="auth-subtitle">Gunakan email kampus (.ac.id) atau email usaha Anda</p>
+        <p class="auth-subtitle">Pilih jenis akun Anda untuk login</p>
       </div>
 
-      <!-- Developer Quick Demo Login -->
-      <div class="auth-demo-box">
+      <!-- Role Tab Selector -->
+      <div class="role-tab-bar" id="login-role-tabs">
+        <button class="role-tab-btn active" id="tab-mhs" onclick="switchLoginRole('mahasiswa')">
+          <span class="tab-emoji">🧑‍💻</span>
+          <span>Mahasiswa IT</span>
+        </button>
+        <button class="role-tab-btn" id="tab-umkm" onclick="switchLoginRole('umkm')">
+          <span class="tab-emoji">🏬</span>
+          <span>UMKM / Bisnis</span>
+        </button>
+      </div>
+
+      <!-- Role indicator badge -->
+      <div class="role-badge-indicator mhs" id="role-indicator">
+        <i data-lucide="graduation-cap" style="width: 14px; height: 14px;"></i>
+        <span id="role-indicator-text">Masuk sebagai Mahasiswa IT</span>
+      </div>
+
+      <!-- Quick Demo Login -->
+      <div class="auth-demo-box" id="demo-box-mhs">
         <div class="auth-demo-title">
-          <i data-lucide="info" style="width: 14px; height: 14px;"></i>
-          <span>Uji Coba Cepat (Mock Demo Login)</span>
+          <i data-lucide="zap" style="width: 14px; height: 14px;"></i>
+          <span>Akun Demo Tersedia</span>
         </div>
-        <p style="margin-bottom: 8px; color: var(--color-slate-600);">Klik untuk memuat kredensial akun uji coba:</p>
-        <ul class="auth-demo-list">
-          <li class="auth-demo-item" onclick="loadDemoAccount('mahasiswa')">
-            Masuk sebagai <strong>Mahasiswa IT (Budi - UI)</strong>
-          </li>
-          <li class="auth-demo-item" onclick="loadDemoAccount('umkm')">
-            Masuk sebagai <strong>Pemilik UMKM (Hendra - CV Maju Bersama)</strong>
-          </li>
-        </ul>
+        <p style="color: var(--color-slate-600); margin-bottom: 4px; font-size: 11px;">Klik tombol di bawah untuk langsung mencoba sebagai Mahasiswa:</p>
+        <div class="auth-demo-item" onclick="loadDemoAccount('mahasiswa')">
+          🧑‍💻 <strong>Masuk sebagai Budi Santoso (Mahasiswa IT)</strong>
+        </div>
+      </div>
+
+      <div class="auth-demo-box d-none" id="demo-box-umkm"
+        style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-color: #fde68a;">
+        <div class="auth-demo-title" style="color: #92400e;">
+          <i data-lucide="zap" style="width: 14px; height: 14px;"></i>
+          <span>Akun Demo Tersedia</span>
+        </div>
+        <p style="color: var(--color-slate-600); margin-bottom: 4px; font-size: 11px;">Klik tombol di bawah untuk langsung mencoba sebagai UMKM:</p>
+        <div class="auth-demo-item" onclick="loadDemoAccount('umkm')"
+          style="border-color: #fde68a;">
+          🏬 <strong>Masuk sebagai Hendra Wijaya (CV Maju Bersama)</strong>
+        </div>
       </div>
 
       <!-- Main Login Form -->
       <form id="login-form" onsubmit="handleLoginSubmit(event)">
+        <input type="hidden" id="selected-role" value="mahasiswa">
+
         <div class="form-group" id="email-group">
           <label class="form-label" for="login-email">Alamat Email</label>
           <input type="email" id="login-email" class="form-input" placeholder="nama@email.com" required>
@@ -84,7 +214,14 @@
 
         <div class="form-group" id="password-group">
           <label class="form-label" for="login-password">Kata Sandi</label>
-          <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+          <div style="position: relative;">
+            <input type="password" id="login-password" class="form-input" placeholder="••••••••" required
+              style="padding-right: 44px;">
+            <button type="button" onclick="togglePasswordVisibility()"
+              style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--color-slate-400);">
+              <i data-lucide="eye" id="eye-icon" style="width: 16px; height: 16px;"></i>
+            </button>
+          </div>
         </div>
 
         <div
@@ -94,11 +231,13 @@
             <span style="font-size: var(--font-xs); color: var(--color-slate-600);">Ingat Saya</span>
           </label>
           <a href="#" style="font-size: var(--font-xs); color: var(--color-accent-dark); font-weight: 500;"
-            onclick="showToast('Lupa Password', 'Sistem pengiriman tautan reset password akan disimulasikan...'); return false;">Lupa
+            onclick="showToast('Lupa Password', 'Tautan reset password dikirim ke email Anda (simulasi).'); return false;">Lupa
             Sandi?</a>
         </div>
 
-        <button type="submit" class="btn btn-primary w-full" id="login-submit-btn">Masuk</button>
+        <button type="submit" class="btn btn-primary w-full" id="login-submit-btn">
+          <span id="login-btn-text">Masuk sebagai Mahasiswa</span>
+        </button>
       </form>
 
       <div class="auth-footer">
@@ -124,12 +263,20 @@
           <div class="auth-role-icon">🧑‍💻</div>
           <h3 class="auth-role-title">Mahasiswa IT</h3>
           <p class="auth-role-desc">Saya ingin menawarkan jasa IT & portofolio akademis kepada UMKM.</p>
+          <div
+            style="margin-top: 12px; font-size: 11px; color: var(--color-slate-400); background: var(--color-slate-50); padding: 6px 10px; border-radius: var(--radius-sm);">
+            ✅ KTM Terverifikasi · ✅ Email Kampus .ac.id · ✅ Portofolio Proyek
+          </div>
         </div>
 
         <div class="auth-role-card" onclick="navigateToRegister('umkm')">
           <div class="auth-role-icon">🏬</div>
           <h3 class="auth-role-title">UMKM / Bisnis</h3>
           <p class="auth-role-desc">Saya ingin merekrut mahasiswa IT bertarif bersahabat untuk bisnis saya.</p>
+          <div
+            style="margin-top: 12px; font-size: 11px; color: var(--color-slate-400); background: var(--color-slate-50); padding: 6px 10px; border-radius: var(--radius-sm);">
+            ✅ Escrow Aman · ✅ Tarif Transparan · ✅ Kelola Proyek
+          </div>
         </div>
       </div>
 
@@ -159,19 +306,30 @@
 
   <!-- Login Logic -->
   <script>
-    // Toggle between sections based on hash
+    // ---- UI: Toggle Login/Register sections ----
     window.addEventListener('load', () => {
       if (window.location.hash === '#register') {
         showRegisterSelection();
       } else {
         showLogin();
       }
+
+      // If already logged in, redirect straight to dashboard
+      const existingUser = localStorage.getItem('freelancein_user');
+      if (existingUser) {
+        const u = JSON.parse(existingUser);
+        if (u.role === 'mahasiswa') {
+          window.location.href = 'student-dashboard.html';
+        } else if (u.role === 'umkm') {
+          window.location.href = 'umkm-dashboard.html';
+        }
+      }
     });
 
     window.addEventListener('hashchange', () => {
       if (window.location.hash === '#register') {
         showRegisterSelection();
-      } else {
+      } else if (window.location.hash === '') {
         showLogin();
       }
     });
@@ -185,9 +343,6 @@
     function showLogin() {
       document.getElementById('register-selection-section').classList.add('d-none');
       document.getElementById('login-section').classList.remove('d-none');
-      if (window.location.hash === '#register') {
-        window.location.hash = '';
-      }
     }
 
     function navigateToRegister(role) {
@@ -198,89 +353,214 @@
       }
     }
 
-    // Demo Loader
+    // ---- Role Tab Switching ----
+    let currentLoginRole = 'mahasiswa';
+
+    function switchLoginRole(role) {
+      currentLoginRole = role;
+      document.getElementById('selected-role').value = role;
+
+      const tabMhs = document.getElementById('tab-mhs');
+      const tabUmkm = document.getElementById('tab-umkm');
+      const indicator = document.getElementById('role-indicator');
+      const indicatorText = document.getElementById('role-indicator-text');
+      const demoMhs = document.getElementById('demo-box-mhs');
+      const demoUmkm = document.getElementById('demo-box-umkm');
+      const loginBtnText = document.getElementById('login-btn-text');
+      const emailInput = document.getElementById('login-email');
+
+      if (role === 'mahasiswa') {
+        tabMhs.classList.add('active');
+        tabUmkm.classList.remove('active');
+        indicator.className = 'role-badge-indicator mhs';
+        indicator.innerHTML = `<i data-lucide="graduation-cap" style="width:14px;height:14px;"></i> <span>Masuk sebagai Mahasiswa IT</span>`;
+        demoMhs.classList.remove('d-none');
+        demoUmkm.classList.add('d-none');
+        loginBtnText.innerText = 'Masuk sebagai Mahasiswa';
+        emailInput.placeholder = 'nama@mahasiswa.kampus.ac.id';
+      } else {
+        tabUmkm.classList.add('active');
+        tabMhs.classList.remove('active');
+        indicator.className = 'role-badge-indicator umkm';
+        indicator.innerHTML = `<i data-lucide="store" style="width:14px;height:14px;"></i> <span>Masuk sebagai UMKM / Bisnis</span>`;
+        demoMhs.classList.add('d-none');
+        demoUmkm.classList.remove('d-none');
+        loginBtnText.innerText = 'Masuk sebagai UMKM';
+        emailInput.placeholder = 'email@bisnis.com';
+      }
+
+      // Clear form
+      document.getElementById('login-email').value = '';
+      document.getElementById('login-password').value = '';
+      document.getElementById('email-group').classList.remove('has-error', 'has-success');
+      document.getElementById('password-group').classList.remove('has-error', 'has-success');
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    // ---- Password Toggle ----
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById('login-password');
+      const eyeIcon = document.getElementById('eye-icon');
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+        eyeIcon.setAttribute('data-lucide', 'eye-off');
+      } else {
+        passInput.type = 'password';
+        eyeIcon.setAttribute('data-lucide', 'eye');
+      }
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    // ---- Demo Loader ----
     function loadDemoAccount(role) {
       const emailField = document.getElementById('login-email');
       const passField = document.getElementById('login-password');
 
       if (role === 'mahasiswa') {
-        emailField.value = 'budi@mahasiswa.ui.ac.id';
-        passField.value = 'password123';
-        showToast('Kredensial Dimuat', 'Data demo Mahasiswa (Budi Santoso) dimuat.', 'info');
+        switchLoginRole('mahasiswa');
+        setTimeout(() => {
+          emailField.value = 'budi@mahasiswa.ui.ac.id';
+          passField.value = 'password123';
+          showToast('Demo Dimuat', 'Kredensial Mahasiswa (Budi Santoso) siap. Klik Masuk!', 'info');
+        }, 150);
       } else {
-        emailField.value = 'hendra@majubersama.com';
-        passField.value = 'password123';
-        showToast('Kredensial Dimuat', 'Data demo UMKM (Hendra Wijaya) dimuat.', 'info');
+        switchLoginRole('umkm');
+        setTimeout(() => {
+          emailField.value = 'hendra@majubersama.com';
+          passField.value = 'password123';
+          showToast('Demo Dimuat', 'Kredensial UMKM (Hendra Wijaya) siap. Klik Masuk!', 'info');
+        }, 150);
       }
     }
 
-    // Login Submission
-    function handleLoginSubmit(event) {
-      event.preventDefault();
-
-      const email = document.getElementById('login-email').value.trim();
-      const pass = document.getElementById('login-password').value;
-      const btn = document.getElementById('login-submit-btn');
-
-      // Visual validation reset
-      document.getElementById('email-group').classList.remove('has-error');
-      document.getElementById('password-group').classList.remove('has-error');
-
-      // Basic credentials validation
-      let userObj = null;
-
-      if (email === 'budi@mahasiswa.ui.ac.id') {
-        userObj = {
+    // ---- Mock user data lookup ----
+    const MOCK_ACCOUNTS = {
+      'budi@mahasiswa.ui.ac.id': {
+        password: 'password123',
+        data: {
           email: 'budi@mahasiswa.ui.ac.id',
           name: 'Budi Santoso',
           role: 'mahasiswa',
           univ: 'Universitas Indonesia',
-          semester: '6'
-        };
-      } else if (email === 'hendra@majubersama.com') {
-        userObj = {
+          semester: '6',
+          skills: ['Laravel', 'React', 'Node.js']
+        }
+      },
+      'hendra@majubersama.com': {
+        password: 'password123',
+        data: {
           email: 'hendra@majubersama.com',
           name: 'Hendra Wijaya',
           role: 'umkm',
           businessName: 'CV Maju Bersama',
-          businessField: 'Kuliner'
-        };
-      } else {
-        // Mock fallback registration for other addresses
-        if (email.includes('.ac.id')) {
-          userObj = {
-            email: email,
-            name: email.split('@')[0].toUpperCase(),
-            role: 'mahasiswa',
-            univ: 'Universitas Demo',
-            semester: '5'
-          };
-        } else {
-          userObj = {
-            email: email,
-            name: email.split('@')[0].toUpperCase(),
-            role: 'umkm',
-            businessName: 'Usaha ' + email.split('@')[0],
-            businessField: 'Jasa Digital'
-          };
+          businessField: 'Kuliner & F&B'
         }
       }
+    };
 
-      // Add loading state
+    // ---- Login Submission ----
+    function handleLoginSubmit(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('login-email').value.trim().toLowerCase();
+      const pass = document.getElementById('login-password').value;
+      const selectedRole = document.getElementById('selected-role').value;
+      const btn = document.getElementById('login-submit-btn');
+
+      // Reset error state
+      document.getElementById('email-group').classList.remove('has-error', 'has-success');
+      document.getElementById('password-group').classList.remove('has-error', 'has-success');
+
+      if (!email) {
+        document.getElementById('email-group').classList.add('has-error');
+        showToast('Gagal Masuk', 'Mohon isi alamat email Anda.', 'danger');
+        return;
+      }
+
       btn.classList.add('btn-loading');
+      btn.disabled = true;
 
       setTimeout(() => {
+        let userObj = null;
+        let loginError = null;
+
+        // 1. Check registered users in localStorage
+        const registeredUsers = JSON.parse(localStorage.getItem('freelancein_registered_users') || '[]');
+        const foundUser = registeredUsers.find(u => u.email.toLowerCase() === email);
+
+        if (foundUser) {
+          if (foundUser.password !== pass) {
+            loginError = 'password';
+          } else if (foundUser.role !== selectedRole) {
+            loginError = 'role_mismatch';
+          } else {
+            userObj = foundUser;
+          }
+        }
+        // 2. Check hardcoded mock accounts
+        else if (MOCK_ACCOUNTS[email]) {
+          const mock = MOCK_ACCOUNTS[email];
+          if (mock.password !== pass) {
+            loginError = 'password';
+          } else if (mock.data.role !== selectedRole) {
+            loginError = 'role_mismatch';
+          } else {
+            userObj = mock.data;
+          }
+        }
+        // 3. Email tidak terdaftar → tampilkan error, form dikosongkan, TIDAK auto-register
+        else {
+          loginError = 'not_found';
+        }
+
         btn.classList.remove('btn-loading');
-        // Save session
+        btn.disabled = false;
+
+        // Handle errors
+        if (loginError === 'password') {
+          document.getElementById('password-group').classList.add('has-error');
+          // Kosongkan password field saja (email tetap untuk kepraktisan)
+          document.getElementById('login-password').value = '';
+          showToast('Gagal Masuk', 'Kata sandi yang Anda masukkan salah.', 'danger');
+          document.getElementById('login-password').focus();
+          return;
+        }
+        if (loginError === 'not_found') {
+          document.getElementById('email-group').classList.add('has-error');
+          document.getElementById('password-group').classList.add('has-error');
+          // Kosongkan kedua field jika akun tidak ditemukan
+          document.getElementById('login-email').value = '';
+          document.getElementById('login-password').value = '';
+          showToast('Akun Tidak Ditemukan', 'Email belum terdaftar. Silakan daftar terlebih dahulu atau periksa kembali email Anda.', 'danger');
+          document.getElementById('login-email').focus();
+          return;
+        }
+        if (loginError === 'role_mismatch') {
+          const correctRole = (foundUser || MOCK_ACCOUNTS[email]?.data)?.role;
+          const roleLabel = correctRole === 'mahasiswa' ? 'Mahasiswa IT' : 'UMKM / Bisnis';
+          showToast('Peran Salah', `Akun ini terdaftar sebagai ${roleLabel}. Silakan pilih tab yang sesuai.`, 'warning');
+          return;
+        }
+
+        // Success! Save session
+        document.getElementById('email-group').classList.add('has-success');
+        document.getElementById('password-group').classList.add('has-success');
         localStorage.setItem('freelancein_user', JSON.stringify(userObj));
 
+        const welcomeName = userObj.name.split(' ')[0];
+        showToast('Login Berhasil! 🎉', `Selamat datang kembali, ${welcomeName}!`, 'success');
+
         // Redirect based on role
-        if (userObj.role === 'mahasiswa') {
-          window.location.href = 'student-dashboard.html?login=success';
-        } else {
-          window.location.href = 'umkm-dashboard.html?login=success';
-        }
-      }, 1000);
+        setTimeout(() => {
+          if (userObj.role === 'mahasiswa') {
+            window.location.href = 'student-dashboard.html?login=success';
+          } else {
+            window.location.href = 'umkm-dashboard.html?login=success';
+          }
+        }, 800);
+
+      }, 900);
     }
   </script>
 
