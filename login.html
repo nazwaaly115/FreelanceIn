@@ -302,6 +302,7 @@
   </script>
 
   <!-- Custom JS -->
+  <script src="js/api.js"></script>
   <script src="js/main.js"></script>
 
   <!-- Login Logic -->
@@ -460,7 +461,7 @@
     };
 
     // ---- Login Submission ----
-    function handleLoginSubmit(event) {
+    async function handleLoginSubmit(event) {
       event.preventDefault();
 
       const email = document.getElementById('login-email').value.trim().toLowerCase();
@@ -468,7 +469,6 @@
       const selectedRole = document.getElementById('selected-role').value;
       const btn = document.getElementById('login-submit-btn');
 
-      // Reset error state
       document.getElementById('email-group').classList.remove('has-error', 'has-success');
       document.getElementById('password-group').classList.remove('has-error', 'has-success');
 
@@ -481,86 +481,25 @@
       btn.classList.add('btn-loading');
       btn.disabled = true;
 
-      setTimeout(() => {
-        let userObj = null;
-        let loginError = null;
-
-        // 1. Check registered users in localStorage
-        const registeredUsers = JSON.parse(localStorage.getItem('freelancein_registered_users') || '[]');
-        const foundUser = registeredUsers.find(u => u.email.toLowerCase() === email);
-
-        if (foundUser) {
-          if (foundUser.password !== pass) {
-            loginError = 'password';
-          } else if (foundUser.role !== selectedRole) {
-            loginError = 'role_mismatch';
-          } else {
-            userObj = foundUser;
-          }
-        }
-        // 2. Check hardcoded mock accounts
-        else if (MOCK_ACCOUNTS[email]) {
-          const mock = MOCK_ACCOUNTS[email];
-          if (mock.password !== pass) {
-            loginError = 'password';
-          } else if (mock.data.role !== selectedRole) {
-            loginError = 'role_mismatch';
-          } else {
-            userObj = mock.data;
-          }
-        }
-        // 3. Email tidak terdaftar → tampilkan error, form dikosongkan, TIDAK auto-register
-        else {
-          loginError = 'not_found';
-        }
-
-        btn.classList.remove('btn-loading');
-        btn.disabled = false;
-
-        // Handle errors
-        if (loginError === 'password') {
-          document.getElementById('password-group').classList.add('has-error');
-          // Kosongkan password field saja (email tetap untuk kepraktisan)
-          document.getElementById('login-password').value = '';
-          showToast('Gagal Masuk', 'Kata sandi yang Anda masukkan salah.', 'danger');
-          document.getElementById('login-password').focus();
-          return;
-        }
-        if (loginError === 'not_found') {
-          document.getElementById('email-group').classList.add('has-error');
-          document.getElementById('password-group').classList.add('has-error');
-          // Kosongkan kedua field jika akun tidak ditemukan
-          document.getElementById('login-email').value = '';
-          document.getElementById('login-password').value = '';
-          showToast('Akun Tidak Ditemukan', 'Email belum terdaftar. Silakan daftar terlebih dahulu atau periksa kembali email Anda.', 'danger');
-          document.getElementById('login-email').focus();
-          return;
-        }
-        if (loginError === 'role_mismatch') {
-          const correctRole = (foundUser || MOCK_ACCOUNTS[email]?.data)?.role;
-          const roleLabel = correctRole === 'mahasiswa' ? 'Mahasiswa IT' : 'UMKM / Bisnis';
-          showToast('Peran Salah', `Akun ini terdaftar sebagai ${roleLabel}. Silakan pilih tab yang sesuai.`, 'warning');
-          return;
-        }
-
-        // Success! Save session
+      try {
+        const { token, user } = await FreelanceInAPI.login(email, pass, selectedRole);
+        FreelanceInAPI.setSession(token, user);
         document.getElementById('email-group').classList.add('has-success');
         document.getElementById('password-group').classList.add('has-success');
-        localStorage.setItem('freelancein_user', JSON.stringify(userObj));
-
-        const welcomeName = userObj.name.split(' ')[0];
+        const welcomeName = user.name.split(' ')[0];
         showToast('Login Berhasil! 🎉', `Selamat datang kembali, ${welcomeName}!`, 'success');
-
-        // Redirect based on role
         setTimeout(() => {
-          if (userObj.role === 'mahasiswa') {
-            window.location.href = 'student-dashboard.html?login=success';
-          } else {
-            window.location.href = 'umkm-dashboard.html?login=success';
-          }
+          if (user.role === 'admin') window.location.href = 'admin.html?login=success';
+          else if (user.role === 'mahasiswa') window.location.href = 'student-dashboard.html?login=success';
+          else window.location.href = 'umkm-dashboard.html?login=success';
         }, 800);
+      } catch (err) {
+        document.getElementById('password-group').classList.add('has-error');
+        showToast('Gagal Masuk', err.message, 'danger');
+      }
 
-      }, 900);
+      btn.classList.remove('btn-loading');
+      btn.disabled = false;
     }
   </script>
 

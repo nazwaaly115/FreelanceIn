@@ -211,43 +211,7 @@
               Proposal Lamaran Saya
             </h3>
           </div>
-          <div class="dashboard-section-body">
-
-            <!-- Proposal 1 -->
-            <div class="project-list-item">
-              <div class="project-item-info">
-                <h4 class="project-item-title">Pembuatan Landing Page Hijab Cantik</h4>
-                <div class="project-item-meta">
-                  <span>UMKM: <strong>Toko Hijab Syar'i</strong></span>
-                  <span>&bull;</span>
-                  <span>Penawaran Anda: <strong>Rp 1.800.000</strong></span>
-                  <span>&bull;</span>
-                  <span>Tanggal: <strong>14 Juni 2026</strong></span>
-                </div>
-              </div>
-              <div>
-                <span class="badge badge-warning">Dalam Review</span>
-              </div>
-            </div>
-
-            <!-- Proposal 2 -->
-            <div class="project-list-item">
-              <div class="project-item-info">
-                <h4 class="project-item-title">Sistem Penjualan Apotek Kasir</h4>
-                <div class="project-item-meta">
-                  <span>UMKM: <strong>Apotek Sehat Depok</strong></span>
-                  <span>&bull;</span>
-                  <span>Penawaran Anda: <strong>Rp 3.500.000</strong></span>
-                  <span>&bull;</span>
-                  <span>Tanggal: <strong>08 Juni 2026</strong></span>
-                </div>
-              </div>
-              <div>
-                <span class="badge badge-info">Negosiasi</span>
-              </div>
-            </div>
-
-          </div>
+          <div class="dashboard-section-body" id="proposals-list-container">
         </section>
 
         <!-- PORTOFOLIO SAYA SECTION -->
@@ -307,47 +271,7 @@
             </h3>
           </div>
           <div class="dashboard-section-body">
-            <div class="recommendation-grid">
-
-              <!-- Rec Card 1 -->
-              <div class="card" style="padding: var(--space-md);" id="rec-proj-1">
-                <span class="badge badge-primary" style="margin-bottom: 8px;">Web Dev</span>
-                <h4 style="font-size: var(--font-sm); font-weight: 700; margin-bottom: 4px;">Landing Page & Integrasi
-                  Chat WA</h4>
-                <p style="font-size: 11px; color: var(--color-slate-500); line-height: 1.4; margin-bottom: 12px;">
-                  Dibutuhkan landing page penjualan produk keripik singkong dengan Laravel. Harus terhubung ke chat
-                  WhatsApp...</p>
-                <div
-                  style="border-top: 1px solid var(--color-slate-100); padding-top: 8px; display: flex; justify-content: space-between; align-items: center;">
-                  <div>
-                    <span style="font-size: 9px; color: var(--color-slate-400); display: block;">Anggaran</span>
-                    <strong style="font-size: var(--font-xs); color: var(--color-slate-800);">Rp 1.500.000</strong>
-                  </div>
-                  <button class="btn btn-primary btn-sm" style="padding: 4px 10px; font-size: 10px;"
-                    onclick="applyForProject('rec-proj-1', 'Landing Page & Integrasi Chat WA')">Ajukan Proposal</button>
-                </div>
-              </div>
-
-              <!-- Rec Card 2 -->
-              <div class="card" style="padding: var(--space-md);" id="rec-proj-2">
-                <span class="badge badge-info" style="margin-bottom: 8px;">API / Backend</span>
-                <h4 style="font-size: var(--font-sm); font-weight: 700; margin-bottom: 4px;">Integrasi Payment Gateway
-                  Toko</h4>
-                <p style="font-size: 11px; color: var(--color-slate-500); line-height: 1.4; margin-bottom: 12px;">Kami
-                  butuh mahasiswa IT yang bisa integrasikan Midtrans sandbox di website Laravel e-commerce kami yang
-                  sudah ada...</p>
-                <div
-                  style="border-top: 1px solid var(--color-slate-100); padding-top: 8px; display: flex; justify-content: space-between; align-items: center;">
-                  <div>
-                    <span style="font-size: 9px; color: var(--color-slate-400); display: block;">Anggaran</span>
-                    <strong style="font-size: var(--font-xs); color: var(--color-slate-800);">Rp 2.000.000</strong>
-                  </div>
-                  <button class="btn btn-primary btn-sm" style="padding: 4px 10px; font-size: 10px;"
-                    onclick="applyForProject('rec-proj-2', 'Integrasi Payment Gateway Toko')">Ajukan Proposal</button>
-                </div>
-              </div>
-
-            </div>
+            <div class="recommendation-grid" id="jobs-recommendation-grid"></div>
           </div>
         </section>
 
@@ -411,159 +335,140 @@
   </script>
 
   <!-- Custom JS -->
+  <script src="js/api.js"></script>
   <script src="js/main.js"></script>
 
-  <!-- Student Dashboard Logic -->
   <script>
-    // ---- Role Guard & Session Management ----
-    window.addEventListener('load', () => {
-      let userJson = localStorage.getItem('freelancein_user');
-
-      // Auto-seed demo session if accessed directly without login
-      if (!userJson) {
-        const mockStudent = {
-          email: 'budi@mahasiswa.ui.ac.id',
-          name: 'Budi Santoso',
-          role: 'mahasiswa',
-          univ: 'Universitas Indonesia',
-          semester: '6',
-          skills: ['Laravel', 'React', 'Node.js']
-        };
-        localStorage.setItem('freelancein_user', JSON.stringify(mockStudent));
-        userJson = JSON.stringify(mockStudent);
+    window.addEventListener('load', async () => {
+      if (!FreelanceInAPI.getToken()) {
+        window.location.href = 'login.html';
+        return;
       }
-
-      const user = JSON.parse(userJson);
-
-      // Role guard: UMKM users must not access this page
+      let user;
+      try {
+        ({ user } = await FreelanceInAPI.me());
+        FreelanceInAPI.setSession(FreelanceInAPI.getToken(), user);
+      } catch {
+        window.location.href = 'login.html';
+        return;
+      }
       if (user.role === 'umkm') {
-        showToast('Akses Ditolak', 'Halaman ini khusus untuk Mahasiswa. Mengalihkan ke Dashboard UMKM...', 'warning');
-        setTimeout(() => {
-          window.location.href = 'umkm-dashboard.html';
-        }, 1500);
+        window.location.href = 'umkm-dashboard.html';
         return;
       }
 
-      // Populate dashboard with user data
-      if (user.role === 'mahasiswa') {
-        document.getElementById('student-name').innerText = user.name;
+      document.getElementById('student-name').innerText = user.name;
+      const skill = (user.skills && user.skills[0]) || 'IT';
+      document.getElementById('student-univ').innerText = `${skill} Developer — ${user.univ || 'Universitas'}`;
+      document.getElementById('student-sem').innerText = user.semester || '5';
+      document.querySelectorAll('a[href="profile.html"]').forEach(l => { l.href = 'profile.html?user=me'; });
 
-        // Build subtitle from role + university
-        const skill = user.skills && user.skills.length > 0 ? user.skills[0] : 'IT';
-        document.getElementById('student-univ').innerText = `${skill} Developer — ${user.univ || 'Universitas'}`;
-        document.getElementById('student-sem').innerText = user.semester || '5';
-
-        // Update profile link to correct dynamic profile
-        const profileLinks = document.querySelectorAll('a[href="profile.html"]');
-        profileLinks.forEach(l => { l.href = 'profile.html?user=me'; });
+      if (user.portfolio && user.portfolio.length) {
+        const portList = document.getElementById('portfolio-list');
+        portList.innerHTML = user.portfolio.map((p, i) => `
+          <div class="portfolio-card-editable" id="port-item-${i}">
+            <img src="${p.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=240'}" alt="${p.title}">
+            <div class="portfolio-card-body-edit">
+              <strong style="font-size: var(--font-xs);">${p.title}</strong>
+              <span style="font-size: 10px; color: var(--color-slate-500);">${p.tech || ''}</span>
+            </div>
+          </div>
+        `).join('');
       }
 
-      // Show toast on fresh login
+      await loadProposals();
+      await loadJobRecommendations();
+
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('login') === 'success') {
         window.history.replaceState({}, document.title, window.location.pathname);
-        const firstName = user.name.split(' ')[0];
-        setTimeout(() => {
-          showToast('Selamat Datang! 🎉', `Halo ${firstName}, dashboard mahasiswa siap digunakan.`, 'success');
-        }, 200);
+        setTimeout(() => showToast('Selamat Datang! 🎉', `Halo ${user.name.split(' ')[0]}!`, 'success'), 200);
       }
     });
 
-    // Add Mock Certificate
-    function addMockCertificate() {
-      const title = prompt("Masukkan nama sertifikat IT:");
-      if (!title) return;
-      const issuer = prompt("Penerbit sertifikat (misal: Dicoding, Coursera):");
-      if (!issuer) return;
-
-      const container = document.getElementById('certificates-list');
-      const certNode = document.createElement('div');
-      certNode.style.cssText = "border-left: 2px solid var(--color-primary); padding-left: 10px; animation: fadeIn 0.3s ease;";
-      certNode.innerHTML = `
-        <strong style="font-size: 11px; display: block; color: var(--color-slate-800);">${title}</strong>
-        <span style="font-size: 9px; color: var(--color-slate-400);">${issuer} &bull; 2026</span>
-      `;
-      container.appendChild(certNode);
-      showToast('Sertifikat Ditambahkan', `Sertifikat "${title}" berhasil disimpan.`, 'success');
-    }
-
-    // Modal Control
-    function openAddPortfolioModal() {
-      document.getElementById('add-portfolio-modal').classList.add('show');
-    }
-
-    function closeAddPortfolioModal() {
-      document.getElementById('add-portfolio-modal').classList.remove('show');
-      document.getElementById('portfolio-form').reset();
-    }
-
-    // Submit Portfolio
-    let portfolioCounter = 2;
-    function submitNewPortfolio(event) {
-      event.preventDefault();
-
-      const title = document.getElementById('port-title').value.trim();
-      const tech = document.getElementById('port-tech').value.trim();
-      const btn = document.getElementById('port-submit-btn');
-
-      btn.classList.add('btn-loading');
-
-      setTimeout(() => {
-        btn.classList.remove('btn-loading');
-        closeAddPortfolioModal();
-
-        portfolioCounter++;
-        const itemId = `port-item-${portfolioCounter}`;
-
-        const container = document.getElementById('portfolio-list');
-        const card = document.createElement('div');
-        card.className = 'portfolio-card-editable';
-        card.id = itemId;
-        card.style.animation = "fadeIn 0.4s ease";
-        card.innerHTML = `
-          <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=240&auto=format&fit=crop" alt="Project">
-          <div class="portfolio-card-body-edit">
-            <strong style="font-size: var(--font-xs); display: block; color: var(--color-slate-900);">${title}</strong>
-            <span style="font-size: 10px; color: var(--color-slate-500);">${tech}</span>
-            <div class="portfolio-card-actions">
-              <button class="btn btn-text btn-sm" style="padding: 2px; color: var(--color-danger);" onclick="deletePortfolio('${itemId}')">✕ Hapus</button>
+    async function loadProposals() {
+      const container = document.getElementById('proposals-list-container');
+      try {
+        const { proposals } = await FreelanceInAPI.getMyProposals();
+        if (!proposals.length) {
+          container.innerHTML = '<p style="padding:16px;color:var(--color-slate-500);">Belum ada proposal. Cari proyek di <a href="projects.html">halaman lowongan</a>.</p>';
+          return;
+        }
+        container.innerHTML = proposals.map(p => `
+          <div class="project-list-item">
+            <div class="project-item-info">
+              <h4 class="project-item-title">${p.job_title}</h4>
+              <div class="project-item-meta">
+                <span>UMKM: <strong>${p.business_name || p.umkm_name}</strong></span>
+                <span>&bull;</span>
+                <span>Penawaran: <strong>${p.price}</strong></span>
+              </div>
             </div>
+            <span class="badge badge-${p.status === 'pending' ? 'warning' : p.status === 'accepted' ? 'success' : 'danger'}">${p.status}</span>
           </div>
-        `;
-
-        container.appendChild(card);
-        showToast('Karya Ditambahkan', `Portofolio "${title}" berhasil diunggah.`, 'success');
-      }, 1000);
-    }
-
-    // Delete Portfolio
-    function deletePortfolio(id) {
-      const el = document.getElementById(id);
-      if (el && confirm("Apakah Anda yakin ingin menghapus portofolio ini?")) {
-        el.style.opacity = '0';
-        el.style.transform = 'scale(0.9)';
-        setTimeout(() => el.remove(), 300);
-        showToast('Portofolio Dihapus', 'Karya berhasil dihapus dari portofolio.', 'success');
+        `).join('');
+      } catch (err) {
+        container.innerHTML = `<p style="color:var(--color-danger);">${err.message}</p>`;
       }
     }
 
-    // Apply for Project Recommendations
-    function applyForProject(cardId, projectName) {
-      const card = document.getElementById(cardId);
-      const applyBtn = card.querySelector('button');
+    async function loadJobRecommendations() {
+      const grid = document.getElementById('jobs-recommendation-grid');
+      try {
+        const { jobs } = await FreelanceInAPI.getJobs({ status: 'open' });
+        grid.innerHTML = jobs.slice(0, 4).map(j => `
+          <div class="card" style="padding: var(--space-md);">
+            <span class="badge badge-primary" style="margin-bottom: 8px;">${j.category}</span>
+            <h4 style="font-size: var(--font-sm); font-weight: 700; margin-bottom: 4px;">${j.title}</h4>
+            <p style="font-size: 11px; color: var(--color-slate-500); line-height: 1.4; margin-bottom: 12px;">${j.description.substring(0, 100)}...</p>
+            <div style="border-top: 1px solid var(--color-slate-100); padding-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+              <strong style="font-size: var(--font-xs);">${j.budget}</strong>
+              <a href="projects.html" class="btn btn-primary btn-sm" style="padding: 4px 10px; font-size: 10px;">Ajukan Proposal</a>
+            </div>
+          </div>
+        `).join('') || '<p style="color:var(--color-slate-500);">Tidak ada rekomendasi saat ini.</p>';
+      } catch (err) {
+        grid.innerHTML = `<p style="color:var(--color-danger);">${err.message}</p>`;
+      }
+    }
 
-      applyBtn.disabled = true;
-      applyBtn.innerText = 'Mengirim...';
+    function addMockCertificate() {
+      const title = prompt("Masukkan nama sertifikat IT:");
+      if (!title) return;
+      showToast('Sertifikat Ditambahkan', `"${title}" disimpan lokal.`, 'success');
+    }
 
-      setTimeout(() => {
-        applyBtn.className = "btn btn-outline btn-sm";
-        applyBtn.innerText = '✓ Melamar Terkirim';
-        showToast('Proposal Terkirim', `Proposal untuk proyek "${projectName}" berhasil diajukan ke klien.`, 'success');
-      }, 1200);
+    function openAddPortfolioModal() {
+      document.getElementById('add-portfolio-modal').classList.add('show');
+    }
+    function closeAddPortfolioModal() {
+      document.getElementById('add-portfolio-modal').classList.remove('show');
+    }
+
+    async function submitNewPortfolio(event) {
+      event.preventDefault();
+      const title = document.getElementById('port-title').value.trim();
+      const tech = document.getElementById('port-tech').value.trim();
+      try {
+        const { user } = await FreelanceInAPI.me();
+        const portfolio = [...(user.portfolio || []), { title, tech, image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=240' }];
+        await FreelanceInAPI.updateProfile({ portfolio });
+        closeAddPortfolioModal();
+        showToast('Karya Ditambahkan', `Portofolio "${title}" tersimpan.`, 'success');
+        window.location.reload();
+      } catch (err) {
+        showToast('Gagal', err.message, 'danger');
+      }
+    }
+
+    function deletePortfolio(id) {
+      if (confirm("Hapus portofolio?")) document.getElementById(id)?.remove();
+    }
+
+    function applyForProject(_cardId, _name) {
+      window.location.href = 'projects.html';
     }
   </script>
-
-
 
 </body>
 

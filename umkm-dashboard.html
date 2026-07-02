@@ -330,6 +330,19 @@
             <input type="text" id="job-budget" class="form-input" placeholder="Contoh: Rp 3.000.000" required>
           </div>
           <div class="form-group">
+            <label class="form-label" for="job-category">Kategori</label>
+            <select id="job-category" class="form-input">
+              <option value="Web Dev">Web Dev</option>
+              <option value="UI/UX">UI/UX</option>
+              <option value="Mobile App">Mobile App</option>
+              <option value="Data & AI">Data & AI</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="job-deadline">Tenggat Proyek</label>
+            <input type="date" id="job-deadline" class="form-input">
+          </div>
+          <div class="form-group">
             <label class="form-label" for="job-desc">Detail Pekerjaan & Kebutuhan Fitur</label>
             <textarea id="job-desc" class="form-textarea" rows="4"
               placeholder="Tuliskan spesifikasi, halaman yang dibutuhkan, dan universitas yang Anda inginkan..."
@@ -360,61 +373,79 @@
   </script>
 
   <!-- Custom JS -->
+  <script src="js/api.js"></script>
   <script src="js/main.js"></script>
 
   <!-- UMKM Dashboard Logic -->
   <script>
-    // ---- Role Guard & Session Management ----
-    window.addEventListener('load', () => {
-      let userJson = localStorage.getItem('freelancein_user');
-
-      // Auto-seed demo session if accessed directly without login
-      if (!userJson) {
-        const mockUmkm = {
-          email: 'hendra@majubersama.com',
-          name: 'Hendra Wijaya',
-          role: 'umkm',
-          businessName: 'CV Maju Bersama',
-          businessField: 'Kuliner & F&B'
-        };
-        localStorage.setItem('freelancein_user', JSON.stringify(mockUmkm));
-        userJson = JSON.stringify(mockUmkm);
-      }
-
-      const user = JSON.parse(userJson);
-
-      // Role guard: Mahasiswa users must not access this page
-      if (user.role === 'mahasiswa') {
-        showToast('Akses Ditolak', 'Halaman ini khusus untuk UMKM. Mengalihkan ke Dashboard Mahasiswa...', 'warning');
-        setTimeout(() => {
-          window.location.href = 'student-dashboard.html';
-        }, 1500);
+    window.addEventListener('load', async () => {
+      const token = FreelanceInAPI.getToken();
+      if (!token) {
+        showToast('Masuk Diperlukan', 'Silakan masuk sebagai UMKM.', 'warning');
+        setTimeout(() => window.location.href = 'login.html', 1500);
         return;
       }
 
-      // Populate dashboard with UMKM data
-      if (user.role === 'umkm') {
-        document.getElementById('umkm-name').innerText = user.businessName || user.name;
-        document.getElementById('umkm-field').innerText = `Bidang Usaha: ${user.businessField || 'Jasa & Usaha'}`;
+      let user;
+      try {
+        ({ user } = await FreelanceInAPI.me());
+        FreelanceInAPI.setSession(token, user);
+      } catch {
+        window.location.href = 'login.html';
+        return;
       }
 
-      // Show toast on fresh login
+      if (user.role === 'mahasiswa') {
+        showToast('Akses Ditolak', 'Halaman ini khusus UMKM.', 'warning');
+        setTimeout(() => window.location.href = 'student-dashboard.html', 1500);
+        return;
+      }
+      if (user.role !== 'umkm') return;
+
+      document.getElementById('umkm-name').innerText = user.business_name || user.name;
+      document.getElementById('umkm-field').innerText = `Bidang Usaha: ${user.business_field || 'Jasa & Usaha'}`;
+
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('login') === 'success') {
         window.history.replaceState({}, document.title, window.location.pathname);
-        const firstName = user.name.split(' ')[0];
-        setTimeout(() => {
-          showToast('Selamat Datang! 🎉', `Halo ${firstName}, dashboard UMKM siap digunakan.`, 'success');
-        }, 200);
+        setTimeout(() => showToast('Selamat Datang! 🎉', `Halo ${user.name.split(' ')[0]}, dashboard UMKM siap digunakan.`, 'success'), 200);
       }
+      if (urlParams.get('post') === 'true') openPostJobModal();
 
-      // Check query parameter for automatic post job modal opening
-      if (urlParams.get('post') === 'true') {
-        openPostJobModal();
-      }
+      await loadUmkmJobs();
     });
 
-    // Modal Controls
+    async function loadUmkmJobs() {
+      const container = document.getElementById('project-list-container');
+      try {
+        const { jobs } = await FreelanceInAPI.getMyJobs();
+        if (!jobs.length) {
+          container.innerHTML = '<p style="padding:20px;color:var(--color-slate-500);text-align:center;">Belum ada lowongan. Klik Posting Pekerjaan untuk memulai.</p>';
+          return;
+        }
+        container.innerHTML = jobs.map(j => `
+          <div class="project-list-item">
+            <div class="project-item-info">
+              <h4 class="project-item-title">${j.title}</h4>
+              <div class="project-item-meta">
+                <span>Pelamar: <strong>${j.proposal_count || 0} Mahasiswa</strong></span>
+                <span>&bull;</span>
+                <span>Anggaran: <strong>${j.budget}</strong></span>
+                <span>&bull;</span>
+                <span>Status: <strong>${j.status}</strong></span>
+              </div>
+            </div>
+            <div class="project-item-actions">
+              ${j.pending_proposals > 0 ? `<span class="badge badge-warning" style="margin-right:8px;">${j.pending_proposals} Proposal</span>` : ''}
+              <a href="proposals.html?job=${j.id}" class="btn btn-primary btn-sm">Review Proposal</a>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = `<p style="color:var(--color-danger);">${err.message}</p>`;
+      }
+    }
+
     function openPostJobModal() {
       document.getElementById('post-job-modal').classList.add('show');
     }
@@ -424,61 +455,30 @@
       document.getElementById('post-job-form').reset();
     }
 
-    // Submit Posted Job
-    let projectCounter = 2;
-    function submitPostedJob(event) {
+    async function submitPostedJob(event) {
       event.preventDefault();
-
       const title = document.getElementById('job-title').value.trim();
       const budget = document.getElementById('job-budget').value.trim();
+      const description = document.getElementById('job-desc').value.trim();
+      const category = document.getElementById('job-category').value;
+      const deadline = document.getElementById('job-deadline').value;
       const btn = document.getElementById('job-submit-btn');
-
       btn.classList.add('btn-loading');
-
-      setTimeout(() => {
-        btn.classList.remove('btn-loading');
+      try {
+        await FreelanceInAPI.createJob({ title, budget, description, category, deadline });
         closePostJobModal();
-
-        projectCounter++;
-
-        const container = document.getElementById('project-list-container');
-        const item = document.createElement('div');
-        item.className = 'project-list-item';
-        item.style.animation = "fadeIn 0.4s ease";
-        item.innerHTML = `
-          <div class="project-item-info">
-            <h4 class="project-item-title">${title}</h4>
-            <div class="project-item-meta">
-              <span>Pelamar: <strong>0 Mahasiswa</strong></span>
-              <span>&bull;</span>
-              <span>Anggaran: <strong>${budget}</strong></span>
-              <span>&bull;</span>
-              <span>Tenggat: <strong>14 Hari ke depan</strong></span>
-            </div>
-          </div>
-          <div class="project-item-actions">
-            <span class="badge badge-info" style="margin-right: 8px;">Baru Diposting</span>
-            <button class="btn btn-outline btn-sm" onclick="showToast('Review', 'Sedang menunggu mahasiswa kampus mengirim proposal...', 'info')">Lacak Proposal</button>
-          </div>
-        `;
-
-        // Prepend new listing
-        container.insertBefore(item, container.firstChild);
-        showToast('Lowongan Diposting', `Lowongan pekerjaan "${title}" berhasil disebarkan ke jaringan kampus.`, 'success');
-      }, 1000);
+        showToast('Lowongan Diposting', `"${title}" berhasil dipublikasikan.`, 'success');
+        await loadUmkmJobs();
+      } catch (err) {
+        showToast('Gagal', err.message, 'danger');
+      }
+      btn.classList.remove('btn-loading');
     }
 
-    // Remove Saved Freelancer
     function removeSavedFreelancer(id) {
       const el = document.getElementById(id);
-      if (el && confirm("Apakah Anda yakin ingin menghapus mahasiswa ini dari daftar tersimpan?")) {
-        el.style.opacity = '0';
-        el.style.transform = 'scale(0.9)';
-        setTimeout(() => {
-          el.remove();
-          // Update count
-          document.getElementById('saved-freelancers-count').innerText = "1 Orang";
-        }, 300);
+      if (el && confirm("Hapus mahasiswa dari daftar tersimpan?")) {
+        el.remove();
         showToast('Pemberitahuan', 'Mahasiswa dihapus dari bookmark.', 'success');
       }
     }

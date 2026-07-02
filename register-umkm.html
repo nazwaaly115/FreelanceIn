@@ -122,11 +122,12 @@
   </script>
 
   <!-- Custom JS -->
+  <script src="js/api.js"></script>
   <script src="js/main.js"></script>
 
   <!-- Registration Logic -->
   <script>
-    function handleRegisterUMKM(event) {
+    async function handleRegisterUMKM(event) {
       event.preventDefault();
 
       const namaUsaha = document.getElementById('reg-nama-usaha').value.trim();
@@ -135,7 +136,6 @@
       const pass = document.getElementById('reg-pass').value;
       const btn = document.getElementById('reg-submit-btn');
 
-      // Basic validation
       if (!namaUsaha || !bidangUsaha || !email || !pass) {
         showToast('Peringatan', 'Mohon lengkapi semua field yang wajib diisi.', 'warning');
         return;
@@ -145,46 +145,22 @@
         return;
       }
 
-      // Check for duplicate email
-      const registeredUsers = JSON.parse(localStorage.getItem('freelancein_registered_users') || '[]');
-      const existingUser = registeredUsers.find(u => u.email.toLowerCase() === email);
-      if (existingUser) {
-        showToast('Email Sudah Terdaftar', 'Email ini sudah digunakan. Silakan masuk atau gunakan email lain.', 'danger');
-        return;
-      }
-
       btn.classList.add('btn-loading');
       btn.disabled = true;
 
-      setTimeout(() => {
-        btn.classList.remove('btn-loading');
-        btn.disabled = false;
+      try {
+        const { token, user } = await FreelanceInAPI.register({
+          email, password: pass, role: 'umkm', name: namaUsaha, businessName: namaUsaha, businessField: bidangUsaha
+        });
+        FreelanceInAPI.setSession(token, user);
+        showToast('Pendaftaran Berhasil! 🎉', `Selamat datang ${namaUsaha.split(' ')[0]}!`, 'success');
+        setTimeout(() => window.location.href = 'umkm-dashboard.html?login=success', 1000);
+      } catch (err) {
+        showToast('Gagal Daftar', err.message, 'danger');
+      }
 
-        const umkmUser = {
-          name: namaUsaha,
-          email: email,
-          password: pass,
-          role: 'umkm',
-          businessName: namaUsaha,
-          businessField: bidangUsaha
-        };
-
-        // Save to mock database
-        const allUsers = JSON.parse(localStorage.getItem('freelancein_registered_users') || '[]');
-        const filtered = allUsers.filter(u => u.email.toLowerCase() !== email);
-        filtered.push(umkmUser);
-        localStorage.setItem('freelancein_registered_users', JSON.stringify(filtered));
-
-        // Save active session
-        localStorage.setItem('freelancein_user', JSON.stringify(umkmUser));
-
-        showToast('Pendaftaran Berhasil! 🎉', `Selamat datang ${namaUsaha.split(' ')[0]}! Mengalihkan ke dashboard...`, 'success');
-
-        // Redirect to dashboard
-        setTimeout(() => {
-          window.location.href = 'umkm-dashboard.html?login=success';
-        }, 1000);
-      }, 1200);
+      btn.classList.remove('btn-loading');
+      btn.disabled = false;
     }
   </script>
 

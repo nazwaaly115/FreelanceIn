@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Proposal Masuk - FreelanceIn</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <a href="index.html" class="logo">Freelance<span>In</span><div class="logo-dot"></div></a>
+        <nav><ul class="nav-menu"></ul></nav>
+      </div>
+      <div class="nav-right"></div>
+    </div>
+  </header>
+
+  <div class="container py-xl">
+    <div style="margin-bottom: var(--space-lg);">
+      <a href="umkm-dashboard.html" style="font-size:var(--font-xs);color:var(--color-slate-500);">&larr; Kembali ke Dashboard</a>
+      <h1 style="font-size:var(--font-xl);font-weight:800;margin-top:8px;" id="page-title">Review Proposal</h1>
+      <p style="color:var(--color-slate-600);font-size:var(--font-sm);" id="job-desc"></p>
+    </div>
+    <div id="proposals-loading" style="text-align:center;padding:40px;">Memuat proposal...</div>
+    <div id="proposals-list"></div>
+  </div>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><p class="footer-copy">&copy; 2026 FreelanceIn.</p></div></div></footer>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    const jobId = new URLSearchParams(window.location.search).get('job');
+
+    async function loadProposals() {
+      const user = FreelanceInAPI.getSessionUser();
+      if (!user || user.role !== 'umkm') {
+        showToast('Akses Ditolak', 'Halaman ini khusus UMKM.', 'warning');
+        setTimeout(() => window.location.href = 'login.html', 1500);
+        return;
+      }
+      if (!jobId) {
+        document.getElementById('proposals-loading').textContent = 'Parameter job tidak ditemukan.';
+        return;
+      }
+      try {
+        const { job, proposals } = await FreelanceInAPI.getJobProposals(jobId);
+        document.getElementById('page-title').textContent = `Proposal: ${job.title}`;
+        document.getElementById('job-desc').textContent = job.description;
+        document.getElementById('proposals-loading').style.display = 'none';
+
+        if (!proposals.length) {
+          document.getElementById('proposals-list').innerHTML = '<div class="card" style="padding:40px;text-align:center;color:var(--color-slate-500);">Belum ada proposal masuk untuk lowongan ini.</div>';
+          return;
+        }
+
+        document.getElementById('proposals-list').innerHTML = proposals.map(p => `
+          <div class="card dashboard-section" style="margin-bottom:16px;padding:20px;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+              <div style="display:flex;gap:12px;align-items:center;">
+                ${p.avatar_url ? `<img src="${p.avatar_url}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">` : `<div style="width:48px;height:48px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;font-weight:700;">${p.student_name.charAt(0)}</div>`}
+                <div>
+                  <strong style="display:block;">${p.student_name}</strong>
+                  <span style="font-size:var(--font-xs);color:var(--color-slate-500);">${p.univ || ''} ${p.ktm_status === 'verified' ? '· ✅ KTM Verified' : ''}</span>
+                  <div style="margin-top:4px;">${(p.skills || []).map(s => `<span class="badge badge-info" style="font-size:9px;margin-right:4px;">${s}</span>`).join('')}</div>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <strong style="color:var(--color-accent-dark);font-size:var(--font-md);">${p.price}</strong>
+                <div style="font-size:var(--font-xs);color:var(--color-slate-500);">${p.duration_days} hari kerja</div>
+                <span class="badge ${p.status === 'pending' ? 'badge-warning' : p.status === 'accepted' ? 'badge-success' : 'badge-danger'}" style="margin-top:6px;">${p.status}</span>
+              </div>
+            </div>
+            <p style="margin:16px 0;font-size:var(--font-sm);color:var(--color-slate-700);line-height:1.5;">${p.cover_letter}</p>
+            ${p.status === 'pending' ? `
+              <div style="display:flex;gap:8px;">
+                <button class="btn btn-primary btn-sm" onclick="acceptProposal(${p.id})">Terima & Buat Kontrak</button>
+                <button class="btn btn-outline btn-sm" style="color:var(--color-danger);border-color:var(--color-danger);" onclick="rejectProposal(${p.id})">Tolak</button>
+                <a href="profile.html?user=${p.student_id}" class="btn btn-text btn-sm">Lihat Profil</a>
+              </div>` : p.status === 'accepted' ? `<a href="project-tracking.html" class="btn btn-outline btn-sm">Lacak Kontrak</a>` : ''}
+          </div>
+        `).join('');
+      } catch (err) {
+        document.getElementById('proposals-loading').textContent = err.message;
+      }
+    }
+
+    async function acceptProposal(id) {
+      if (!confirm('Terima proposal ini dan buat kontrak proyek?')) return;
+      try {
+        const res = await FreelanceInAPI.acceptProposal(id);
+        showToast('Proposal Diterima', 'Kontrak proyek telah dibuat.', 'success');
+        setTimeout(() => window.location.href = `project-tracking.html?contract=${res.contractId}`, 1000);
+      } catch (err) {
+        showToast('Gagal', err.message, 'danger');
+      }
+    }
+
+    async function rejectProposal(id) {
+      if (!confirm('Tolak proposal ini?')) return;
+      try {
+        await FreelanceInAPI.rejectProposal(id);
+        showToast('Proposal Ditolak', 'Mahasiswa akan diberitahu.', 'info');
+        loadProposals();
+      } catch (err) {
+        showToast('Gagal', err.message, 'danger');
+      }
+    }
+
+    window.addEventListener('load', loadProposals);
+  </script>
+</body>
+</html>

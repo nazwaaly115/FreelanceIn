@@ -94,7 +94,8 @@
         <button class="btn btn-outline" id="prof-bookmark-btn" onclick="showToast('Bookmark', 'Profil Budi Santoso disimpan ke bookmark.');">
           <i data-lucide="bookmark" style="width: 16px; height: 16px;"></i>
         </button>
-        <a href="messages.html?chat=budi" class="btn btn-outline" id="prof-message-btn">Kirim Pesan</a>
+        <a href="messages.html" class="btn btn-outline" id="prof-message-btn">Kirim Pesan</a>
+        <button class="btn btn-outline" id="prof-edit-btn" style="display:none;" onclick="ProfileApp.openEditModal()">Edit Profil Jasa</button>
         <button class="btn btn-primary" id="prof-hire-btn" data-toggle="modal" data-target="#hire-modal">Pekerjakan Sekarang</button>
       </div>
     </div>
@@ -381,7 +382,7 @@
         <h3 class="modal-title">Kirim Penawaran Proyek</h3>
         <button class="modal-close">✕</button>
       </div>
-      <form id="hire-project-form" onsubmit="submitHireOffer(event)">
+      <form id="hire-project-form" onsubmit="ProfileApp.submitHireOffer(event)">
         <div class="modal-body">
           <p style="font-size: var(--font-xs); color: var(--color-slate-500); margin-bottom: var(--space-md);">
             Anda akan mengirimkan undangan rekrutmen proyek kepada mahasiswa: <strong>Budi Santoso (UI)</strong>.
@@ -456,6 +457,34 @@
     </div>
   </div>
 
+  <!-- EDIT PROFILE MODAL (Mahasiswa) -->
+  <div id="edit-profile-modal" class="modal">
+    <div class="modal-overlay" onclick="document.getElementById('edit-profile-modal').classList.remove('show')"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Edit Profil Jasa</h3>
+        <button class="modal-close" onclick="document.getElementById('edit-profile-modal').classList.remove('show')">✕</button>
+      </div>
+      <form onsubmit="ProfileApp.saveProfile(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Bio / Deskripsi Jasa</label>
+            <textarea id="edit-bio" class="form-textarea" rows="4" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Keahlian (pisahkan koma)</label>
+            <input type="text" id="edit-skills" class="form-input" placeholder="Laravel, React, Node.js">
+          </div>
+          <p style="font-size:var(--font-xs);color:var(--color-slate-500);">Portofolio dapat dikelola dari <a href="student-dashboard.html">Dashboard Mahasiswa</a>.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('edit-profile-modal').classList.remove('show')">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm">Simpan Profil</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
@@ -518,385 +547,8 @@
     lucide.createIcons();
   </script>
 
-  <!-- Profile Specific Script -->
-  <script>
-    // Profile database
-    const profilesData = {
-      budi: {
-        name: "Budi Santoso",
-        role: "Web & API Developer Specialist",
-        univ: "S1 Teknik Informatika - Universitas Indonesia",
-        sem: "Semester 6",
-        location: "Depok, Jawa Barat, Indonesia",
-        timezone: "Waktu lokal: 17:21 WIB",
-        rate: "Rp 130.000 / jam",
-        projects: "12 Proyek",
-        hours: "120 Jam",
-        success: "100% Sukses",
-        email: "budi.santoso@mahasiswa.ui.ac.id",
-        avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=160&auto=format&fit=crop",
-        bio1: "Halo! Saya adalah mahasiswa aktif semester 6 jurusan Teknik Informatika di Universitas Indonesia. Berpengalaman selama lebih dari 2 tahun dalam membangun arsitektur backend aplikasi web yang andal, efisien, dan memiliki tingkat keamanan tinggi. Saya memiliki ketertarikan mendalam pada pembuatan sistem integrasi basis data dan RESTful API.",
-        bio2: "Dalam setiap kolaborasi dengan pelaku UMKM, saya selalu mengedepankan komunikasi yang transparan, penulisan kode yang bersih (clean code) sesuai standar industri, serta dokumentasi API yang lengkap agar sistem mudah dioperasikan. Saya berkomitmen penuh membantu UMKM di Indonesia bertransformasi ke digital dengan biaya yang sangat masuk akal bagi pertumbuhan bisnis Anda.",
-        skills: ["Laravel", "React.js", "Node.js", "PHP", "Express.js", "PostgreSQL", "MySQL", "RESTful API", "Docker", "Git / Version Control", "HTML & CSS", "UI/UX Figma (Basic)"],
-        portfolio: [
-          {
-            title: "E-Commerce POS System (Sistem Kasir)",
-            desc: "Membangun web kasir sederhana responsive untuk inventory toko UMKM.",
-            fullDesc: "Aplikasi Point of Sales (POS) berbasis web terintegrasi yang dirancang khusus untuk UMKM toko kelontong dan kuliner. Fitur utama mencakup manajemen stok barang otomatis, laporan laba-rugi bulanan, manajemen kasir multi-level, serta struk digital dinamis. Berjalan dengan performa query database yang telah dioptimasi.",
-            tech: "Laravel, MySQL, Bootstrap",
-            img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop"
-          },
-          {
-            title: "Booking App Admin Dashboard",
-            desc: "Dasbor pengelola booking jasa digital lengkap dengan grafik analitik.",
-            fullDesc: "Pengembangan dashboard administrasi canggih untuk pengelolaan pemesanan jasa online secara real-time. Dashboard ini mengintegrasikan visualisasi grafik transaksi keuangan (Chart.js), ekspor data laporan berformat CSV/Excel, serta sistem otentikasi JWT yang aman.",
-            tech: "React.js, Node.js, Express, PostgreSQL",
-            img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop"
-          },
-          {
-            title: "Company Profile & SEO Optimization",
-            desc: "Website profil interaktif responsive dengan peningkatan traffic search 40%.",
-            fullDesc: "Pembuatan website profil perusahaan modern bergaya minimalis untuk CV manufaktur lokal. Fokus utama adalah optimalisasi SEO on-page yang berhasil menaikkan posisi ranking website di Google search, kecepatan loading halaman yang optimal, dan struktur navigasi responsif yang ramah seluler.",
-            tech: "HTML, CSS, Vanilla JS, SEO",
-            img: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=600&auto=format&fit=crop"
-          }
-        ],
-        reviews: [
-          { job: "Pengembangan Sistem POS Kasir Warung Kopi", date: "April 2026", budget: "Rp 4.500.000 (Fixed Price)", feedback: '"Budi bekerja dengan sangat baik. Sistem POS kasir warung kopi kami selesai lebih cepat dari tenggat waktu semula. Dokumentasi coding dan cara penggunaan sistem diberikan secara detail. Komunikatif dan sangat profesional untuk sekelas mahasiswa!" &mdash; Hendra W., CV Maju Bersama.' },
-          { job: "Custom Website Profil Toko Roti Lapis", date: "Februari 2026", budget: "Rp 3.000.000 (Fixed Price)", feedback: '"Sangat puas dengan hasilnya. Desain web-nya bersih dan cepat saat dibuka di handphone pelanggan. Budi juga sabar melayani beberapa revisi visual dari kami hingga sesuai keinginan. Terima kasih FreelanceIn!" &mdash; Santi S., Founder Roti Kita.' },
-          { job: "Integrasi API Midtrans Payment Gateway", date: "Desember 2025", budget: "Rp 2.500.000 (Fixed Price)", feedback: '"API pembayaran Midtrans terintegrasi dengan baik di website toko online kami. Kodenya rapi dan terdokumentasi lengkap. Ada sedikit hambatan teknis dari sisi server kami, tapi Budi merespons dan memperbaikinya dengan cepat." &mdash; Aris S., Sinar Abadi Tech.' }
-        ]
-      },
-      siti: {
-        name: "Siti Rahma",
-        role: "UI/UX Designer & Prototyper",
-        univ: "S1 Sistem Informasi - ITB",
-        sem: "Semester 6",
-        location: "Bandung, Jawa Barat, Indonesia",
-        timezone: "Waktu lokal: 17:21 WIB",
-        rate: "Rp 120.000 / jam",
-        projects: "20 Proyek",
-        hours: "180 Jam",
-        success: "98% Sukses",
-        email: "siti.rahma@mahasiswa.itb.ac.id",
-        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=160&auto=format&fit=crop",
-        bio1: "Halo! Saya adalah mahasiswa Sistem Informasi semester 6 di Institut Teknologi Bandung. Berfokus pada perancangan antarmuka pengguna (UI) dan pengalaman pengguna (UX) untuk aplikasi web dan mobile. Saya menguasai Figma, wireframing, perancangan design system, serta interactive prototyping dengan tingkat presisi tinggi.",
-        bio2: "Saya selalu mengawali proses desain dengan memahami kebutuhan pengguna akhir dan tujuan bisnis UMKM. Melalui perancangan visual yang estetik, modern, dan intuitif, saya siap membantu bisnis Anda menarik lebih banyak pelanggan dan meningkatkan conversion rate produk digital Anda.",
-        skills: ["Figma", "Wireframing", "Prototyping", "UX Research", "Design System", "Adobe Illustrator", "User Flow", "Usability Testing", "HTML & CSS"],
-        portfolio: [
-          {
-            title: "Finance SaaS Dashboard Design",
-            desc: "Perancangan UI/UX dashboard analitik keuangan bisnis dengan gaya modern.",
-            fullDesc: "Mendesain dashboard keuangan lengkap untuk sistem pelaporan bisnis SaaS. Fokus pada visualisasi data tabel, grafik keuangan interaktif, tata letak informasi yang bersih, serta desain responsif untuk memantau arus kas bisnis UMKM secara efisien.",
-            tech: "Figma, Design System, UX Research",
-            img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop"
-          },
-          {
-            title: "Healthy Food Delivery UI",
-            desc: "Desain UI aplikasi pemesanan makanan sehat ramah pengguna.",
-            fullDesc: "Perancangan antarmuka aplikasi seluler untuk pengantaran katering makanan sehat. Dilengkapi dengan user flow pemesanan kustom kalori harian, layout katalog makanan yang menggugah selera, proses checkout 3 langkah, serta prototipe interaktif berakurasi tinggi.",
-            tech: "Figma, Prototyping, Wireframe",
-            img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=600&auto=format&fit=crop"
-          },
-          {
-            title: "Car Rental App UI Kit",
-            desc: "Paket kit UI aplikasi sewa mobil yang bersih dan konsisten.",
-            fullDesc: "UI Kit lengkap berisi lebih dari 40 komponen desain yang dapat digunakan kembali untuk aplikasi persewaan kendaraan. Termasuk sistem grid, palet warna, tipografi, set ikon kustom, dan komponen navigasi konsisten.",
-            tech: "Figma, Design System, UI Kit",
-            img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=600&auto=format&fit=crop"
-          }
-        ],
-        reviews: [
-          { job: "Desain Mockup Website Toko Online Hijab", date: "Mei 2026", budget: "Rp 2.000.000 (Fixed Price)", feedback: '"Siti merancang desain toko online kami dengan sangat cantik dan modern. Pilihan warnanya sangat pas dengan brand kami. Dia sangat responsif dalam melayani revisi dan memberikan penjelasan alur UX dengan sabar." &mdash; Owner Hijab Cantik.' },
-          { job: "Desain UI Aplikasi Kasir POS Android", date: "Maret 2026", budget: "Rp 3.500.000 (Fixed Price)", feedback: '"Pekerjaan yang luar biasa. Wireframe dan prototipe aplikasi kasir kami sangat mudah dipahami oleh tim developer kami. Sukses selalu Siti!" &mdash; CV Kasirku.' }
-        ]
-      },
-      rian: {
-        name: "Rian Hidayat",
-        role: "Mobile App Developer (Flutter)",
-        univ: "S1 Teknik Komputer - ITS",
-        sem: "Semester 6",
-        location: "Surabaya, Jawa Timur, Indonesia",
-        timezone: "Waktu lokal: 17:21 WIB",
-        rate: "Rp 130.000 / jam",
-        projects: "8 Proyek",
-        hours: "90 Jam",
-        success: "100% Sukses",
-        email: "rian.hidayat@mahasiswa.its.ac.id",
-        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=160&auto=format&fit=crop",
-        bio1: "Halo! Saya Rian, mahasiswa Teknik Komputer semester 6 di Institut Teknologi Sepuluh Nopember (ITS). Fokus utama saya adalah membangun aplikasi mobile lintas platform (Android & iOS) yang responsif dan berkinerja tinggi menggunakan Flutter dan Dart.",
-        bio2: "Saya berpengalaman mengintegrasikan RESTful API, Firebase (Auth, Firestore, Cloud Messaging), Google Maps API, serta menerapkan arsitektur state management yang bersih seperti Provider atau BLoC. Saya berkomitmen menghasilkan produk aplikasi mobile yang stabil untuk menunjang operasional bisnis UMKM Anda.",
-        skills: ["Flutter", "Dart", "Firebase", "State Management", "Maps API", "REST API", "Git", "Android Dev", "iOS Dev"],
-        portfolio: [
-          {
-            title: "Courier Delivery App",
-            desc: "Aplikasi pelacakan pengiriman kurir logistik lokal secara langsung.",
-            fullDesc: "Aplikasi seluler kurir dengan integrasi peta Google Maps untuk memantau pergerakan pengiriman barang secara real-time. Dilengkapi dengan notifikasi push Firebase, tanda tangan digital penerima, serta offline mode caching.",
-            tech: "Flutter, Dart, Firebase, Maps API",
-            img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop"
-          },
-          {
-            title: "IoT Smart Home UI",
-            desc: "Pengontrol perangkat rumah pintar berbasis seluler terintegrasi.",
-            fullDesc: "Aplikasi seluler interaktif untuk mengontrol peralatan rumah tangga pintar (lampu, AC, pintu pintar) menggunakan protokol MQTT. Menampilkan status sensor suhu dan kelembaban secara real-time dengan grafik yang menarik.",
-            tech: "Flutter, MQTT, Dart, Charts",
-            img: "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=600&auto=format&fit=crop"
-          },
-          {
-            title: "Live Chat Application",
-            desc: "Aplikasi pesan singkat instan multi-room dengan WebSocket.",
-            fullDesc: "Membangun sistem chat instan seluler yang mendukung pengiriman pesan teks, gambar, dan stiker secara real-time menggunakan pustaka Socket.io. Dilengkapi dengan enkripsi pesan sederhana end-to-end.",
-            tech: "Flutter, Dart, Node.js Socket.io",
-            img: "https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=600&auto=format&fit=crop"
-          }
-        ],
-        reviews: [
-          { job: "Pembuatan Aplikasi Pemesanan Ojek Lokal", date: "Juni 2026", budget: "Rp 5.000.000 (Fixed Price)", feedback: '"Sangat puas bekerja dengan Rian. Aplikasi pesanan ojek untuk UMKM kami berjalan dengan sangat stabil. Integrasi maps dan gps sangat akurat. Sangat direkomendasikan!" &mdash; Owner Ojekku.' }
-        ]
-      },
-      dewi: {
-        name: "Dewi Lestari",
-        role: "Data Analyst & Python Developer",
-        univ: "S1 Ilmu Komputer - UGM",
-        sem: "Semester 6",
-        location: "Yogyakarta, Indonesia",
-        timezone: "Waktu lokal: 17:21 WIB",
-        rate: "Rp 140.000 / jam",
-        projects: "10 Proyek",
-        hours: "110 Jam",
-        success: "100% Sukses",
-        email: "dewi.lestari@mahasiswa.ugm.ac.id",
-        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=160&auto=format&fit=crop",
-        bio1: "Halo, saya Dewi. Mahasiswa semester 6 Ilmu Komputer UGM. Saya memiliki hasrat besar di bidang Data Science, Data Analysis, dan visualisasi data bisnis. Saya membantu pelaku usaha/UMKM mengekstrak wawasan berharga dari data operasional mereka.",
-        bio2: "Saya mahir menggunakan Python (Pandas, NumPy, Scikit-learn) untuk data cleaning dan machine learning, serta berpengalaman mendesain dashboard bisnis interaktif di Tableau dan Power BI. Mari ubah data mentah bisnis Anda menjadi keputusan strategis yang menguntungkan!",
-        skills: ["Python", "Pandas & NumPy", "Tableau", "SQL", "Data Visualization", "Machine Learning", "Jupyter Notebook", "Power BI", "Statistics"],
-        portfolio: [
-          {
-            title: "Sales Prediction Python",
-            desc: "Prediksi tren penjualan produk UMKM dengan model Machine Learning.",
-            fullDesc: "Melakukan analisis data transaksi historis untuk UMKM kuliner guna mendeteksi pola musiman dan memprediksi penjualan bulan berikutnya menggunakan model regresi linier dan ARIMA di Python.",
-            tech: "Python, Pandas, Scikit-learn, ARIMA",
-            img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop"
-          },
-          {
-            title: "Customer Segmentation",
-            desc: "Dasbor interaktif pengelompokan profil loyalitas pelanggan.",
-            fullDesc: "Merancang dasbor visualisasi Tableau yang mengelompokkan pelanggan berdasarkan metode RFM (Recency, Frequency, Monetary). Membantu pemilik bisnis merancang strategi promosi yang spesifik dan efektif.",
-            tech: "Tableau, SQL, RFM Analysis",
-            img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop"
-          },
-          {
-            title: "Spam Classifier API",
-            desc: "Deteksi email spam otomatis dengan pemrosesan bahasa alami (NLP).",
-            fullDesc: "Membangun API deteksi spam teks menggunakan model klasifikasi Naive Bayes di Python. API dikemas dengan Flask dan terdokumentasi dengan baik.",
-            tech: "Python, NLTK, Flask API, NLP",
-            img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop"
-          }
-        ],
-        reviews: [
-          { job: "Analisis Data Penjualan Toko Ritel", date: "Maret 2026", budget: "Rp 3.000.000 (Fixed Price)", feedback: '"Dewi memberikan wawasan penjualan yang sangat mencerahkan bagi bisnis ritel kami. Sekarang kami tahu produk mana yang paling mendatangkan keuntungan dan kapan jam sibuk kami. Pekerjaan yang sangat rapi." &mdash; Owner Toko Maju Ritel.' }
-        ]
-      }
-    };
-
-    // Open Portfolio Detail Modal
-    function openPortfolioModal(title, details, tech, imgSrc) {
-      document.getElementById('port-modal-title').innerText = title;
-      document.getElementById('port-modal-desc').innerText = details;
-      document.getElementById('port-modal-tech').innerText = tech;
-      document.getElementById('port-modal-img').src = imgSrc;
-
-      const modal = document.getElementById('portfolio-modal');
-      modal.classList.add('show');
-    }
-
-    // Submit Recruitment Proposal Offer
-    function submitHireOffer(event) {
-      event.preventDefault();
-
-      const projectTitle = document.getElementById('project-title').value.trim();
-
-      // Close modal
-      const modal = document.getElementById('hire-modal');
-      modal.classList.remove('show');
-
-      // Reset form
-      document.getElementById('hire-project-form').reset();
-
-      // Show Success Toast
-      showToast('Penawaran Terkirim!', `Undangan proyek "${projectTitle}" dikirim ke ${window.activeProfileName || 'Budi Santoso'}. Mengalihkan ke pelacakan proyek...`, 'success');
-
-      // Redirect to project tracking page after delay
-      setTimeout(() => {
-        window.location.href = 'project-tracking.html';
-      }, 1500);
-    }
-
-    // Automatically open hire modal if URL hash is #hire
-    window.addEventListener('load', () => {
-      // 1. Get profile key from URL
-      const urlParams = new URLSearchParams(window.location.search);
-      let userKey = urlParams.get('user');
-
-      // Check if logged in user is viewing themselves
-      const userJson = localStorage.getItem('freelancein_user');
-      let loggedInUser = null;
-      if (userJson) {
-        loggedInUser = JSON.parse(userJson);
-      }
-
-      // Default fallback
-      let data = profilesData.budi;
-
-      if (userKey && profilesData[userKey]) {
-        data = profilesData[userKey];
-      } else if (loggedInUser && loggedInUser.role === 'mahasiswa' && (userKey === 'me' || !userKey)) {
-        // Use active session user
-        data = {
-          name: loggedInUser.name,
-          role: "Developer Mahasiswa Terdaftar",
-          univ: `S1 ${loggedInUser.univ || 'Teknik Informatika'}`,
-          sem: `Semester ${loggedInUser.semester || '5'}`,
-          location: "Indonesia",
-          timezone: "Waktu lokal: WIB",
-          rate: "Rp 100.000 / jam",
-          projects: "0 Proyek",
-          hours: "0 Jam",
-          success: "100% Sukses",
-          email: loggedInUser.email,
-          avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=160&auto=format&fit=crop",
-          bio1: `Halo! Saya adalah ${loggedInUser.name}, mahasiswa aktif dari ${loggedInUser.univ || 'Universitas'}. Saya terdaftar sebagai freelancer IT di FreelanceIn.`,
-          bio2: "Saya siap menerima tawaran proyek digital berskala mikro/kecil dari para pelaku UMKM Indonesia dengan komitmen tinggi.",
-          skills: loggedInUser.skills || ["HTML", "CSS", "Javascript"],
-          portfolio: [],
-          reviews: []
-        };
-        userKey = 'me';
-      } else {
-        userKey = 'budi';
-      }
-
-      window.activeProfileName = data.name;
-
-      // 2. Update page elements
-      document.title = `${data.name} - ${data.role} - FreelanceIn`;
-      document.querySelector('.profile-large-avatar').src = data.avatar;
-      document.getElementById('prof-name').innerText = data.name;
-      document.getElementById('prof-location').innerText = data.location;
-      document.getElementById('prof-timezone').innerText = data.timezone;
-
-      // Update button actions
-      document.getElementById('prof-bookmark-btn').setAttribute('onclick', `showToast('Bookmark', 'Profil ${data.name} disimpan ke bookmark.');`);
-      document.getElementById('prof-message-btn').href = `messages.html?chat=${userKey}`;
-
-      // Update metrics
-      document.getElementById('prof-sidebar-rate').innerText = data.rate;
-      document.getElementById('prof-sidebar-projects').innerText = data.projects;
-      document.getElementById('prof-sidebar-hours').innerText = data.hours;
-      document.getElementById('prof-sidebar-success').innerText = data.success;
-      document.getElementById('prof-sidebar-email').innerText = data.email;
-
-      // Update education
-      document.getElementById('prof-sidebar-degree').innerText = data.role.includes("UI/UX") ? "S1 Desain / Sistem Informasi" : "S1 Teknik Informatika";
-      document.getElementById('prof-sidebar-univ').innerText = data.univ.replace("S1 ", "");
-      document.getElementById('prof-sidebar-date').innerText = `2023 - Sekarang (${data.sem})`;
-
-      // Update links
-      const slugName = data.name.toLowerCase().replace(/\s+/g, '');
-      document.getElementById('prof-link-github').href = `https://github.com/${slugName}`;
-      document.getElementById('prof-link-github').setAttribute('onclick', `showToast('Eksternal Link', 'Membuka GitHub ${data.name}...', 'success'); return false;`);
-      document.getElementById('prof-link-github').innerHTML = `<i data-lucide="github"></i> github.com/${slugName}`;
-      
-      document.getElementById('prof-link-linkedin').href = `https://linkedin.com/in/${slugName}`;
-      document.getElementById('prof-link-linkedin').setAttribute('onclick', `showToast('Eksternal Link', 'Membuka LinkedIn ${data.name}...', 'success'); return false;`);
-      document.getElementById('prof-link-linkedin').innerHTML = `<i data-lucide="linkedin"></i> linkedin.com/in/${slugName}`;
-
-      // Update main title & rate
-      document.getElementById('prof-main-title').innerText = data.role;
-      document.getElementById('prof-main-rate').innerHTML = `${data.rate.replace(" / jam", "")} <span>/ jam</span>`;
-
-      // Update bio
-      document.getElementById('prof-bio-1').innerText = data.bio1;
-      document.getElementById('prof-bio-2').innerText = data.bio2;
-
-      // Update Skills
-      const skillsContainer = document.getElementById('prof-skills-list');
-      skillsContainer.innerHTML = '';
-      data.skills.forEach(skill => {
-        skillsContainer.innerHTML += `<span class="tag-skill">${skill}</span>`;
-      });
-
-      // Update Portfolio
-      const portfolioContainer = document.getElementById('prof-portfolio-list');
-      portfolioContainer.innerHTML = '';
-      if (data.portfolio.length === 0) {
-        portfolioContainer.innerHTML = `<div style="grid-column: 1/-1; padding: 24px; text-align: center; color: var(--color-slate-400); font-size: var(--font-xs);">Belum ada portofolio yang diunggah.</div>`;
-      } else {
-        data.portfolio.forEach(item => {
-          portfolioContainer.innerHTML += `
-            <div class="portfolio-detailed-card" onclick="openPortfolioModal('${item.title}', '${item.fullDesc.replace(/'/g, "\\'")}', '${item.tech}', '${item.img}')">
-              <img src="${item.img}" alt="${item.title}" class="portfolio-detailed-img">
-              <div class="portfolio-detailed-content">
-                <h4 class="portfolio-detailed-title">${item.title}</h4>
-                <p class="portfolio-detailed-desc">${item.desc}</p>
-                <div class="freelancer-skills" style="gap: 4px;">
-                  ${item.tech.split(',').map(t => `<span class="tag-skill" style="padding: 2px 6px; font-size: 10px;">${t.trim()}</span>`).join('')}
-                </div>
-              </div>
-            </div>
-          `;
-        });
-      }
-
-      // Update Reviews
-      const reviewsContainer = document.getElementById('prof-reviews-list');
-      reviewsContainer.innerHTML = '';
-      if (data.reviews.length === 0) {
-        reviewsContainer.innerHTML = `<div style="padding: 24px; text-align: center; color: var(--color-slate-400); font-size: var(--font-xs);">Belum ada ulasan pekerjaan.</div>`;
-      } else {
-        data.reviews.forEach(review => {
-          reviewsContainer.innerHTML += `
-            <div class="review-item">
-              <div class="review-header-row">
-                <h4 class="review-job-title">${review.job}</h4>
-                <div class="review-stars-date">
-                  <div class="review-stars">
-                    <i data-lucide="star" style="fill: #fbbf24; stroke: none;"></i>
-                    <i data-lucide="star" style="fill: #fbbf24; stroke: none;"></i>
-                    <i data-lucide="star" style="fill: #fbbf24; stroke: none;"></i>
-                    <i data-lucide="star" style="fill: #fbbf24; stroke: none;"></i>
-                    <i data-lucide="star" style="fill: #fbbf24; stroke: none;"></i>
-                  </div>
-                  <span class="review-date">${review.date}</span>
-                </div>
-              </div>
-              <div class="review-details-meta">
-                Anggaran: <strong>${review.budget}</strong> &nbsp;&bull;&nbsp; Kampus Terverifikasi: <strong>${data.univ.replace("S1 ", "")}</strong>
-              </div>
-              <p class="review-feedback-text">${review.feedback}</p>
-            </div>
-          `;
-        });
-      }
-
-      // Automatically open hire modal if URL hash is #hire
-      if (window.location.hash === '#hire') {
-        const modal = document.getElementById('hire-modal');
-        if (modal) {
-          modal.classList.add('show');
-        }
-      }
-
-      // Re-create icons
-      if (window.lucide) {
-        window.lucide.createIcons();
-      }
-    });
-  </script>
-
-  <!-- Custom main.js for toast support -->
+  <script src="js/api.js"></script>
   <script src="js/main.js"></script>
-
+  <script src="js/profile-app.js"></script>
 </body>
-
 </html>

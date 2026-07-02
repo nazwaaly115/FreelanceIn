@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin - Verifikasi KTM - FreelanceIn</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <a href="index.html" class="logo">Freelance<span>In</span><div class="logo-dot"></div></a>
+        <nav><ul class="nav-menu"><li class="nav-item text-primary"><a href="admin.html">Admin KTM</a></li></ul></nav>
+      </div>
+      <div class="nav-right"></div>
+    </div>
+  </header>
+
+  <div class="container py-xl">
+    <h1 style="font-size:var(--font-xl);font-weight:800;margin-bottom:8px;">Panel Verifikasi KTM</h1>
+    <p style="color:var(--color-slate-600);font-size:var(--font-sm);margin-bottom:var(--space-xl);">Tinjau dan verifikasi kartu mahasiswa (KTM) sebelum mahasiswa dapat mengirim proposal.</p>
+    <div id="admin-loading" style="text-align:center;padding:40px;">Memuat data...</div>
+    <div id="admin-list"></div>
+  </div>
+
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><p class="footer-copy">&copy; 2026 FreelanceIn Admin.</p></div></div></footer>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    async function loadPending() {
+      const user = FreelanceInAPI.getSessionUser();
+      if (!user || user.role !== 'admin') {
+        showToast('Akses Ditolak', 'Login sebagai admin@freelancein.com / admin123', 'warning');
+        setTimeout(() => window.location.href = 'login.html', 2000);
+        return;
+      }
+      try {
+        const { students } = await FreelanceInAPI.getPendingKTM();
+        document.getElementById('admin-loading').style.display = 'none';
+        if (!students.length) {
+          document.getElementById('admin-list').innerHTML = '<div class="card" style="padding:40px;text-align:center;">Tidak ada pengajuan KTM pending.</div>';
+          return;
+        }
+        document.getElementById('admin-list').innerHTML = students.map(s => `
+          <div class="card" style="padding:20px;margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+              <div>
+                <strong>${s.name}</strong>
+                <div style="font-size:var(--font-xs);color:var(--color-slate-500);">${s.email} · ${s.univ || '-'} · Semester ${s.semester || '-'}</div>
+                <span class="badge badge-${s.ktm_status === 'submitted' ? 'warning' : 'info'}" style="margin-top:6px;">${s.ktm_status}</span>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                ${s.ktm_file ? `<a href="/uploads/${s.ktm_file}" target="_blank" class="btn btn-outline btn-sm">Lihat KTM</a>` : '<span style="font-size:var(--font-xs);color:var(--color-slate-400);">Belum upload</span>'}
+                ${s.ktm_status === 'submitted' ? `
+                  <button class="btn btn-primary btn-sm" onclick="approve(${s.id})">Setujui</button>
+                  <button class="btn btn-outline btn-sm" style="color:var(--color-danger);" onclick="reject(${s.id})">Tolak</button>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        document.getElementById('admin-loading').textContent = err.message;
+      }
+    }
+
+    async function approve(id) {
+      await FreelanceInAPI.approveKTM(id);
+      showToast('Disetujui', 'KTM mahasiswa terverifikasi.', 'success');
+      loadPending();
+    }
+
+    async function reject(id) {
+      const reason = prompt('Alasan penolakan (opsional):');
+      await FreelanceInAPI.rejectKTM(id, reason);
+      showToast('Ditolak', 'Mahasiswa akan diberitahu.', 'info');
+      loadPending();
+    }
+
+    window.addEventListener('load', loadPending);
+  </script>
+</body>
+</html>

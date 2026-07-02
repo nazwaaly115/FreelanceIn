@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cari Proyek IT untuk Mahasiswa - FreelanceIn</title>
+  <meta name="description" content="Temukan proyek digital dari UMKM Indonesia. Ajukan proposal dan mulai kerja freelance sebagai mahasiswa IT terverifikasi.">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/marketplace.css">
+  <style>
+    .job-card { padding: var(--space-lg); margin-bottom: var(--space-md); transition: box-shadow 0.2s; }
+    .job-card:hover { box-shadow: var(--shadow-md); }
+    .job-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-sm); }
+    .job-card-title { font-size: var(--font-md); font-weight: 700; color: var(--color-slate-900); }
+    .job-card-meta { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: var(--font-xs); color: var(--color-slate-500); margin: var(--space-sm) 0; }
+    .job-card-desc { font-size: var(--font-sm); color: var(--color-slate-600); line-height: 1.5; margin-bottom: var(--space-md); }
+    .job-card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--color-slate-100); padding-top: var(--space-md); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <a href="index.html" class="logo">Freelance<span>In</span><div class="logo-dot"></div></a>
+        <nav><ul class="nav-menu"><!-- dynamic --></ul></nav>
+      </div>
+      <div class="nav-right"><!-- dynamic --></div>
+    </div>
+  </header>
+
+  <div class="container py-xl">
+    <div style="margin-bottom: var(--space-md); font-size: var(--font-xs); color: var(--color-slate-500);">
+      <a href="index.html">Beranda</a> &nbsp;/&nbsp; <span style="color: var(--color-slate-800); font-weight: 500;">Cari Proyek</span>
+    </div>
+    <div style="margin-bottom: var(--space-xl);">
+      <h1 style="font-size: var(--font-2xl); font-weight: 800; color: var(--color-slate-900);">Lowongan Proyek IT dari UMKM</h1>
+      <p style="color: var(--color-slate-600); font-size: var(--font-sm); margin-top: 4px;">Temukan pekerjaan freelance yang cocok dengan keahlian Anda. Verifikasi KTM diperlukan untuk mengirim proposal.</p>
+    </div>
+
+    <div class="marketplace-layout">
+      <aside class="filter-sidebar">
+        <div class="filter-section">
+          <span style="font-weight: 700; font-size: var(--font-sm);">Filter Proyek</span>
+        </div>
+        <div class="filter-section">
+          <div class="filter-title">Kategori</div>
+          <select id="filter-category" class="form-input" onchange="loadJobs()">
+            <option value="">Semua Kategori</option>
+            <option value="Web Dev">Web Dev</option>
+            <option value="UI/UX">UI/UX</option>
+            <option value="Mobile App">Mobile App</option>
+            <option value="Data & AI">Data & AI</option>
+          </select>
+        </div>
+        <div class="filter-section">
+          <div class="filter-title">Cari</div>
+          <input type="text" id="filter-search" class="form-input" placeholder="Judul atau deskripsi..." oninput="debounceSearch()">
+        </div>
+      </aside>
+
+      <main>
+        <div id="jobs-loading" style="text-align:center;padding:40px;color:var(--color-slate-500);">Memuat lowongan...</div>
+        <div id="jobs-list"></div>
+        <div id="jobs-empty" style="display:none;text-align:center;padding:60px;">
+          <p style="color:var(--color-slate-500);">Belum ada lowongan proyek. UMKM dapat posting kebutuhan jasa dari dashboard.</p>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Proposal Modal -->
+  <div id="proposal-modal" class="modal">
+    <div class="modal-overlay" onclick="closeProposalModal()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Kirim Proposal</h3>
+        <button class="modal-close" onclick="closeProposalModal()">✕</button>
+      </div>
+      <form id="proposal-form" onsubmit="submitProposal(event)">
+        <div class="modal-body">
+          <p id="proposal-job-title" style="font-weight:600;margin-bottom:12px;"></p>
+          <div class="form-group">
+            <label class="form-label">Cover Letter / Penawaran</label>
+            <textarea id="proposal-cover" class="form-textarea" rows="4" required placeholder="Jelaskan pengalaman dan pendekatan Anda..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Harga Penawaran</label>
+            <input type="text" id="proposal-price" class="form-input" required placeholder="Rp 1.500.000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Estimasi (hari kerja)</label>
+            <input type="number" id="proposal-duration" class="form-input" value="14" min="1">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeProposalModal()">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="proposal-submit-btn">Kirim Proposal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container"><div class="footer-bottom"><p class="footer-copy">&copy; 2026 FreelanceIn.</p></div></div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let selectedJobId = null;
+    let searchTimer = null;
+
+    function debounceSearch() {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(loadJobs, 300);
+    }
+
+    function formatDate(d) {
+      if (!d) return '-';
+      return new Date(d).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    async function loadJobs() {
+      const list = document.getElementById('jobs-list');
+      const loading = document.getElementById('jobs-loading');
+      const empty = document.getElementById('jobs-empty');
+      const category = document.getElementById('filter-category').value;
+      const search = document.getElementById('filter-search').value.trim();
+      const params = { status: 'open' };
+      if (category) params.category = category;
+      if (search) params.search = search;
+
+      try {
+        const { jobs } = await FreelanceInAPI.getJobs(params);
+        loading.style.display = 'none';
+        if (!jobs.length) {
+          list.innerHTML = '';
+          empty.style.display = 'block';
+          return;
+        }
+        empty.style.display = 'none';
+        list.innerHTML = jobs.map(j => `
+          <div class="card job-card">
+            <div class="job-card-header">
+              <div>
+                <span class="badge badge-primary" style="margin-bottom:6px;">${j.category || 'IT'}</span>
+                <h3 class="job-card-title">${j.title}</h3>
+              </div>
+              <strong style="color:var(--color-accent-dark);white-space:nowrap;">${j.budget}</strong>
+            </div>
+            <div class="job-card-meta">
+              <span><i data-lucide="building-2" style="width:12px;height:12px;display:inline;"></i> ${j.business_name || j.umkm_name}</span>
+              <span><i data-lucide="users" style="width:12px;height:12px;display:inline;"></i> ${j.proposal_count || 0} proposal</span>
+              <span><i data-lucide="calendar" style="width:12px;height:12px;display:inline;"></i> ${formatDate(j.deadline)}</span>
+            </div>
+            <p class="job-card-desc">${j.description.substring(0, 200)}${j.description.length > 200 ? '...' : ''}</p>
+            <div class="job-card-footer">
+              <span style="font-size:var(--font-xs);color:var(--color-slate-400);">Diposting ${formatDate(j.created_at)}</span>
+              <button class="btn btn-primary btn-sm" onclick="openProposalModal(${j.id}, '${j.title.replace(/'/g, "\\'")}')">Kirim Proposal</button>
+            </div>
+          </div>
+        `).join('');
+        if (window.lucide) lucide.createIcons();
+      } catch (err) {
+        loading.textContent = 'Gagal memuat: ' + err.message + '. Pastikan server berjalan (npm run dev).';
+      }
+    }
+
+    function openProposalModal(jobId, title) {
+      const user = FreelanceInAPI.getSessionUser();
+      if (!user) {
+        showToast('Masuk Diperlukan', 'Silakan masuk sebagai mahasiswa untuk mengirim proposal.', 'warning');
+        setTimeout(() => window.location.href = 'login.html', 1500);
+        return;
+      }
+      if (user.role !== 'mahasiswa') {
+        showToast('Akses Ditolak', 'Hanya mahasiswa yang dapat mengirim proposal.', 'warning');
+        return;
+      }
+      selectedJobId = jobId;
+      document.getElementById('proposal-job-title').textContent = title;
+      document.getElementById('proposal-modal').classList.add('show');
+    }
+
+    function closeProposalModal() {
+      document.getElementById('proposal-modal').classList.remove('show');
+      document.getElementById('proposal-form').reset();
+      selectedJobId = null;
+    }
+
+    async function submitProposal(e) {
+      e.preventDefault();
+      const btn = document.getElementById('proposal-submit-btn');
+      btn.disabled = true;
+      try {
+        await FreelanceInAPI.submitProposal({
+          job_id: selectedJobId,
+          cover_letter: document.getElementById('proposal-cover').value.trim(),
+          price: document.getElementById('proposal-price').value.trim(),
+          duration_days: parseInt(document.getElementById('proposal-duration').value, 10)
+        });
+        closeProposalModal();
+        showToast('Proposal Terkirim', 'Proposal Anda telah dikirim ke UMKM.', 'success');
+        loadJobs();
+      } catch (err) {
+        showToast('Gagal', err.message, 'danger');
+      }
+      btn.disabled = false;
+    }
+
+    window.addEventListener('load', () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('search')) document.getElementById('filter-search').value = params.get('search');
+      loadJobs();
+    });
+  </script>
+</body>
+</html>

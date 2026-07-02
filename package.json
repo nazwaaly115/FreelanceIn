@@ -1,10 +1,12 @@
 {
   "name": "freelancein-design-system",
-  "version": "1.0.0",
-  "description": "Design System & Landing Page for FreelanceIn",
-  "main": "index.html",
+  "version": "2.0.0",
+  "description": "Marketplace dua sisi UMKM & Mahasiswa IT — FreelanceIn",
+  "main": "server/index.js",
   "scripts": {
-    "dev": "npx -y browser-sync start --server --files \"*.html, css/*.css, js/*.js\""
+    "dev": "node server/index.js",
+    "start": "node server/index.js",
+    "static": "npx -y browser-sync start --server --files \"*.html, css/*.css, js/*.js\""
   },
   "keywords": [
     "design-system",
@@ -15,5 +17,14 @@
     "student"
   ],
   "author": "FreelanceIn Team",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1"
+  }
 }

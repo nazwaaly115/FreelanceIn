@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- MOCK STATE & SESSION MANAGEMENT ---
   window.logoutUser = function (e) {
     if (e) e.preventDefault();
-    localStorage.removeItem('freelancein_user');
+    if (window.FreelanceInAPI) FreelanceInAPI.clearSession();
+    else localStorage.removeItem('freelancein_user');
     window.location.href = 'index.html?logout=success';
   };
 
@@ -38,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         navMenu.innerHTML = `
           <li class="nav-item ${currentPath === 'index.html' || currentPath === '' ? 'text-primary' : ''}"><a href="index.html">Home</a></li>
           <li class="nav-item ${currentPath === 'marketplace.html' ? 'text-primary' : ''}"><a href="marketplace.html">Cari Talenta</a></li>
+          <li class="nav-item ${currentPath === 'projects.html' ? 'text-primary' : ''}"><a href="projects.html">Cari Proyek</a></li>
           <li class="nav-item"><a href="index.html#alur-kolaborasi">Cara Kerja</a></li>
-          <li class="nav-item"><a href="design-system.html" style="color: var(--color-slate-500); font-weight: 600;">Sistem Desain (FIDS)</a></li>
         `;
       }
       if (navRight) {
@@ -68,8 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (user.role === 'mahasiswa') {
       if (navMenu) {
         navMenu.innerHTML = `
-          <li class="nav-item ${currentPath === 'index.html' || currentPath === '' ? 'text-primary' : ''}"><a href="index.html">Home</a></li>
-          <li class="nav-item ${currentPath === 'marketplace.html' ? 'text-primary' : ''}"><a href="marketplace.html">Cari Talenta</a></li>
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item ${currentPath === 'projects.html' ? 'text-primary' : ''}"><a href="projects.html">Cari Proyek</a></li>
           <li class="nav-item ${currentPath === 'student-dashboard.html' ? 'text-primary' : ''}"><a href="student-dashboard.html">Dashboard</a></li>
           <li class="nav-item ${currentPath === 'messages.html' ? 'text-primary' : ''}"><a href="messages.html">Pesan</a></li>
         `;
@@ -84,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <a href="messages.html" class="btn-text" style="padding: var(--space-xs) var(--space-sm); position: relative; display: flex; align-items: center;" title="Pesan">
             <i data-lucide="message-square" style="width: 20px; height: 20px;"></i>
-            <span class="badge badge-danger" style="position: absolute; top: -5px; right: -5px; padding: 2px 5px; font-size: 8px;">2</span>
+            <span class="badge badge-danger notif-badge" style="position: absolute; top: -5px; right: -5px; padding: 2px 5px; font-size: 8px; display: none;">0</span>
           </a>
           <div class="user-menu-wrapper" style="position: relative; cursor: pointer; display: flex; align-items: center;">
             <div class="user-menu-trigger d-flex align-center gap-xs">
@@ -106,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (user.role === 'umkm') {
       if (navMenu) {
         navMenu.innerHTML = `
-          <li class="nav-item ${currentPath === 'index.html' || currentPath === '' ? 'text-primary' : ''}"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="index.html">Home</a></li>
           <li class="nav-item ${currentPath === 'marketplace.html' ? 'text-primary' : ''}"><a href="marketplace.html">Cari Talenta</a></li>
           <li class="nav-item ${currentPath === 'umkm-dashboard.html' ? 'text-primary' : ''}"><a href="umkm-dashboard.html">Dashboard UMKM</a></li>
           <li class="nav-item ${currentPath === 'messages.html' ? 'text-primary' : ''}"><a href="messages.html">Pesan</a></li>
@@ -122,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <a href="messages.html" class="btn-text" style="padding: var(--space-xs) var(--space-sm); position: relative; display: flex; align-items: center;" title="Pesan">
             <i data-lucide="message-square" style="width: 20px; height: 20px;"></i>
-            <span class="badge badge-danger" style="position: absolute; top: -5px; right: -5px; padding: 2px 5px; font-size: 8px;">1</span>
+            <span class="badge badge-danger notif-badge" style="position: absolute; top: -5px; right: -5px; padding: 2px 5px; font-size: 8px; display: none;">0</span>
           </a>
           <div class="user-menu-wrapper" style="position: relative; cursor: pointer; display: flex; align-items: center;">
             <div class="user-menu-trigger d-flex align-center gap-xs">
@@ -141,6 +142,18 @@ document.addEventListener('DOMContentLoaded', () => {
           <button class="mobile-nav-toggle">
             <i data-lucide="menu"></i>
           </button>
+        `;
+      }
+    } else if (user.role === 'admin') {
+      if (navMenu) {
+        navMenu.innerHTML = `
+          <li class="nav-item ${currentPath === 'admin.html' ? 'text-primary' : ''}"><a href="admin.html">Verifikasi KTM</a></li>
+        `;
+      }
+      if (navRight) {
+        navRight.innerHTML = `
+          <span style="font-size:var(--font-xs);font-weight:600;color:var(--color-slate-600);">Admin</span>
+          <a href="#" onclick="logoutUser(event)" class="btn btn-outline btn-sm">Keluar</a>
         `;
       }
     }
@@ -165,6 +178,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize session headers first
   initSessionAndHeaders();
+
+  // Load notification badge count
+  if (window.FreelanceInAPI && FreelanceInAPI.getToken()) {
+    FreelanceInAPI.getNotifications().then(({ unread }) => {
+      document.querySelectorAll('.notif-badge').forEach(b => {
+        if (unread > 0) {
+          b.textContent = unread > 9 ? '9+' : unread;
+          b.style.display = 'block';
+        }
+      });
+    }).catch(() => {});
+  }
 
   // Re-create icons if Lucide is available
   if (window.lucide) {
@@ -276,7 +301,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroSearchButton = document.querySelector('.hero-search-box button');
 
   function handleSearch(query) {
+    const userRaw = localStorage.getItem('freelancein_user');
+    const user = userRaw ? JSON.parse(userRaw) : null;
     const isMarketplace = window.location.pathname.includes('marketplace.html');
+    const isProjects = window.location.pathname.includes('projects.html');
+
+    if (user && user.role === 'mahasiswa') {
+      if (isProjects) {
+        const inp = document.getElementById('filter-search');
+        if (inp) { inp.value = query; if (typeof loadJobs === 'function') loadJobs(); }
+      } else {
+        window.location.href = `projects.html?search=${encodeURIComponent(query)}`;
+      }
+      return;
+    }
+
     if (isMarketplace) {
       const globalInput = document.getElementById('global-search-input');
       if (globalInput) {

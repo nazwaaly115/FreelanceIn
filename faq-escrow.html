@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ Rekening Bersama - FreelanceIn</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+  <header class="site-header"><div class="container nav-container"><div class="nav-left"><a href="index.html" class="logo">Freelance<span>In</span><div class="logo-dot"></div></a><nav><ul class="nav-menu"></ul></nav></div><div class="nav-right"></div></div></header>
+  <div class="container py-xl" style="max-width:720px;">
+    <h1 style="font-size:var(--font-2xl);font-weight:800;margin-bottom:var(--space-md);">FAQ Rekening Bersama (Escrow)</h1>
+    <div class="card" style="padding:20px;margin-bottom:16px;">
+      <h3 style="font-weight:700;margin-bottom:8px;">Apa itu Rekening Bersama FreelanceIn?</h3>
+      <p style="line-height:1.7;color:var(--color-slate-700);">Dana proyek UMKM disimpan sementara di escrow platform hingga pekerjaan disetujui. Mahasiswa baru menerima pembayaran setelah UMKM melepaskan dana.</p>
+    </div>
+    <div class="card" style="padding:20px;margin-bottom:16px;">
+      <h3 style="font-weight:700;margin-bottom:8px;">Bagaimana alur pembayarannya?</h3>
+      <ol style="line-height:1.8;color:var(--color-slate-700);padding-left:20px;">
+        <li>UMKM menerima proposal mahasiswa</li>
+        <li>UMKM deposit dana via Midtrans Snap (sandbox/production)</li>
+        <li>Mahasiswa mengerjakan proyek</li>
+        <li>UMKM review deliverable dan lepaskan dana</li>
+      </ol>
+    </div>
+    <div class="card" style="padding:20px;margin-bottom:16px;">
+      <h3 style="font-weight:700;margin-bottom:8px;">Apakah aman untuk UMKM?</h3>
+      <p style="line-height:1.7;color:var(--color-slate-700);">Ya. Dana tidak langsung ke mahasiswa. Jika pekerjaan tidak sesuai, UMKM dapat minta revisi sebelum melepaskan dana.</p>
+    </div>
+    <div class="card" style="padding:20px;">
+      <h3 style="font-weight:700;margin-bottom:8px;">Integrasi Midtrans</h3>
+      <p style="line-height:1.7;color:var(--color-slate-700);">Platform mendukung Midtrans Snap sandbox. Setel <code>MIDTRANS_SERVER_KEY</code> di file <code>.env</code> untuk aktivasi gateway nyata.</p>
+    </div>
+  </div>
+  <footer class="site-footer"><div class="container"><div class="footer-bottom"><p class="footer-copy">&copy; 2026 FreelanceIn.</p></div></div></footer>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
