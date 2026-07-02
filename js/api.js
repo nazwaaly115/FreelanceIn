@@ -3,7 +3,10 @@
  * Abstraksi fetch ke backend Express — siap diganti ke production URL
  */
 const FreelanceInAPI = (function () {
-  const BASE = window.FREELANCEIN_API_URL || '';
+  const BASE = window.FREELANCEIN_API_URL || 
+    (window.location.protocol === 'file:' || window.location.port !== '3000'
+      ? 'http://localhost:3000' 
+      : '');
 
   function getToken() {
     return localStorage.getItem('freelancein_token');
